@@ -456,15 +456,31 @@ footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-item
   </div>
 </section>
 
+<style>#depoimentos .prova{background:#0b0b0c;border-color:#0b0b0c;display:flex;align-items:center}</style>
 <section id="depoimentos">
   <div class="w">
-    <div class="olho">La prueba</div>
-    <h2>La prueba está <span class="serif">en los pedidos</span></h2>
-    <div class="prova-num" style="margin-top:22px;background:#fff;border:1px solid var(--linha);border-radius:var(--r-lg);padding:30px 22px;text-align:center;box-shadow:0 10px 30px rgba(61,15,36,.07)">
-      <div style="font-weight:800;font-size:clamp(52px,40px + 4vw,76px);line-height:1;color:var(--vinho);letter-spacing:-1.5px">+1,000</div>
-      <div style="margin-top:10px;font-weight:700;font-size:var(--s2);color:var(--tinta)">Más de 1,000 pedidos pagados</div>
-      <p style="margin-top:12px;color:var(--cinza)">Y tú la pruebas 7 días: si no es para ti, te regresamos tu dinero.</p>
+    <div class="olho">Quienes ya la usan</div>
+    <h2>Lo que ellas <span class="serif">nos contaron</span></h2>
+    <div class="carrossel provas" id="carProvas" tabindex="0" aria-label="Mensajes de clientas">
+      <figure class="prova">
+        <img class="print" src="img/dep-denise.jpg" width="1170" height="1017" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “Me gustó mucho, la verdad. Es muy fácil de usar, yo pensaba que iba a ser más complicado, pero lo aprendí solo y me está ayudando a organizarme mucho mejor, sobre todo con las entregas que siempre andaba cambiando. Y otra cosa, pagar solo una vez también fue lo que más me gustó.”">
+      </figure>
+      <figure class="prova">
+        <img class="print" src="img/dep-aline.jpg" width="1170" height="1249" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “¡No manches! La parte del control de inventario fue un alivio para mí. Antes tenía que estar anotando en una libreta cuántas piezas me quedaban y era horrible. Con eso ya me ayudó muchísimo. La parte de las ventas también está buenísima para registrar todo y tener los precios bien calculados. ¡Me encantó!”">
+      </figure>
+      <figure class="prova">
+        <img class="print" src="img/dep-bruna.jpg" width="1170" height="1071" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “Sí, claro que lo recomiendo. Es muy fácil de usar y no tiene un montón de cosas que ni necesitas. Lo que más me gustó es que no hay mensualidad, porque antes ya había pagado por otra app que sí cobraba cada mes y ni siquiera estaba tan buena.”">
+      </figure>
+      <figure class="prova">
+        <img class="print" src="img/dep-alexandra.jpg" width="1170" height="1125" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “La verdad sí me sirvió. Antes anotaba todo en mi cuaderno. Ya había visto algunas apps, pero no quería pagar una mensualidad. Así está mucho mejor: la app hace las cuentas y me deja todas las ventas calculadas y registradas.”">
+      </figure>
     </div>
+    <div class="car-nav" data-car="carProvas"><button type="button" class="ant" aria-label="Anterior">&#8249;</button><span class="pontos"></span><button type="button" class="prox" aria-label="Siguiente">&#8250;</button></div>
+    <p class="depos-nota">Mensajes de clientas por WhatsApp, traducidos al español.</p>
   </div>
 </section>
 
