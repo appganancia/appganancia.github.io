@@ -1,4 +1,719 @@
-<!doctype html><html lang="es-MX"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AppGanancia</title><link rel="icon" href="favicon-32.png">
-<style>html,body{margin:0;height:100%;background:linear-gradient(180deg,#a51a53,#660b38);font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center}img{width:260px;max-width:70vw}p{opacity:.85;font-size:17px;margin-top:18px}</style>
-</head><body><div><img src="logo-branca.png" alt="AppGanancia"><p>Muy pronto</p></div></body></html>
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mis Ventas | AppGanancia</title>
+<meta name="description" content="La app que anota tu venta en unos cuantos toques y te muestra al momento tu ganancia. Pagas una sola vez, sin Excel y sin mensualidad.">
+<meta name="theme-color" content="#8e2757">
+<link rel="preload" as="image" href="img/vsl-capa.jpg" fetchpriority="high">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96.png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hay vendedoras pagando por trabajar sin saberlo.">
+<meta property="og:description" content="La app que anota tu venta en unos cuantos toques y te muestra al momento tu ganancia. $299, una sola vez.">
+<meta property="og:image" content="https://appganancia.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{
+  --vinho:#8e2757; --vinho-esc:#5c1838; --vinho-prof:#3d0f24;
+  --rose:#f6e7ee; --rose2:#fdf6f9; --creme:#fffaf6;
+  --tinta:#2a1f28; --cinza:#6f6478; --linha:#ecdfe6;
+  --dourado:#c9a227; --verde:#1e7d4f; --verde-bg:#e8f5ee;
+  --verm:#b3261e; --verm-bg:#fdeceb;
+  --r-sm:10px; --r:16px; --r-lg:26px;
+  --s0:clamp(15.5px,15px + .2vw,17px);
+  --s2:clamp(20px,18px + 1.1vw,25px);
+  --s4:clamp(29px,24px + 2.6vw,42px);
+  --s5:clamp(34px,27px + 3.4vw,52px);
+  --serif:ui-serif,Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--creme);color:var(--tinta);
+  font-size:var(--s0);line-height:1.62;overflow-x:hidden}
+img{max-width:100%;display:block}
+.w{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+section{padding:54px 0}
+h1,h2,h3{line-height:1.14;letter-spacing:-.6px;font-weight:800}
+h2{font-size:var(--s4);margin-bottom:14px}
+h3{font-size:var(--s2)}
+.serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.5px}
+.olho{font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--vinho);margin-bottom:9px}
+.centro{text-align:center}
+
+.hero{position:relative;background:
+   radial-gradient(120% 90% at 12% 0%, #a12f66 0%, transparent 55%),
+   linear-gradient(168deg,var(--vinho) 0%,var(--vinho-esc) 52%,var(--vinho-prof) 100%);
+  color:#fff;overflow:hidden;padding:26px 0 40px}
+.hero:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size:4px 4px}
+.hero .w{position:relative;z-index:2}
+.marca{height:38px;width:auto;margin-bottom:30px}
+.chapeu{font-size:11.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  color:#f0c6d8;margin-bottom:12px}
+.hero h1{font-size:var(--s5);margin-bottom:16px}
+.hero h1 .serif{display:block;color:#ffd7e8}
+.sub{font-size:clamp(16px,15px + .5vw,19px);color:#f7e4ec;max-width:34ch;margin-bottom:26px}
+.sub b{color:#fff;font-weight:700}
+.hero h1 .l2{display:block;color:#fff}
+.hero h1 mark{background:linear-gradient(transparent 8%,#ffd84d 8%,#ffd84d 92%,transparent 92%);color:#3d0f24;
+  padding:0 .14em;margin:0 -.04em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero .sub mark{background:none;color:#ffd84d;font-weight:700}
+
+.topfaixa{background:#ffd84d;color:var(--vinho-prof);text-align:center;font-weight:900;font-size:clamp(12px,3.4vw,15px);
+  line-height:1.3;letter-spacing:.03em;text-transform:uppercase;padding:10px 12px;position:relative;z-index:3}
+.topfaixa .hoje{white-space:nowrap}
+
+.palco{position:relative;display:flex;justify-content:center;padding:8px 0 4px}
+@media (max-width:899px){
+  .hero{padding-top:16px}
+  .hero .marca{height:30px;margin-bottom:12px}
+  .chapeu{font-size:10.5px;margin-bottom:9px}
+  .hero h1{font-size:clamp(26px,6.4vw,33px);line-height:1.14;margin-bottom:10px}
+  .sub{font-size:15.5px;line-height:1.42;margin-bottom:14px;max-width:32ch}
+  .palco{padding:0 0 4px}
+  .fone{width:min(268px,64vw)}
+}
+@media (max-width:899px) and (max-height:700px){
+  .hero{padding-top:10px}
+  .hero .marca{height:24px;margin-bottom:8px}
+  .chapeu{font-size:10px;margin-bottom:6px}
+  .hero h1{font-size:clamp(22px,5.8vw,27px);margin-bottom:7px}
+  .sub{font-size:14px;line-height:1.36;margin-bottom:10px;max-width:none}   .fone{width:min(228px,58vw)}
+}
+@media (max-width:899px){
+  .hero-txt{display:flex;flex-direction:column}
+  .hero-txt .chapeu{order:1}
+  .hero-txt h1{order:2}
+  .hero-txt .sub{order:3}
+  .hero-txt .palco-mob{order:5}
+  .hero-txt .cta-hero{order:6}
+  .hero-txt .hero-sob{order:7}
+  .palco-desk{display:none}
+}
+@media (min-width:900px){ .palco-mob{display:none} }
+.fone{position:relative;width:min(300px,72vw);border-radius:34px;padding:9px;
+  background:linear-gradient(160deg,#3b2530,#1d1218);
+  box-shadow:0 30px 60px -28px rgba(20,4,12,.85), 0 0 0 1px rgba(255,255,255,.09) inset;
+  animation:flutua 7s ease-in-out infinite}
+.fone .tela{border-radius:26px;overflow:hidden;background:var(--rose2);aspect-ratio:360/738}
+.fone .tela img,.fone .tela video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.vsl{--vsl-fundo:#1d1218;--vsl-tinta:#3d0f24;--vsl-vidro:rgba(29,18,24,.66);--vsl-acento:#ff3d8b;--vsl-fonte:var(--sans);
+  position:relative;width:calc(100% - 36px);max-width:484px;aspect-ratio:4/5;margin:4px auto 16px;border-radius:22px;overflow:hidden;background:var(--vsl-fundo);box-shadow:0 14px 30px rgba(61,51,85,.22);cursor:pointer}
+.vsl video{display:block;width:100%;height:100%;object-fit:cover}
+.vsl .som{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.35);border-radius:20px;padding:16px 22px 15px;background:var(--vsl-vidro);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;cursor:pointer;box-shadow:0 10px 26px rgba(30,22,48,.28)}
+.vsl .som-ic{width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;animation:vsl-anel 1.8s ease-out infinite}
+.vsl .som-t{font:800 13.5px/1.2 var(--vsl-fonte);opacity:.85;white-space:nowrap}
+.vsl .som-b{font:900 16.5px/1.2 var(--vsl-fonte);white-space:nowrap}
+@keyframes vsl-anel{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 14px rgba(255,255,255,0)}}
+@media (prefers-reduced-motion: reduce){.vsl .som-ic{animation:none}}
+.vsl.com-som .som{display:none}
+.vsl .pausa{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(30,22,48,.25)}
+.vsl .pausa i{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center}
+.vsl .pausa i:after{content:"";margin-left:6px;border-left:22px solid var(--vsl-tinta);border-top:14px solid transparent;border-bottom:14px solid transparent}
+.vsl.parado .pausa{display:flex}
+.vsl .ctl{position:absolute;left:0;right:0;bottom:5px;height:46px;display:flex;align-items:center;gap:8px;padding:0 10px;background:linear-gradient(rgba(20,16,32,0),rgba(20,16,32,.62));opacity:0;pointer-events:none;transition:opacity .25s}
+.vsl.com-som.ctl-on .ctl,.vsl.com-som.parado .ctl{opacity:1;pointer-events:auto}
+.vsl .cb{flex:0 0 34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.vsl .tempo{color:#fff;font:800 12.5px/1 var(--vsl-fonte);text-shadow:0 1px 2px rgba(0,0,0,.5);font-variant-numeric:tabular-nums}
+.vsl .esp{flex:1}
+.vsl .vol{width:76px;accent-color:var(--vsl-acento);margin:0}
+.vsl.sem-volume .vol{display:none}
+.vsl .prog{position:absolute;left:0;right:0;bottom:0;height:18px;cursor:pointer;touch-action:none}
+.vsl .prog:before{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.5)}
+.vsl .prog i{position:absolute;left:0;bottom:0;height:5px;width:0;background:var(--vsl-acento)}
+.palco .vsl{width:100%;max-width:400px;margin:0 auto;box-shadow:0 26px 50px -24px rgba(20,4,12,.85)}
+@media (max-width:899px) and (max-height:700px){ .palco .vsl{max-width:min(300px,78vw)} }
+@media (min-width:900px){ .palco .vsl{max-width:440px} .palco-desk{align-self:start;padding-top:6px} }
+
+@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.fone{animation:none}}
+
+.oferta{background:#fff;color:var(--tinta);border-radius:var(--r-lg);
+  padding:22px 20px;text-align:center;box-shadow:0 24px 50px -26px rgba(20,4,12,.6)}
+.oferta .de{font-size:13px;font-weight:700;color:var(--cinza);margin-bottom:2px}
+.oferta .ancora{font-size:13px;line-height:1.45;color:var(--cinza);
+  border-bottom:1px solid var(--linha);padding-bottom:11px;margin-bottom:13px}
+.oferta .ancora s{opacity:.85}
+.oferta .ancora b{color:var(--tinta);font-weight:700}
+.oferta .val{font-weight:800;font-size:clamp(46px,38px + 3vw,60px);line-height:1;
+  color:var(--vinho);letter-spacing:-2px}
+.oferta .val sup{font-size:.42em;font-weight:800;vertical-align:super;letter-spacing:0}
+.oferta .uma{display:inline-block;background:var(--verde-bg);color:var(--verde);
+  font-size:12.5px;font-weight:800;border-radius:999px;padding:5px 13px;margin:10px 0 16px}
+.cta{display:block;background:linear-gradient(165deg,var(--vinho),var(--vinho-esc));
+  color:#fff;text-decoration:none;font-size:17px;font-weight:800;letter-spacing:-.2px;
+  border-radius:var(--r);padding:17px 18px;box-shadow:0 14px 26px -14px rgba(92,24,56,.8);
+  transition:transform .15s, box-shadow .15s}
+.cta:active{transform:translateY(1px)}
+.cta.claro{background:#fff;color:var(--vinho)}
+.oferta .sob{font-size:12.5px;color:var(--cinza);margin-top:12px;line-height:1.5}
+
+.ini{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--vinho);
+  color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.card{background:#fff;border:1px solid var(--linha);border-radius:var(--r);
+  padding:6px 18px;box-shadow:0 12px 30px -26px rgba(61,15,36,.4)}
+.para{list-style:none}
+.para li{display:flex;gap:11px;align-items:flex-start;padding:13px 0;
+  border-bottom:1px solid var(--linha)}
+.para li:last-child{border-bottom:0}
+.para li:before{content:'';flex-shrink:0;width:19px;height:19px;margin-top:2px;
+  border-radius:50%;background:var(--verde-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e7d4f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/12px no-repeat}
+
+.nao{margin-top:20px}
+.nao .rot{font-size:14px;font-weight:800;color:var(--tinta);margin-bottom:2px}
+.para.neg li:before{background:var(--rose) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238e2757' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center/11px no-repeat}
+.para.neg li{color:var(--cinza)}
+
+.dores{list-style:none;display:grid;gap:9px;margin:18px 0}
+.dores li{background:#fff;border:1px solid var(--linha);border-left:3px solid var(--vinho);
+  border-radius:var(--r-sm);padding:13px 15px;font-size:15.5px}
+.remate{font-size:clamp(16px,15px + .5vw,18.5px);line-height:1.55;margin-top:4px}
+.remate b{color:var(--vinho)}
+
+.passos{list-style:none;counter-reset:p;display:grid;gap:11px;margin-top:20px}
+.passos li{display:flex;gap:13px;background:#fff;border:1px solid var(--linha);
+  border-radius:var(--r);padding:15px 16px}
+.passos .num{flex-shrink:0;width:27px;height:27px;border-radius:50%;
+  background:linear-gradient(165deg,var(--vinho),var(--vinho-esc));color:#fff;
+  font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.passos .t{display:block;font-weight:800;font-size:16px;margin-bottom:2px}
+.passos .d{display:block;font-size:14.5px;color:var(--cinza);line-height:1.5}
+
+.tela-app{margin:22px auto 0;width:min(300px,72vw)}
+.tela-app>div{border-radius:0}
+.tela-app img{width:100%;height:auto;display:block}
+.legenda{font-size:13.5px;color:var(--cinza);text-align:center;margin-top:11px;
+  max-width:40ch;margin-left:auto;margin-right:auto}
+
+.comp{width:100%;border-collapse:collapse;font-size:16px;margin:6px 0}
+.comp td{padding:13px 2px;border-bottom:1px solid var(--linha)}
+.comp td:last-child{text-align:right;font-weight:700;white-space:nowrap;color:var(--cinza)}
+.comp tr.nosso td{border-bottom:0;padding-top:16px;font-size:18px;font-weight:800;color:var(--vinho)}
+.comp tr.nosso td:last-child{color:var(--vinho)}
+.comp small{display:block;font-size:11px;font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;color:var(--cinza);margin-top:3px}
+.comp tr.nosso small{color:var(--vinho);opacity:.75}
+.inclui{font-size:14.5px;line-height:1.6;color:var(--cinza);margin-top:14px}
+.inclui b{color:var(--tinta)}
+
+.garantia{background:linear-gradient(165deg,#fff,var(--verde-bg));border:1px solid #cfe8da;
+  border-radius:var(--r-lg);padding:24px 20px;text-align:center}
+.garantia svg{width:38px;height:38px;margin:0 auto 12px;fill:none;stroke:var(--verde);
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.garantia .olho{color:var(--verde)}
+.garantia h3{font-size:21px;margin-bottom:10px}
+.garantia p{font-size:15px;color:var(--cinza);line-height:1.6;max-width:46ch;margin:0 auto}
+
+.depos{display:grid;gap:14px;align-items:start}
+@media (min-width:760px){.depos{grid-template-columns:1fr 1fr}}
+.prova{background:#fff;border:1px solid var(--linha);border-radius:var(--r);
+  overflow:hidden;padding:0;margin:0;
+  box-shadow:0 10px 26px -20px rgba(61,15,36,.35)}
+.prova .print{display:block;width:100%;height:auto;background:#0b141a}
+.prova .quem{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;
+  color:var(--cinza);padding:12px 16px;border-top:1px solid var(--linha)}
+.prova .quem .nome{line-height:1.3}
+.prova .quem .onde{display:block;font-weight:400;font-size:12.5px}
+.prova .quem .est{display:flex;gap:2px;margin-left:auto;flex-shrink:0}
+.prova .quem .est svg{width:13px;height:13px;fill:#e8a02b}
+.depos-nota{font-size:13px;color:var(--cinza);text-align:center;margin-top:18px;
+  line-height:1.55}
+
+.faq{margin-top:18px;border-top:1px solid var(--linha)}
+details{border-bottom:1px solid var(--linha)}
+summary{list-style:none;cursor:pointer;padding:15px 34px 15px 0;position:relative;
+  font-size:15.5px;font-weight:700;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'';position:absolute;right:4px;top:50%;margin-top:-5px;
+  width:10px;height:10px;border-right:2.2px solid var(--vinho);
+  border-bottom:2.2px solid var(--vinho);transform:rotate(45deg);transition:transform .2s}
+details[open] summary:after{transform:rotate(-135deg)}
+details .r{padding:0 0 16px;font-size:15px;color:var(--cinza);line-height:1.62}
+details .r b{color:var(--tinta)}
+
+footer{background:var(--tinta);color:#c9bec6;font-size:13px;padding:30px 0 38px;
+  line-height:1.65;text-align:center}
+footer .f-logo{height:34px;width:auto;margin:0 auto 16px;opacity:.9}
+footer .f-links{display:flex;gap:10px;justify-content:center;align-items:center;
+  font-size:13.5px;font-weight:600}
+footer .f-links span{opacity:.4}
+footer .f-id{margin-top:14px;font-size:11.5px;opacity:.55;line-height:1.7}
+footer .f-id a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.18)}
+footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;
+  min-height:44px;padding:0 6px;border-bottom:1px solid rgba(255,255,255,.3)}
+
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,250,246,.94);
+  backdrop-filter:blur(10px);border-top:1px solid var(--linha);padding:10px 16px;
+  padding-bottom:calc(10px + env(safe-area-inset-bottom));display:none;gap:12px;align-items:center}
+.barra.on{display:flex}
+.barra .p{display:flex;flex-direction:column;align-items:flex-start;white-space:nowrap;padding-right:12px;border-right:1px solid var(--linha)}
+.barra .p .de{font-size:11px;font-weight:700;color:var(--cinza);line-height:1.2}
+.barra .p .de s{text-decoration-thickness:1.5px}
+.barra .p b{font-size:22px;font-weight:800;color:var(--vinho);line-height:1.05;letter-spacing:-.5px}
+.barra .p small{font-size:10px;font-weight:800;color:var(--verde);line-height:1.2;letter-spacing:.02em}
+.barra .cta{flex:1;padding:15px 12px;font-size:16px;text-align:center;border-radius:14px}
+@media (min-width:900px){ .barra,.barra.on{display:none} }
+
+
+.cta.cta-hero{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;width:fit-content;max-width:100%;
+  margin:20px auto 0;padding:16px 16px 16px 26px;border-radius:999px;background:linear-gradient(180deg,#ffe788,#ffd23f);
+  color:var(--vinho-prof);font-size:17px;font-weight:900;letter-spacing:-.2px;text-align:center;
+  box-shadow:0 5px 0 #c4950f,0 20px 32px -14px rgba(0,0,0,.6);animation:cta-pulsa 2.4s ease-in-out infinite}
+.cta-hero svg{flex-shrink:0;width:30px;height:30px;padding:6px;border-radius:50%;background:var(--vinho-prof);
+  fill:none;stroke:#ffd84d;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.cta-hero:after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;animation:cta-anel 2.4s ease-out infinite}
+.cta.cta-hero:active{transform:translateY(4px);box-shadow:0 1px 0 #c4950f,0 10px 20px -12px rgba(0,0,0,.6);animation:none}
+@keyframes cta-pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes cta-anel{0%{box-shadow:0 0 0 0 rgba(255,216,77,.55)}80%,100%{box-shadow:0 0 0 16px rgba(255,216,77,0)}}
+@media (prefers-reduced-motion:reduce){ .cta.cta-hero,.cta-hero:after{animation:none} }
+.hero-sob{font-size:12.5px;color:#f0c6d8;text-align:center;margin-top:14px}
+@media (max-width:399px){ .cta.cta-hero{font-size:clamp(14px,4.15vw,16px);padding:14px 12px 14px 20px;gap:10px;white-space:nowrap}
+  .cta-hero svg{width:26px;height:26px;padding:5px} }
+@media (max-width:899px) and (max-height:700px){ .cta.cta-hero{margin-top:14px} .hero-sob{margin-top:10px} }
+@media (min-width:900px){ .cta.cta-hero{margin:8px 0 0} .hero-sob{text-align:left;padding-left:26px} }
+.fundo-rosa{background:var(--rose2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.mec .fone{margin:22px auto 0;width:min(250px,64vw);animation:none}
+@media (min-width:900px){ .mec-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center} .mec .fone{margin:0 auto} }
+.carrossel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  padding:6px 20px 16px;margin:18px -20px 0;scrollbar-width:none;scroll-padding:0 20px}
+.carrossel::-webkit-scrollbar{display:none}
+.carrossel>*{flex:0 0 72%;max-width:270px;scroll-snap-align:center;margin:0}
+.slide img{width:100%;height:auto;border-radius:18px;border:1px solid var(--linha);background:#fff;
+  box-shadow:0 16px 30px -22px rgba(61,15,36,.55)}
+.slide figcaption{padding:12px 4px 0;font-size:14.5px;line-height:1.45;color:var(--cinza)}
+.slide figcaption b{display:block;color:var(--tinta);font-size:16.5px;font-weight:800;margin-bottom:2px}
+.carrossel.provas>*{flex-basis:84%;max-width:340px}
+@media (max-width:899px){ .carrossel>*{transition:transform .45s ease,opacity .45s ease;transform:scale(.93);opacity:.6}
+  .carrossel>.foco{transform:none;opacity:1} }
+@media (prefers-reduced-motion:reduce){ .carrossel>*{transition:none} }
+.car-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:4px}
+.car-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--linha);background:#fff;color:var(--vinho);
+  font-size:20px;font-weight:800;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.car-nav .pontos{display:flex;gap:6px}
+.car-nav .pontos i{width:7px;height:7px;border-radius:50%;background:var(--linha);transition:background .2s,width .2s}
+.car-nav .pontos i.on{background:var(--vinho);width:18px;border-radius:4px}
+@media (min-width:900px){ .carrossel{margin:22px 0 0;padding:6px 2px 16px} .carrossel>*{flex-basis:250px} .carrossel.provas>*{flex-basis:330px} }
+.bonus{list-style:none;display:grid;gap:10px;margin-top:20px}
+.bonus li{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid var(--linha);border-radius:var(--r);padding:15px 16px}
+.bonus .ic{flex-shrink:0;width:38px;height:38px;border-radius:11px;background:var(--rose);display:flex;align-items:center;justify-content:center}
+.bonus .ic svg{width:20px;height:20px;fill:none;stroke:var(--vinho);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bonus .t{display:block;font-weight:800;font-size:16px;line-height:1.3}
+.bonus .d{display:block;font-size:14.5px;color:var(--cinza);line-height:1.5;margin-top:2px}
+.bonus .inc{margin-left:auto;flex-shrink:0;align-self:center;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--verde);background:var(--verde-bg);border-radius:999px;padding:4px 9px}
+@media (min-width:900px){ .bonus{grid-template-columns:1fr 1fr} }
+.oferta-final{max-width:430px;margin:22px auto 0;border:2px solid var(--vinho);box-shadow:0 18px 40px -22px rgba(61,15,36,.4)}
+.leva{list-style:none;text-align:left;margin:0 0 18px;border-bottom:1px solid var(--linha);padding-bottom:12px}
+.leva li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14.5px;line-height:1.45}
+.leva li:before{content:'';flex-shrink:0;width:18px;height:18px;margin-top:1px;border-radius:50%;
+  background:var(--verde-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e7d4f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/11px no-repeat}
+.leva li b{font-weight:800}
+.oferta .de-por{font-size:15px;font-weight:700;color:var(--cinza);margin-bottom:4px}
+.oferta .de-por s{color:var(--verm);text-decoration-thickness:2px}
+.oferta .mensal{font-size:13px;color:var(--cinza);margin:-4px 0 16px;line-height:1.45}
+.faq-cta{max-width:420px;margin:28px auto 0;text-align:center}
+
+@media (min-width:900px){
+  section{padding:76px 0}
+  .hero{padding:34px 0 66px}
+  .hero .grade{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+    .hero h1{max-width:none;font-size:min(41px,3.55vw)}
+  .sub{font-size:19.5px}
+  .oferta{max-width:430px}
+  .passos{grid-template-columns:1fr 1fr}
+  .comofunciona{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
+  .tela-app{margin-top:0;width:min(330px,100%)}
+  .card{padding:8px 24px}
+  h2{max-width:22ch}
+  .centro h2,h2.centro{max-width:none}
+}
+</style>
+
+</head>
+<body>
+
+<div class="topfaixa">⚡ Oferta especial disponible solo hoy <span class="hoje"></span></div>
+<script>
+(function () {
+  var el = document.querySelector(".topfaixa .hoje");
+  function atualiza() { try { el.textContent = new Intl.DateTimeFormat("es-MX", { timeZone: "America/Mexico_City", day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date()); } catch (e) {} }
+  atualiza(); setInterval(atualiza, 30000);
+})();
+</script>
+
+<header class="hero">
+  <div class="w">
+    <img src="img/logo-appganancia-branca.png" alt="AppGanancia" width="480" height="116" class="marca">
+    <div class="grade">
+      <div class="hero-txt">
+        <h1>Hay vendedoras <mark>pagando</mark>
+          <span class="l2"><mark>por trabajar</mark> sin saberlo.</span></h1>
+        <p class="sub">Una vendedora profesional no saca las cuentas en el cuaderno:
+          <mark>usa una app en el celular que le muestra la ganancia de cada venta al momento.</mark></p>
+
+        <div class="palco palco-mob">
+          <div class="vsl" id="vsl">
+            <video id="vVsl" src="img/vsl.mp4" poster="img/vsl-capa.jpg" muted playsinline preload="none" width="720" height="900"
+                   aria-label="Cómo funciona la app, desde que agregas el producto hasta la ganancia de la venta"></video>
+            <button class="som" id="bSom" type="button">
+              <span class="som-ic"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" style="color:var(--vsl-tinta)" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+              <span class="som-t">Tu video ya empezó</span>
+              <span class="som-b">Toca para escuchar</span>
+            </button>
+            <div class="pausa"><i></i></div>
+            <div class="ctl">
+              <button class="cb" id="vslPlay" type="button" aria-label="Pausar"></button>
+              <span class="tempo" id="vslTempo">0:00 / 1:16</span><span class="esp"></span>
+              <button class="cb" id="vslSom" type="button" aria-label="Silenciar"></button>
+              <input class="vol" type="range" id="vslVol" min="0" max="1" step="0.05" value="1" aria-label="Volumen">
+            </div>
+            <div class="prog" id="vslProg"><i id="vslProgI"></i></div>
+          </div>
+        </div>
+
+        <a class="cta cta-hero" href="https://pay.hotmart.com/D108140431V?checkoutMode=10" data-checkout><span>Quiero organizar mi negocio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        <div class="hero-sob">Pago único · acceso inmediato · 7 días de garantía</div>
+      </div>
+
+      <div class="palco palco-desk">      </div>
+
+      <div class="palco palco-desk"></div>
+    </div>
+  </div>
+</header>
+
+<section class="mec fundo-rosa">
+  <div class="w">
+    <div class="mec-grade">
+      <div>
+        <div class="olho">Por qué no te queda nada</div>
+        <h2>Vender ya sabes. <span class="serif">Te falta ver lo que te dejó la venta.</span></h2>
+        <p>La semana estuvo buena. Entró dinero, metiste tu pedido, le echaste gasolina, compraste bolsitas… y a fin de mes <b>no te quedó lo que pensabas</b>.</p>
+        <ul class="dores">
+          <li>Vendes sin saber si ese producto te dejó ganancia <i>de verdad</i></li>
+          <li>Le prometes el producto a la clienta y resulta que ya se te acabó</li>
+          <li>Se te olvida quién te quedó a deber, y a la que le da pena cobrar es a ti</li>
+          <li>Cierras el mes sin saber a dónde se fue el dinero</li>
+        </ul>
+        <p class="remate"><b>No es que te falten ventas. Es que el cuaderno anota, pero no saca las cuentas.</b>
+          En Mis Ventas, la venta que anotas ya te muestra la ganancia, descuenta el producto del inventario y apunta quién quedó de pagarte.</p>
+      </div>
+      <div class="fone">
+        <div class="tela">
+          <video data-src="img/demo-uso.mp4" data-poster="img/demo-uso-capa.jpg" data-sob-demanda width="720" height="1280"
+                 muted loop playsinline preload="none"
+                 aria-label="La app en uso: anotando una venta, descontándola del inventario y mostrando la ganancia"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="w">
+    <div class="olho">Lo que vas a recibir</div>
+    <h2>Todo lo que el cuaderno <span class="serif">nunca te mostró</span></h2>
+    <div class="carrossel" id="carTelas" tabindex="0" aria-label="Pantallas de la app">
+      <figure class="slide"><img src="img/tela-01-vender.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de inicio de la app: cuánto te quedó hoy, la ganancia del mes y lo que te deben"><figcaption><b>Cuánto te quedó hoy</b>Anotaste la venta, aparece la ganancia. Sin hacer cuentas de cabeza al final del día.</figcaption></figure>
+      <figure class="slide"><img src="img/tela-02-pago.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de pago de la venta: transferencia, efectivo, tarjeta o a plazos"><figcaption><b>Transferencia, efectivo, tarjeta o a plazos</b>Lo que vendes a plazos ya queda anotado con el nombre de quien se lo llevó. No tienes que acordarte de nada.</figcaption></figure>
+      <figure class="slide"><img src="img/tela-03-inventario.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de inventario: productos, costo, precio de venta y ganancia de cada uno"><figcaption><b>El inventario se actualiza solo</b>Vendiste, el producto sale del inventario, y ya no prometes lo que se acabó.</figcaption></figure>
+      <figure class="slide"><img src="img/tela-04-me-deben.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de ventas con lo que te deben y el botón cobrar"><figcaption><b>Quién te debe, en un toque</b>Lo que te deben queda aparte. ¿Ya te pagó? Un toque y sale de la lista.</figcaption></figure>
+      <figure class="slide"><img src="img/tela-05-resumen.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Resumen del mes: lo que entró, la ganancia, los gastos y lo que te quedó de verdad"><figcaption><b>Cuánto te quedó de verdad</b>Entró, gastaste, te quedó. El mes cierra sin cuentas a ojo y sin cuaderno.</figcaption></figure>
+      <figure class="slide"><img src="img/tela-06-mas-ganancia.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Los que más ganancia dejaron en el mes: los productos que más te hicieron ganar"><figcaption><b>Lo que más ganancia te deja</b>Sabes qué producto conviene volver a pedir primero: el que más ganancia te dejó.</figcaption></figure>
+    </div>
+    <div class="car-nav" data-car="carTelas"><button type="button" class="ant" aria-label="Anterior">‹</button><span class="pontos"></span><button type="button" class="prox" aria-label="Siguiente">›</button></div>
+  </div>
+</section>
+
+<section class="fundo-rosa">
+  <div class="w">
+    <div class="olho">Bonos, sin pagar de más</div>
+    <h2>Y además viene lo que <span class="serif">les faltaba a las otras apps</span></h2>
+    <ul class="bonus">
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9.3 8.4 8.6 8.6 0 01-3.9-1L3 20l1.2-4.6a8.4 8.4 0 1116.8-3.9z"/></svg></span><span><span class="t">Recibo con el nombre de tu negocio</span><span class="d">Se manda por WhatsApp en un toque. La clienta ve el total, nunca tu ganancia.</span></span><span class="inc">incluido</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg></span><span><span class="t">Respaldo en un toque</span><span class="d">Guarda todo en tu WhatsApp o en Drive. Cambias de celular y todo regresa.</span></span><span class="inc">incluido</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><span><span class="t">Mejoras sin volver a pagar</span><span class="d">Cuando la app trae algo nuevo, te llega a tu celular. Sin mensualidad.</span></span><span class="inc">incluido</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><span><span class="t">Abre hasta sin internet</span><span class="d">Queda con su ícono en la pantalla del celular. Sin crear cuenta y sin contraseña que se te olvide.</span></span><span class="inc">incluido</span></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="10" r="1.3"/><circle cx="12" cy="7.5" r="1.3"/><circle cx="15.5" cy="10" r="1.3"/></svg></span><span><span class="t">Con tu propio estilo</span><span class="d">Escoge entre 5 colores y deja la app como más te guste.</span></span><span class="inc">incluido</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="depoimentos">
+  <div class="w">
+    <div class="olho">La prueba</div>
+    <h2>La prueba está <span class="serif">en los pedidos</span></h2>
+    <div class="prova-num" style="margin-top:22px;background:#fff;border:1px solid var(--linha);border-radius:var(--r-lg);padding:30px 22px;text-align:center;box-shadow:0 10px 30px rgba(61,15,36,.07)">
+      <div style="font-weight:800;font-size:clamp(52px,40px + 4vw,76px);line-height:1;color:var(--vinho);letter-spacing:-1.5px">+1,000</div>
+      <div style="margin-top:10px;font-weight:700;font-size:var(--s2);color:var(--tinta)">Más de 1,000 pedidos pagados</div>
+      <p style="margin-top:12px;color:var(--cinza)">Y tú la pruebas 7 días: si no es para ti, te regresamos tu dinero.</p>
+    </div>
+  </div>
+</section>
+
+<section id="comprar" class="fundo-rosa">
+  <div class="w">
+    <div class="olho centro">Tu acceso</div>
+    <h2 class="centro">Pagas una vez, <span class="serif">y la app es tuya</span></h2>
+    <div class="oferta oferta-final">
+      <ul class="leva">
+        <li><span><b>Mis Ventas</b> en tu celular: ventas, ganancia al momento, inventario, quién te debe y resumen del mes</span></li>
+        <li>Recibo con el nombre de tu negocio</li>
+        <li>Respaldo en un toque</li>
+        <li>Mejoras sin volver a pagar</li>
+        <li>Funciona hasta sin internet</li>
+        <li>5 colores para escoger</li>
+        <li>7 días de garantía</li>
+      </ul>
+      <div class="de-por">antes <s>$599</s> ahora</div>
+      <div class="val"><sup>$</sup>299</div>
+      <div class="uma">pago único, sin mensualidad</div>
+      <p class="mensal">Las apps de mensualidad cobran de $199 a $399 cada mes.</p>
+      <a class="cta" href="#" data-checkout>Quiero organizar mi negocio</a>
+      <div class="sob">7 días de garantía. Si no es para ti, te regresamos tu dinero.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="w">
+    <div class="garantia">
+      <svg viewBox="0 0 24 24"><path d="M12 2.6l7.5 3v6.2c0 4.4-3 8.2-7.5 9.6-4.5-1.4-7.5-5.2-7.5-9.6V5.6l7.5-3z"/><path d="M8.6 12.2l2.4 2.4 4.4-4.8"/></svg>
+      <div class="olho">Garantía de 7 días</div>
+      <h3>¿No te gustó? Te devolvemos tu dinero.</h3>
+      <p>Úsala como quieras durante 7 días. Si sientes que no es para ti, nos mandas un mensaje y te regresamos todo lo que pagaste. Sin formularios y sin tener que dar explicaciones. Es nuestra garantía y la cumplimos con gusto.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="w">
+    <div class="olho">Dudas</div>
+    <h2>Preguntas de quien <span class="serif">llegó hasta aquí</span></h2>
+    <div class="faq">
+      <details><summary>¿Cómo la instalo en mi celular?</summary>
+        <div class="r">Tocas <b>Instalar</b> dentro de la app y el ícono de AppGanancia queda en tu pantalla de inicio, junto al WhatsApp y al Instagram. No pasa por la Play Store ni por la App Store, así que se instala al instante y <b>no ocupa espacio</b> en el celular. De ahí en adelante la abres desde el ícono, <b>en pantalla completa, sin la barra del navegador</b>, y funciona hasta sin señal.</div></details>
+      <details><summary>¿Cómo funciona la app en mi celular?</summary>
+        <div class="r">Te llega un link, lo abres en el celular y, en 2 toques, pones el ícono en tu pantalla de inicio (la misma app te enseña cómo, con los pasos para tu celular). De ahí en adelante abre igual que cualquier otra app, en pantalla completa, <b>sin la barra del navegador</b>. No tienes que bajarla de ninguna tienda y no ocupa espacio en el celular.</div></details>
+      <details><summary>¿Tiene mensualidad?</summary>
+        <div class="r">No. Pagas <b>una sola vez</b> y la app es tuya, con las actualizaciones incluidas. No hay suscripción, ni renovación, ni cobros automáticos.</div></details>
+      <details><summary>¿Necesito internet para usarla?</summary>
+        <div class="r">Para abrir la app la primera vez y ponerla en tu pantalla de inicio, sí. Ya instalada, sigue funcionando <b>aunque el internet esté lento o no tengas señal</b>, porque todo se guarda en tu propio celular: anotas la venta en el tianguis, en el camión o en casa de la clienta y no pierdes nada.</div></details>
+      <details><summary>¿Y si cambio de celular? ¿Pierdo todo?</summary>
+        <div class="r">No, si usas el respaldo. En un toque la app arma un archivo con todo (productos, ventas, gastos) y te lo mandas a tu propio WhatsApp. En el celular nuevo, abres la app, eliges restaurar y sigues donde te quedaste. Como los datos se guardan en el celular, <b>hacer el respaldo de vez en cuando es lo que te protege</b>, y la app te lo recuerda.</div></details>
+      <details><summary>No sé nada de Excel. ¿Sí voy a poder usarla?</summary>
+        <div class="r">Justo para eso existe. No hay fórmulas, ni celdas, ni pestañas. Tocas el producto, la cantidad, la forma de pago, y la venta queda anotada. <b>Quien nunca ha abierto un Excel en su vida la usa sin batallar.</b></div></details>
+      <details><summary>¿Me sirve si vendo comida, pongo uñas o hago manualidades?</summary>
+        <div class="r">Sí. Está pensada para quien vende ropa, maquillaje y accesorios por catálogo, pero lo que hace (anotar ventas, llevar el inventario, apuntar quién te debe y mostrarte la ganancia) sirve para cualquier negocio pequeño en el que compras o haces tu producto y lo vendes.</div></details>
+      <details><summary>¿Emite factura?</summary>
+        <div class="r">No. Es una app para llevar tus cuentas: te muestra tus ventas, tu inventario y tu ganancia. Las facturas se hacen por el SAT, y eso lo ve tu contador.</div></details>
+      <details><summary>¿Cómo la recibo después de pagar?</summary>
+        <div class="r">En cuanto se confirma tu pago (con tarjeta, al momento; en OXXO, en cuanto se refleja), te llega el link de acceso a tu correo. Lo abres y ya la estás usando: no hay que esperar ni que nadie te la active.</div></details>
+    </div>
+    <div class="faq-cta"><a class="cta" href="#" data-checkout>Quiero organizar mi negocio</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <img src="img/logo-appganancia-branca.png" alt="AppGanancia" width="150" height="36" class="f-logo">
+    <div class="f-links">
+      <a href="termos.html">Términos de uso</a>
+      <span>·</span>
+      <a href="privacidad.html">Aviso de privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<div class="barra" id="barra">
+  <div class="p"><span class="de">antes <s>$599</s></span><b>$299</b><small>pago único</small></div>
+  <a class="cta" href="#" data-checkout>Quiero ver mi ganancia</a>
+</div>
+
+<script>
+var CHECKOUT = 'https://pay.hotmart.com/D108140431V?checkoutMode=10';   /* front MX$299 (IVA incluido), produto 8782634; checkoutMode=10 = checkout com o bump */
+(function(){
+  /* repasse de UTM + fbclid da landing para o checkout (fase 2.4 da funil-montar).
+     localStorage com validade de 7 dias (casa com a janela de clique do Meta), pra
+     sobreviver ao fechamento da aba: em 29/08/2026 medimos 12 de 109 pedidos chegando
+     na Cakto sem UTM nenhuma, com checkoutUrl limpa. O TTL nao e opcional: sem ele uma
+     UTM velha carimbaria uma visita organica futura, trocando erro visivel por invisivel.
+     ATENCAO ao alcance: localStorage e isolado por navegador, entao isto NAO cobre o pulo
+     do navegador do Instagram pro Chrome. Esse caso depende do _fbc na CAPI. */
+  var TTL = 7 * 24 * 60 * 60 * 1000;
+  var qs = location.search || '';
+  try {
+    if (qs) {
+      localStorage.setItem('agn_qs', JSON.stringify({qs: qs, em: Date.now()}));
+    } else {
+      var salvo = JSON.parse(localStorage.getItem('agn_qs') || 'null');
+      if (salvo && salvo.qs && (Date.now() - salvo.em) < TTL) qs = salvo.qs;
+      else if (salvo) localStorage.removeItem('agn_qs');
+    }
+  } catch(e){}
+  var alvo = qs ? CHECKOUT + (CHECKOUT.indexOf('?')>=0?'&':'?') + qs.replace(/^\?/,'') : CHECKOUT;
+  document.querySelectorAll('[data-checkout]').forEach(function(a){ a.href = alvo; });
+
+  /* barra fixa: ancora no HERO (elemento que comeca visivel; um alvo abaixo da
+     dobra nunca cruza a borda e o observer nao dispara). Recolhe quando um CTA
+     grande esta na tela, pra nao cobrir o botao da secao de compra. */
+  var hero = document.querySelector('header.hero');
+  var barra = document.getElementById('barra');
+  var passouHero = false, ctaNaTela = false;
+  function pintarBarra(){ barra.classList.toggle('on', passouHero && !ctaNaTela); }
+  if ('IntersectionObserver' in window && hero && barra) {
+    new IntersectionObserver(function(e){
+      passouHero = !e[0].isIntersecting;
+      pintarBarra();
+    }, {threshold:0}).observe(hero);
+
+    var grandes = [].slice.call(document.querySelectorAll('[data-checkout]'))
+      .filter(function(el){ return !barra.contains(el); });
+    var vistos = new Array(grandes.length).fill(false);
+    grandes.forEach(function(el, i){
+      new IntersectionObserver(function(e){
+        vistos[i] = e[0].isIntersecting;
+        ctaNaTela = vistos.indexOf(true) >= 0;
+        pintarBarra();
+      }, {threshold:0.6}).observe(el);
+    });
+  }
+})();
+</script>
+
+<script>
+/* demo de uso (o player antigo da VSL saiu em 21/10/2026, entrou o padrao de VSL de pagina abaixo) */
+(function(){
+  /* demo de uso: o video e a capa so carregam quando a pessoa chega perto dele */
+  var demos = document.querySelectorAll('video[data-sob-demanda]');
+  function carregar(d){
+    if (d.dataset.carregado) return; d.dataset.carregado = '1';
+    d.poster = d.dataset.poster; d.src = d.dataset.src; d.preload = 'auto';
+    d.play().catch(function(){});
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { carregar(e.target); io.unobserve(e.target); } });
+    }, { rootMargin: '600px 0px' });
+    demos.forEach(function(d){ io.observe(d); });
+  } else { demos.forEach(carregar); }
+})();
+</script>
+<script>
+/* uma VSL so (21/10/2026): no computador o bloco vai para a coluna da direita. Roda ANTES do player, porque mover um video que ja toca pausa ele. */
+(function(){ var box = document.getElementById("vsl"), desk = document.querySelector(".palco-desk"), mob = document.querySelector(".palco-mob"); if (!box || !desk || !mob || !window.matchMedia) return;
+  var mq = window.matchMedia("(min-width:900px)");
+  var lugar = function(){ var alvo = mq.matches ? desk : mob; if (box.parentNode === alvo) return; var v = box.querySelector("video"), tocava = v && !v.paused; alvo.appendChild(box); if (tocava) { var p = v.play(); if (p && p.catch) p.catch(function(){}); } };
+  lugar(); if (mq.addEventListener) mq.addEventListener("change", lugar); else if (mq.addListener) mq.addListener(lugar);
+})();
+window.VSL_ROT = { pausa: "Pausar", play: "Reproducir", som: "Silenciar", mudo: "Activar el sonido" };
+</script>
+<script>
+/* VSL de pagina, padrao da fabrica (20/10/2026, o modelo da LP do Ingles con Tito): toca muda ao abrir; o primeiro toque
+   liga o som e volta ao comeco; depois o toque pausa e retoma; barra de progresso arrastavel; eventos vsl_* no pixel.
+   Rotulos por lingua em VSL_ROT (defina antes deste script para trocar; padrao em italiano). */
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var box = $("vsl"), v = $("vVsl"); if (!box || !v) return;
+  var ROT = window.VSL_ROT || { pausa: "Pausa", play: "Riproduci", som: "Disattiva l'audio", mudo: "Attiva l'audio" };
+  var ev = function (nome, extra) { try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: nome }, extra || {})); if (window.fbq) fbq("trackCustom", nome, extra || {}); } catch (e) {} };
+  var marcos = {};
+  var IC = {
+    play: '<svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M8 5v14l11-7z"/></svg>',
+    pausa: '<svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>',
+    som: '<svg viewBox="0 0 24 24" width="19" height="19" fill="#fff"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    mudo: '<svg viewBox="0 0 24 24" width="19" height="19" fill="#fff"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9l5 6M21 9l-5 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>'
+  };
+  var fmt = function (s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+  var tocar = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+  var icones = function () {
+    var mudo = v.muted || v.volume === 0;
+    $("vslPlay").innerHTML = v.paused ? IC.play : IC.pausa; $("vslPlay").setAttribute("aria-label", v.paused ? ROT.play : ROT.pausa);
+    $("vslSom").innerHTML = mudo ? IC.mudo : IC.som; $("vslSom").setAttribute("aria-label", mudo ? ROT.mudo : ROT.som);
+  };
+  var tCtl;
+  var mostra = function () { box.classList.add("ctl-on"); clearTimeout(tCtl); tCtl = setTimeout(function () { box.classList.remove("ctl-on"); }, 2600); };
+  var alterna = function () { if (v.paused) { tocar(); box.classList.remove("parado"); } else { v.pause(); box.classList.add("parado"); } mostra(); icones(); };
+  /* no iPhone o volume da pagina e so leitura (manda o botao do aparelho): fica so o liga e desliga do som */
+  try { v.volume = .5; if (Math.abs(v.volume - .5) > .01) box.classList.add("sem-volume"); v.volume = 1; } catch (e) { box.classList.add("sem-volume"); }
+  tocar(); ev("vsl_inicio"); icones();
+  box.onclick = function (e) {
+    if (e.target.closest(".ctl, .prog")) return;
+    if (!box.classList.contains("com-som")) { v.muted = false; v.currentTime = 0; box.classList.add("com-som"); box.classList.remove("parado"); tocar(); ev("vsl_som"); mostra(); icones(); return; }
+    alterna();
+  };
+  $("vslPlay").onclick = alterna;
+  $("vslSom").onclick = function () { v.muted = !v.muted; if (!v.muted && v.volume === 0) { v.volume = 1; $("vslVol").value = 1; } mostra(); icones(); };
+  $("vslVol").oninput = function () { v.volume = +$("vslVol").value; v.muted = v.volume === 0; mostra(); icones(); };
+  v.addEventListener("play", icones); v.addEventListener("pause", icones);
+  /* barra de progresso: sempre visivel; tocar ou arrastar nela leva o video para aquele ponto */
+  var prog = $("vslProg"), fill = $("vslProgI");
+  (function anda() { if (v.duration) { fill.style.width = (v.currentTime / v.duration * 100) + "%"; $("vslTempo").textContent = fmt(v.currentTime) + " / " + fmt(v.duration); } requestAnimationFrame(anda); })();
+  var busca = function (e) { var r = prog.getBoundingClientRect(); if (v.duration) v.currentTime = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)) * v.duration; mostra(); };
+  prog.addEventListener("pointerdown", function (e) {
+    busca(e); try { prog.setPointerCapture(e.pointerId); } catch (x) {}
+    var mv = function (m) { busca(m); }; prog.addEventListener("pointermove", mv);
+    prog.addEventListener("pointerup", function () { prog.removeEventListener("pointermove", mv); }, { once: true });
+  });
+  v.addEventListener("timeupdate", function () {
+    if (v.muted || !v.duration) return;
+    [25, 50, 75].forEach(function (k) { if (!marcos[k] && v.currentTime / v.duration * 100 >= k) { marcos[k] = 1; ev("vsl_" + k); } });
+  });
+  v.addEventListener("ended", function () { if (!v.muted) { ev("vsl_fim"); box.classList.add("parado"); } else { v.currentTime = 0; tocar(); } });
+})();
+</script>
+<script>
+/* carrosseis (telas do app e prints), 21/10/2026: setas e pontos; o deslize e animado (vai e freia), o cartao
+   do centro fica em destaque, e ele PASSA SOZINHO a cada 3,2 s enquanto esta na tela. Se a cliente tocar,
+   arrastar, rolar ou usar as setas, para e so volta a passar depois de 6 s sem mexer. Quem pede menos
+   movimento no sistema nao ve o automatico. */
+(function(){
+  var menos = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.car-nav').forEach(function(nav){
+    var car = document.getElementById(nav.dataset.car); if (!car) return;
+    var itens = [].slice.call(car.children), pontos = nav.querySelector('.pontos');
+    itens.forEach(function(){ pontos.appendChild(document.createElement('i')); });
+    var bolas = [].slice.call(pontos.children);
+    var animando = false, naTela = false, parouEm = 0, relogio = null;
+    function atual(){ var c = car.scrollLeft + car.clientWidth / 2, k = 0, m = 1e9;
+      itens.forEach(function(it, i){ var d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - c); if (d < m) { m = d; k = i; } }); return k; }
+    function pinta(){ var k = atual();
+      bolas.forEach(function(b, i){ b.classList.toggle('on', i === k); });
+      itens.forEach(function(it, i){ it.classList.toggle('foco', i === k); }); }
+    /* o deslize: anima o scrollLeft com aceleracao e freio; o snap sai durante a animacao para nao brigar com ela */
+    function vai(k){
+      k = (k + itens.length) % itens.length; var it = itens[k];
+      var de = car.scrollLeft, para = Math.max(0, Math.min(car.scrollWidth - car.clientWidth, it.offsetLeft - (car.clientWidth - it.offsetWidth) / 2));
+      if (menos) { car.scrollLeft = para; pinta(); return; }
+      var dur = 650, t0 = null; animando = true; car.style.scrollSnapType = 'none';
+      function passo(t){ if (t0 === null) t0 = t; var x = Math.min(1, (t - t0) / dur), e = x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        car.scrollLeft = de + (para - de) * e;
+        if (x < 1) requestAnimationFrame(passo); else { car.style.scrollSnapType = ''; animando = false; pinta(); } }
+      requestAnimationFrame(passo);
+    }
+    function mexeu(){ parouEm = Date.now(); }
+    ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ car.addEventListener(ev, mexeu, { passive: true }); });
+    nav.querySelector('.ant').onclick = function(){ mexeu(); vai(atual() - 1); };
+    nav.querySelector('.prox').onclick = function(){ mexeu(); vai(atual() + 1); };
+    car.addEventListener('scroll', function(){ if (!animando) requestAnimationFrame(pinta); }, { passive: true });
+    pinta();
+    if (menos) return;
+    function gira(){ if (naTela && !animando && !document.hidden && Date.now() - parouEm > 6000) vai(atual() + 1); }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(e){ naTela = e[0].isIntersecting;
+        if (naTela && !relogio) relogio = setInterval(gira, 3200);
+        if (!naTela && relogio) { clearInterval(relogio); relogio = null; } }, { threshold: .5 }).observe(car);
+    }
+  });
+})();
+</script>
+</body>
+</html>
