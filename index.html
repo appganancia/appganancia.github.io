@@ -99,12 +99,19 @@ h3{font-size:var(--s2)}
   .palco-desk{display:none}
 }
 @media (min-width:900px){ .palco-mob{display:none} }
-.fone{position:relative;width:min(300px,72vw);border-radius:34px;padding:9px;
-  background:linear-gradient(160deg,#3b2530,#1d1218);
-  box-shadow:0 30px 60px -28px rgba(20,4,12,.85), 0 0 0 1px rgba(255,255,255,.09) inset;
+.fone{position:relative;width:min(300px,72vw);border-radius:44px;padding:8px;
+  background:linear-gradient(150deg,#55555c 0%,#1c1c1f 18%,#0b0b0c 55%,#2b2b30 100%);
+  box-shadow:0 30px 60px -24px rgba(20,4,12,.85), inset 0 0 0 1.5px rgba(255,255,255,.16), inset 0 0 0 5px #050506;
   animation:flutua 7s ease-in-out infinite}
-.fone .tela{border-radius:26px;overflow:hidden;background:var(--rose2);aspect-ratio:360/738}
-.fone .tela img,.fone .tela video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.fone::before,.fone::after{content:"";position:absolute;width:4px;border-radius:3px;background:#2e2e33}
+.fone::before{left:-3px;top:17%;height:9%;box-shadow:0 calc(100% + 14px) 0 #2e2e33}
+.fone::after{right:-3px;top:23%;height:13%}
+.fone .tela{position:relative;border-radius:36px;overflow:hidden;background:#fff}
+.fone .sb{height:26px;background:#8d2456;color:#fff;display:flex;align-items:center;justify-content:space-between;
+  padding:3px 20px 0 26px;font:700 11.5px/1 var(--sans)}
+.fone .sb span{display:flex;gap:4px;align-items:center}
+.fone .ilha{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:30%;height:19px;border-radius:12px;background:#000}
+.fone .tela img,.fone .tela video{width:100%;height:auto;aspect-ratio:720/1280;object-fit:cover;display:block}
 .vsl{--vsl-fundo:#1d1218;--vsl-tinta:#3d0f24;--vsl-vidro:rgba(29,18,24,.66);--vsl-acento:#ff3d8b;--vsl-fonte:var(--sans);
   position:relative;width:calc(100% - 36px);max-width:484px;aspect-ratio:4/5;margin:4px auto 16px;border-radius:22px;overflow:hidden;background:var(--vsl-fundo);box-shadow:0 14px 30px rgba(61,51,85,.22);cursor:pointer}
 .vsl video{display:block;width:100%;height:100%;object-fit:cover}
@@ -408,6 +415,8 @@ footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-item
       </div>
       <div class="fone">
         <div class="tela">
+          <div class="sb" aria-hidden="true">4:41<span><svg width="15" height="10" viewBox="0 0 30 20" fill="#fff"><rect x="0" y="13" width="5" height="7" rx="1.5"/><rect x="8" y="9" width="5" height="11" rx="1.5"/><rect x="16" y="5" width="5" height="15" rx="1.5"/><rect x="24" y="1" width="5" height="19" rx="1.5"/></svg><svg width="14" height="10" viewBox="0 0 27 20" fill="#fff"><path d="M13.5 19l4-4.6a5.6 5.6 0 0 0-8 0zM5.3 10.1l2.8 3.2a7.7 7.7 0 0 1 10.8 0l2.8-3.2a12 12 0 0 0-16.4 0zM1 5.2l2.8 3.2a14 14 0 0 1 19.4 0L26 5.2a18.3 18.3 0 0 0-25 0z"/></svg><svg width="22" height="11" viewBox="0 0 22 11"><rect x="1" y="1" width="18" height="9" rx="2.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.4"/><rect x="3" y="3" width="13" height="5" rx="1" fill="#fff"/></svg></span></div>
+          <div class="ilha" aria-hidden="true"></div>
           <video data-src="img/demo-uso.mp4" data-poster="img/demo-uso-capa.jpg" data-sob-demanda width="720" height="1280"
                  muted loop playsinline preload="none"
                  aria-label="La app en uso: anotando una venta, descontándola del inventario y mostrando la ganancia"></video>
@@ -671,46 +680,64 @@ window.VSL_ROT = { pausa: "Pausar", play: "Reproducir", som: "Silenciar", mudo: 
 })();
 </script>
 <script>
-/* carrosseis (telas do app e prints), 21/10/2026: setas e pontos; o deslize e animado (vai e freia), o cartao
-   do centro fica em destaque, e ele PASSA SOZINHO a cada 3,2 s enquanto esta na tela. Se a cliente tocar,
-   arrastar, rolar ou usar as setas, para e so volta a passar depois de 6 s sem mexer. Quem pede menos
-   movimento no sistema nao ve o automatico. */
+/* carrosseis em ESTEIRA (22/10/2026): os cartoes
+   andam devagar e sem parar, em loop (cada cartao ganha um clone no fim, e a volta e invisivel). O dedo desliza nativo;
+   no computador arrasta com o mouse (antes so as setas mexiam: mouse nao rola caixa com overflow e o print era arrastado
+   como imagem). Tocar, arrastar, rolar ou usar as setas para a esteira; ela volta 2,5 s depois. Quem pede menos movimento
+   no sistema nao ve a esteira. */
 (function(){
   var menos = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var VEL = 38; /* px por segundo */
   document.querySelectorAll('.car-nav').forEach(function(nav){
     var car = document.getElementById(nav.dataset.car); if (!car) return;
+    var orig = [].slice.call(car.children), n = orig.length;
+    orig.forEach(function(it){ var c = it.cloneNode(true); c.setAttribute('aria-hidden', 'true');
+      c.querySelectorAll('img').forEach(function(i){ i.alt = ''; }); car.appendChild(c); });
+    car.querySelectorAll('img').forEach(function(i){ i.draggable = false; });
+    car.style.scrollSnapType = 'none'; car.style.cursor = 'grab';
     var itens = [].slice.call(car.children), pontos = nav.querySelector('.pontos');
-    itens.forEach(function(){ pontos.appendChild(document.createElement('i')); });
+    orig.forEach(function(){ pontos.appendChild(document.createElement('i')); });
     var bolas = [].slice.call(pontos.children);
-    var animando = false, naTela = false, parouEm = 0, relogio = null;
+    var pos = car.scrollLeft, meu = false, parouEm = 0, naTela = false, anim = false, arr = null, ult = 0, rodando = false;
+    function volta(){ return itens[n].offsetLeft - itens[0].offsetLeft; }
+    function passoCartao(){ return itens[1].offsetLeft - itens[0].offsetLeft; }
+    function poe(x){ var L = volta(); if (L > 0) { while (x >= L) x -= L; while (x < 0) x += L; } pos = x; meu = true; car.scrollLeft = x; }
     function atual(){ var c = car.scrollLeft + car.clientWidth / 2, k = 0, m = 1e9;
       itens.forEach(function(it, i){ var d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - c); if (d < m) { m = d; k = i; } }); return k; }
     function pinta(){ var k = atual();
-      bolas.forEach(function(b, i){ b.classList.toggle('on', i === k); });
+      bolas.forEach(function(b, i){ b.classList.toggle('on', i === k % n); });
       itens.forEach(function(it, i){ it.classList.toggle('foco', i === k); }); }
-    /* o deslize: anima o scrollLeft com aceleracao e freio; o snap sai durante a animacao para nao brigar com ela */
-    function vai(k){
-      k = (k + itens.length) % itens.length; var it = itens[k];
-      var de = car.scrollLeft, para = Math.max(0, Math.min(car.scrollWidth - car.clientWidth, it.offsetLeft - (car.clientWidth - it.offsetWidth) / 2));
-      if (menos) { car.scrollLeft = para; pinta(); return; }
-      var dur = 650, t0 = null; animando = true; car.style.scrollSnapType = 'none';
-      function passo(t){ if (t0 === null) t0 = t; var x = Math.min(1, (t - t0) / dur), e = x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-        car.scrollLeft = de + (para - de) * e;
-        if (x < 1) requestAnimationFrame(passo); else { car.style.scrollSnapType = ''; animando = false; pinta(); } }
-      requestAnimationFrame(passo);
-    }
     function mexeu(){ parouEm = Date.now(); }
-    ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ car.addEventListener(ev, mexeu, { passive: true }); });
-    nav.querySelector('.ant').onclick = function(){ mexeu(); vai(atual() - 1); };
-    nav.querySelector('.prox').onclick = function(){ mexeu(); vai(atual() + 1); };
-    car.addEventListener('scroll', function(){ if (!animando) requestAnimationFrame(pinta); }, { passive: true });
+    car.addEventListener('scroll', function(){ if (meu) meu = false; else { pos = car.scrollLeft; mexeu(); } requestAnimationFrame(pinta); }, { passive: true });
+    ['touchstart', 'wheel', 'keydown'].forEach(function(ev){ car.addEventListener(ev, mexeu, { passive: true }); });
+    /* arrastar com o mouse */
+    car.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') return;
+      arr = { x: e.clientX, s: car.scrollLeft, longe: false }; car.style.cursor = 'grabbing'; mexeu();
+      try { car.setPointerCapture(e.pointerId); } catch (x) {} });
+    car.addEventListener('pointermove', function(e){ if (!arr) return; var dx = e.clientX - arr.x;
+      if (Math.abs(dx) > 4) arr.longe = true; poe(arr.s - dx); mexeu(); });
+    function solta(){ if (!arr) return; arr = null; car.style.cursor = 'grab'; mexeu(); }
+    car.addEventListener('pointerup', solta); car.addEventListener('pointercancel', solta);
+    /* setas: um cartao por toque, com aceleracao e freio */
+    function vai(dir){ mexeu(); var de = pos, d = passoCartao() * dir, dur = 600, t0 = null; anim = true;
+      if (menos) { poe(de + d); anim = false; return; }
+      function q(t){ if (t0 === null) t0 = t; var x = Math.min(1, (t - t0) / dur), e = x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+        poe(de + d * e); if (x < 1) requestAnimationFrame(q); else { anim = false; mexeu(); } }
+      requestAnimationFrame(q); }
+    nav.querySelector('.ant').onclick = function(){ vai(-1); };
+    nav.querySelector('.prox').onclick = function(){ vai(1); };
     pinta();
     if (menos) return;
-    function gira(){ if (naTela && !animando && !document.hidden && Date.now() - parouEm > 6000) vai(atual() + 1); }
+    /* a esteira: so anda com o carrossel na tela e a aba visivel */
+    function passo(t){
+      if (!naTela) { rodando = false; ult = 0; return; }
+      var dt = ult ? Math.min(0.05, (t - ult) / 1000) : 0; ult = t;
+      if (!arr && !anim && !document.hidden && Date.now() - parouEm > 2500) poe(pos + VEL * dt);
+      requestAnimationFrame(passo);
+    }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function(e){ naTela = e[0].isIntersecting;
-        if (naTela && !relogio) relogio = setInterval(gira, 3200);
-        if (!naTela && relogio) { clearInterval(relogio); relogio = null; } }, { threshold: .5 }).observe(car);
+        if (naTela && !rodando) { rodando = true; requestAnimationFrame(passo); } }, { threshold: .2 }).observe(car);
     }
   });
 })();
