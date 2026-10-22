@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Foto suelta pierde ventas. Catálogo con precio vende. | AppGanancia</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<style>
+:root{
+  --vinho:#8e2757; --vinho-esc:#5c1838; --vinho-prof:#3d0f24; --pink:#ff3d8b;
+  --rose:#f6e7ee; --rose2:#fdf6f9; --creme:#fffaf6;
+  --tinta:#2a1f28; --cinza:#6f6478; --linha:#ecdfe6;
+  --verde:#1e7d4f; --verde-bg:#e8f5ee;
+  --r:16px; --r-lg:24px;
+  --serif:ui-serif,Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--creme);color:var(--tinta);
+  font-size:16px;line-height:1.5;overflow-x:hidden}
+img{max-width:100%;display:block}
+.w{width:100%;max-width:520px;margin:0 auto;padding:0 16px}
+
+.ok{background:var(--verde-bg);border-bottom:1px solid #cfe8da;padding:7px 0}
+.ok .w{display:flex;align-items:center;justify-content:center;gap:7px;text-align:center;
+  font-size:12px;line-height:1.3;color:var(--verde);font-weight:700}
+.ok svg{width:15px;height:15px;flex-shrink:0;fill:none;stroke:var(--verde);
+  stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+.alerta{background:linear-gradient(100deg,var(--vinho),var(--vinho-prof));padding:11px 0 12px;
+  position:relative;overflow:hidden;border-bottom:3px solid var(--pink)}
+.alerta .w{display:flex;flex-direction:column;align-items:center;gap:7px;position:relative;z-index:1;text-align:center}
+.selo{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--vinho);
+  font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;border-radius:999px;
+  padding:5px 12px;box-shadow:0 4px 14px rgba(0,0,0,.22);animation:pulso 2s ease-in-out infinite}
+.selo .pisca{width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0;
+  animation:piscando 1.1s ease-in-out infinite}
+.alerta b{color:#fff;font-size:23px;font-weight:800;letter-spacing:-.6px;line-height:1.1;
+  text-shadow:0 2px 12px rgba(0,0,0,.28)}
+.alerta::after{content:'';position:absolute;top:0;bottom:0;width:45%;left:-60%;z-index:0;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);
+  animation:varre 4.5s ease-in-out infinite}
+@keyframes pulso{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes piscando{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes varre{0%{left:-60%}55%,100%{left:115%}}
+
+.hero{padding-top:14px;text-align:center}
+h1{font-size:clamp(25px,7.4vw,33px);line-height:1.08;letter-spacing:-1.1px;font-weight:800;margin-bottom:8px}
+h1 s{text-decoration-thickness:3px;text-decoration-color:var(--pink);color:var(--cinza)}
+h1 .serif{display:block;font-family:var(--serif);font-weight:400;font-style:italic;color:var(--vinho);letter-spacing:-.5px}
+.sub{font-size:16px;line-height:1.38;color:var(--cinza);margin:0 auto 12px}
+.sub b{color:var(--tinta);white-space:nowrap}
+
+.palco{display:flex;justify-content:center;padding-bottom:6px}
+.fone{--ar:.5623;position:relative;width:min(62vw,250px);padding:7px;border-radius:40px;
+  background:linear-gradient(150deg,#3a2731 0%,#140b10 45%,#0d070a 70%,#2e1f27 100%);
+  box-shadow:0 30px 60px -26px rgba(20,4,12,.9),0 0 0 1px rgba(0,0,0,.55),inset 0 0 0 1.5px rgba(255,255,255,.13)}
+.fone:before,.fone:after{content:'';position:absolute;width:3px;border-radius:2px;
+  background:linear-gradient(90deg,#2e1f27,#4a3440)}
+.fone:before{right:-3px;top:24%;height:11%}
+.fone:after{left:-3px;top:19%;height:15%}
+.fone .tela{position:relative;border-radius:33px;overflow:hidden;background:#000;padding:22px 0 16px}
+.fone .tela:after{content:'';position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:34%;height:4px;
+  border-radius:4px;background:rgba(255,255,255,.55);pointer-events:none}
+.fone .ilha{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:27%;height:13px;
+  border-radius:20px;background:#1a1a1a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);z-index:6;pointer-events:none}
+.vsl{position:relative;aspect-ratio:var(--ar);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.vsl video{width:100%;height:100%;object-fit:cover;object-position:center;display:block;background:#000}
+.vsl .progresso{position:absolute;left:14px;right:14px;bottom:9px;height:4px;border-radius:4px;overflow:hidden;
+  background:rgba(255,255,255,.32);box-shadow:0 1px 3px rgba(0,0,0,.35);z-index:3}
+.vsl .progresso i{display:block;height:100%;width:0;border-radius:4px;background:var(--pink);transition:width .2s linear}
+.vsl .som{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  z-index:4;background:rgba(20,4,12,.28);transition:opacity .25s ease}
+.vsl.tocando .som{opacity:0;pointer-events:none}
+.vsl .som b{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
+  width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.94);
+  box-shadow:0 10px 30px -8px rgba(20,4,12,.6);animation:pulsa 2.2s ease-in-out infinite}
+.vsl .som svg{width:34px;height:34px;fill:none;stroke:#1d1218;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vsl .som span{font-size:11px;font-weight:800;color:#1d1218;letter-spacing:.02em;text-transform:uppercase}
+.vsl .pausa{position:absolute;inset:0;z-index:4;display:none;align-items:center;justify-content:center;background:rgba(20,4,12,.38)}
+.vsl.pausado .pausa{display:flex}
+.vsl .pausa b{display:flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;
+  background:rgba(255,255,255,.94);box-shadow:0 10px 30px -8px rgba(20,4,12,.6)}
+.vsl .pausa svg{width:28px;height:28px;margin-left:5px;fill:#1d1218}
+.vsl .mudo{position:absolute;right:9px;bottom:20px;z-index:5;width:34px;height:34px;padding:0;border:0;border-radius:50%;
+  background:rgba(20,4,12,.62);display:none;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.vsl.tocando .mudo{display:flex}
+.vsl .mudo svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vsl .mudo .x{display:none}
+.vsl.sem-som .mudo .x{display:inline}
+.vsl.sem-som .mudo .ondas{display:none}
+.vsl .mudo:focus-visible,.vsl:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+main{padding:16px 0 36px}
+
+.oferta{max-width:380px;margin:0 auto;background:#fff;border:1px solid var(--linha);border-radius:var(--r-lg);
+  padding:18px 18px 16px;text-align:center;box-shadow:0 24px 50px -34px rgba(61,15,36,.45)}
+.oferta .lim{display:inline-flex;align-items:center;gap:6px;background:var(--pink);color:#fff;font-size:11.5px;font-weight:800;
+  letter-spacing:.07em;text-transform:uppercase;border-radius:999px;padding:6px 12px;margin-bottom:10px}
+.oferta .lim svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.oferta .de{font-size:17px;color:var(--cinza);font-weight:600;line-height:1.2}
+.oferta .de s{text-decoration-thickness:2px;text-decoration-color:var(--pink);color:var(--tinta)}
+.oferta .val{font-weight:800;font-size:58px;line-height:1;color:var(--vinho);letter-spacing:-2px;margin-top:2px}
+.oferta .val sup{font-size:.36em;vertical-align:super;letter-spacing:0;margin-right:3px}
+.oferta .tl{font-size:14px;color:var(--pink);font-weight:800;margin-top:8px;line-height:1.3;text-wrap:balance}
+.oferta .uma{font-size:13px;color:var(--cinza);font-weight:700;margin-top:2px}
+.relogio{display:none;margin:12px auto 0;max-width:300px;background:var(--vinho-prof);color:#fff;border-radius:12px;padding:9px 12px}
+.relogio.on{display:block}
+.relogio small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.8}
+.relogio b{font-size:21px;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+
+.acao{margin-top:16px}
+.cta-link{
+  display:block;text-align:center;text-decoration:none;width:100%;background:linear-gradient(165deg,#b2306c,#5c1838);
+  color:#fff;font-family:var(--sans);font-size:19px;font-weight:800;letter-spacing:-.3px;
+  border:0;border-radius:var(--r);padding:21px 16px;cursor:pointer;line-height:1.2;text-wrap:balance;
+  box-shadow:0 18px 34px -14px rgba(92,24,56,.9);animation:respira 2.8s ease-in-out infinite}
+.cta-link:active{transform:translateY(2px);animation:none}
+@keyframes respira{0%,100%{box-shadow:0 18px 34px -14px rgba(92,24,56,.9)}50%{box-shadow:0 18px 44px -10px rgba(255,61,139,.75)}}
+.pix{font-size:12.5px;line-height:1.4;color:var(--cinza);text-align:center;margin-top:11px;text-wrap:balance}
+.pix b{color:var(--tinta)}
+
+.ga{font-size:12.5px;color:var(--cinza);margin:14px auto 0;text-align:center;line-height:1.4;max-width:34ch;text-wrap:balance}
+
+footer{text-align:center;font-size:12px;color:var(--cinza);padding:0 16px 96px}
+footer a{color:var(--cinza)}
+
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,250,246,.96);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--linha);padding:9px 14px;
+  padding-bottom:calc(9px + env(safe-area-inset-bottom));display:none;gap:12px;align-items:center}
+.barra.on{display:flex}
+.barra .p{font-weight:800;color:var(--vinho);font-size:21px;line-height:1;white-space:nowrap}
+.barra .p s{display:block;font-size:11px;color:var(--cinza);font-weight:600;text-decoration-color:var(--pink)}
+.barra .p small{display:block;font-size:10px;color:var(--pink);font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.barra .cta{flex:1}
+.barra .cta-link{padding:14px 10px;font-size:15.5px;animation:none}
+
+@media (prefers-reduced-motion:reduce){
+  .selo,.selo .pisca,.vsl .som b,.cta-link{animation:none}
+  .alerta::after{display:none}}
+
+@media (max-height:640px){
+  .alerta{padding:8px 0 9px}.alerta .w{gap:5px}.alerta b{font-size:20px}
+  .hero{padding-top:10px}h1{font-size:clamp(23px,6.6vw,28px);margin-bottom:6px}
+  .sub{font-size:14px;margin-bottom:9px}
+}
+</style>
+
+<meta name="facebook-domain-verification" content="d5kgcxxnpqe1al314l1mb2urrufst6" />
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1148101020880740');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1148101020880740&ev=PageView&noscript=1"
+alt=""/></noscript>
+<script async src="https://painel.labofertas.com/api/lp/script?k=6062b6ab7f3c717167390e5e30ebcf89"></script>
+</head>
+<body>
+
+<div class="ok">
+  <div class="w">
+    <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
+    <span>¡Pago aprobado! Hotmart ya te mandó el acceso a tu <span style="white-space:nowrap">correo</span>.<br><span style="font-weight:500">Revisa también spam, promociones o la papelera. Llega de Hotmart, al <span style="white-space:nowrap">correo</span> que pusiste al pagar.</span></span>
+  </div>
+</div>
+
+<div class="alerta">
+  <div class="w">
+    <span class="selo"><span class="pisca"></span>¡espera! no cierres esta pantalla</span>
+    <b>Oferta exclusiva para ti</b>
+  </div>
+</div>
+
+<div class="w hero">
+  <h1><s>Foto suelta</s> pierde ventas.
+    <span class="serif">Catálogo con precio vende.</span></h1>
+  <p class="sub">El inventario que agregas en Mis Ventas se convierte en <b>tu catálogo para WhatsApp</b>.</p>
+
+  <div class="palco" id="palco">
+    <div class="fone" id="fone">
+     <div class="tela"><span class="ilha" aria-hidden="true"></span>
+      <div class="vsl" data-vsl>
+        <video src="img/vsl-catalogo.mp4" poster="img/vsl-catalogo-capa.jpg" width="406" height="722"
+               muted loop playsinline preload="none"
+               aria-label="Video que muestra el catálogo saliendo del inventario y llegando al WhatsApp de la clienta"></video>
+        <div class="progresso"><i></i></div>
+        <div class="pausa" aria-hidden="true"><b><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></b></div>
+        <button class="mudo" type="button" aria-label="Silenciar"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><g class="ondas"><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></g><g class="x"><path d="m16 9 6 6"/><path d="m22 9-6 6"/></g></svg></button>
+        <div class="som" role="button" tabindex="0" aria-label="Reproducir con sonido, desde el inicio">
+          <b><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg><span>Escuchar</span></b>
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>
+
+<main class="w">
+  <div class="oferta">
+    <div class="lim"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg>precio de lanzamiento</div>
+    <div class="de">antes <s>$599</s> ahora</div>
+    <div class="val"><sup>$</sup>399</div>
+    <div class="tl">por tiempo limitado: después regresa a $599</div>
+    <div class="uma">pago único, IVA incluido · sin mensualidad · es tuyo para siempre</div>
+    <div class="relogio" id="relogio"><small>el precio de lanzamiento termina en</small><b>--</b></div>
+
+    <div class="acao" id="acao">
+      <div id="hotmart-sales-funnel"></div>
+      <div id="plano-b" hidden><a class="cta-link" href="https://pay.hotmart.com/Y108141969P" data-checkout>¡SÍ! Quiero mi catálogo listo</a></div>
+      <p class="pix">Con tarjeta, sale en 1 toque. <b></b></p>
+    </div>
+  </div>
+
+  <p class="ga">7 días para pedir tu reembolso, desde la misma plataforma. Si dices que no, tu compra queda igual.</p>
+</main>
+
+<footer><a href="termos.html">Términos de uso</a> · <a href="privacidad.html">Privacidad</a></footer>
+
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+(function(){var b=document.getElementById("plano-b"),w=document.getElementById("hotmart-sales-funnel"),ok=false;
+function reserva(esconde){if(esconde)w.style.display="none";b.hidden=false}
+if(!location.search){reserva(true);return}
+try{checkoutElements.init("salesFunnel",{onLoad:function(){ok=true},onLoadDataError:function(){reserva(true)}}).mount("#hotmart-sales-funnel")}catch(e){reserva(true)}
+setTimeout(function(){if(!ok)reserva(false)},10000)})();
+</script>
+
+<div class="barra" id="barraFixa">
+  <div class="p"><s>$599</s>$399<small>lanzamiento</small></div>
+  <div class="cta"><a class="cta-link" href="#acao">Quiero mi catálogo</a></div>
+</div>
+
+<script>
+(function(){
+  var palco = document.getElementById('palco'), fone = document.getElementById('fone');
+  if (!palco || !fone) return;
+  var larguraAntes = 0;
+  function encaixar(forcar){
+    if (!forcar && window.innerWidth === larguraAntes) return;
+    larguraAntes = window.innerWidth;
+    var ar = parseFloat(getComputedStyle(fone).getPropertyValue('--ar')) || .5623;
+    var topo = palco.getBoundingClientRect().top + window.scrollY;
+    var livre = Math.min(window.innerHeight - topo - 14, 560);       var larg = (Math.max(livre, 300) - 52) * ar + 14;
+    fone.style.width = Math.round(Math.min(larg, palco.clientWidth - 8)) + 'px';
+  }
+  window.encaixarVsl = function(){ encaixar(true); };
+  encaixar();
+  window.addEventListener('resize', function(){ encaixar(); });
+})();
+
+(function(){
+  var menosMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-vsl]').forEach(function(box){
+    var v = box.querySelector('video');
+    var fill = box.querySelector('.progresso i');
+    var mudo = box.querySelector('.mudo');
+    var somOn = false, pausaDela = false, pausaDaAba = false;
+
+    v.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+    v.addEventListener('timeupdate', function(){
+      if (v.duration) fill.style.width = (v.currentTime / v.duration * 100) + '%';
+    });
+
+    function marcarMudo(sem){
+      box.classList.toggle('sem-som', sem);
+      mudo.setAttribute('aria-label', sem ? 'Ligar o som' : 'Silenciar');
+    }
+
+    function ligarSom(){
+      if (somOn) return;
+      somOn = true; pausaDela = false;
+      box.classList.add('tocando'); box.classList.remove('pausado');
+      box.tabIndex = 0;
+      v.loop = false;
+      v.muted = false; marcarMudo(false);
+      v.currentTime = 0;
+      v.play().catch(function(){
+        v.muted = true; v.loop = true; somOn = false; box.classList.remove('tocando'); box.removeAttribute('tabindex');
+        if (!menosMovimento) v.play().catch(function(){});
+      });
+    }
+
+    var botao = box.querySelector('.som');
+    botao.addEventListener('click', function(e){ e.stopPropagation(); ligarSom(); });
+    botao.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ligarSom(); }
+    });
+
+    function alternar(){
+      if (!somOn) return;
+      if (v.paused) { pausaDela = false; v.play().catch(function(){}); }
+      else { pausaDela = true; v.pause(); }
+    }
+    box.addEventListener('click', function(e){ if (somOn && !mudo.contains(e.target)) { e.preventDefault(); alternar(); } });
+    box.addEventListener('keydown', function(e){
+      if (somOn && e.target === box && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); alternar(); }
+    });
+    v.addEventListener('pause', function(){ if (somOn && !v.ended) box.classList.add('pausado'); });
+    v.addEventListener('play', function(){ box.classList.remove('pausado'); });
+
+    mudo.addEventListener('click', function(e){
+      e.stopPropagation(); e.preventDefault();
+      v.muted = !v.muted; marcarMudo(v.muted);
+    });
+
+    v.preload = menosMovimento ? 'metadata' : 'auto';
+    if (!menosMovimento) v.play().catch(function(){});
+
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) {
+        if (!v.paused) { pausaDaAba = true; v.pause(); }
+      } else if (pausaDaAba) {
+        pausaDaAba = false;
+        if (!pausaDela && (somOn || !menosMovimento)) v.play().catch(function(){});
+      }
+    });
+
+    v.addEventListener('ended', function(){
+      somOn = false; pausaDela = false;
+      box.classList.remove('tocando', 'pausado'); box.removeAttribute('tabindex');
+      v.muted = true; marcarMudo(false); v.loop = true; v.currentTime = 0;
+      if (!menosMovimento) v.play().catch(function(){});
+    });
+  });
+})();
+
+var FIM_DO_PRECO = '';
+(function(){
+  var fim = FIM_DO_PRECO;
+  if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) || location.protocol === 'file:') {
+    var p = new URLSearchParams(location.search).get('fim'); if (p) fim = p;
+  }
+  var alvo = fim ? new Date(fim).getTime() : NaN;
+  var caixa = document.getElementById('relogio');
+  if (!caixa || isNaN(alvo) || alvo <= Date.now()) return;
+  var b = caixa.querySelector('b');
+  function dois(n){ return (n < 10 ? '0' : '') + n; }
+  function tic(){
+    var s = Math.floor((alvo - Date.now()) / 1000);
+    if (s <= 0) { caixa.classList.remove('on'); clearInterval(t); return; }
+    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), ss = s % 60;
+    b.textContent = (d ? d + 'd ' : '') + dois(h) + 'h ' + dois(m) + 'min ' + dois(ss) + 's';
+  }
+  caixa.classList.add('on'); tic();
+  var t = setInterval(tic, 1000);
+})();
+
+(function(){
+  var barra = document.getElementById('barraFixa');
+  var acao = document.getElementById('acao');
+  var palco = document.getElementById('palco');
+  if (!barra || !acao || !palco) return;
+  function ver(){
+    var r = acao.getBoundingClientRect();
+    var passouVsl = palco.getBoundingClientRect().bottom < 60;
+    var acaoVisivel = r.top < (window.innerHeight - 90) && r.bottom > 60;
+    barra.classList.toggle('on', passouVsl && !acaoVisivel);
+  }
+  window.addEventListener('scroll', ver, {passive:true});
+  window.addEventListener('resize', ver);
+  ver();
+})();
+</script>
+</body>
+</html>
