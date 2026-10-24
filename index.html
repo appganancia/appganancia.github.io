@@ -62,14 +62,6 @@ h3{font-size:var(--s2)}
 .hero h1 .serif{display:block;color:#ffd7e8}
 .sub{font-size:clamp(16px,15px + .5vw,19px);color:#f7e4ec;max-width:34ch;margin-bottom:26px}
 .sub b{color:#fff;font-weight:700}
-.hero h1 .l2{display:block;color:#fff}
-.hero h1 mark{background:linear-gradient(transparent 8%,#ffd84d 8%,#ffd84d 92%,transparent 92%);color:#3d0f24;
-  padding:0 .14em;margin:0 -.04em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.hero .sub mark{background:none;color:#ffd84d;font-weight:700}
-
-.topfaixa{background:#ffd84d;color:var(--vinho-prof);text-align:center;font-weight:900;font-size:clamp(12px,3.4vw,15px);
-  line-height:1.3;letter-spacing:.03em;text-transform:uppercase;padding:10px 12px;position:relative;z-index:3}
-.topfaixa .hoje{white-space:nowrap}
 
 .palco{position:relative;display:flex;justify-content:center;padding:8px 0 4px}
 @media (max-width:899px){
@@ -86,7 +78,8 @@ h3{font-size:var(--s2)}
   .hero .marca{height:24px;margin-bottom:8px}
   .chapeu{font-size:10px;margin-bottom:6px}
   .hero h1{font-size:clamp(22px,5.8vw,27px);margin-bottom:7px}
-  .sub{font-size:14px;line-height:1.36;margin-bottom:10px;max-width:none}   .fone{width:min(228px,58vw)}
+  .sub{font-size:14px;line-height:1.36;margin-bottom:10px;max-width:none}
+  .fone{width:min(228px,58vw)}
 }
 @media (max-width:899px){
   .hero-txt{display:flex;flex-direction:column}
@@ -94,8 +87,7 @@ h3{font-size:var(--s2)}
   .hero-txt h1{order:2}
   .hero-txt .sub{order:3}
   .hero-txt .palco-mob{order:5}
-  .hero-txt .cta-hero{order:6}
-  .hero-txt .hero-sob{order:7}
+  .hero-txt .oferta{order:6}
   .palco-desk{display:none}
 }
 @media (min-width:900px){ .palco-mob{display:none} }
@@ -261,31 +253,14 @@ footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-item
   backdrop-filter:blur(10px);border-top:1px solid var(--linha);padding:10px 16px;
   padding-bottom:calc(10px + env(safe-area-inset-bottom));display:none;gap:12px;align-items:center}
 .barra.on{display:flex}
-.barra .p{display:flex;flex-direction:column;align-items:flex-start;white-space:nowrap;padding-right:12px;border-right:1px solid var(--linha)}
-.barra .p .de{font-size:11px;font-weight:700;color:var(--cinza);line-height:1.2}
-.barra .p .de s{text-decoration-thickness:1.5px}
-.barra .p b{font-size:22px;font-weight:800;color:var(--vinho);line-height:1.05;letter-spacing:-.5px}
-.barra .p small{font-size:10px;font-weight:800;color:var(--verde);line-height:1.2;letter-spacing:.02em}
-.barra .cta{flex:1;padding:15px 12px;font-size:16px;text-align:center;border-radius:14px}
+.barra .p{font-weight:800;color:var(--vinho);font-size:19px;line-height:1;white-space:nowrap}
+.barra .p small{display:block;font-size:10.5px;color:var(--cinza);font-weight:700}
+.barra .cta{flex:1;padding:14px 12px;font-size:16px;text-align:center}
 @media (min-width:900px){ .barra,.barra.on{display:none} }
 
 
-.cta.cta-hero{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;width:fit-content;max-width:100%;
-  margin:20px auto 0;padding:16px 16px 16px 26px;border-radius:999px;background:linear-gradient(180deg,#ffe788,#ffd23f);
-  color:var(--vinho-prof);font-size:17px;font-weight:900;letter-spacing:-.2px;text-align:center;
-  box-shadow:0 5px 0 #c4950f,0 20px 32px -14px rgba(0,0,0,.6);animation:cta-pulsa 2.4s ease-in-out infinite}
-.cta-hero svg{flex-shrink:0;width:30px;height:30px;padding:6px;border-radius:50%;background:var(--vinho-prof);
-  fill:none;stroke:#ffd84d;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.cta-hero:after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;animation:cta-anel 2.4s ease-out infinite}
-.cta.cta-hero:active{transform:translateY(4px);box-shadow:0 1px 0 #c4950f,0 10px 20px -12px rgba(0,0,0,.6);animation:none}
-@keyframes cta-pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
-@keyframes cta-anel{0%{box-shadow:0 0 0 0 rgba(255,216,77,.55)}80%,100%{box-shadow:0 0 0 16px rgba(255,216,77,0)}}
-@media (prefers-reduced-motion:reduce){ .cta.cta-hero,.cta-hero:after{animation:none} }
-.hero-sob{font-size:12.5px;color:#f0c6d8;text-align:center;margin-top:14px}
-@media (max-width:399px){ .cta.cta-hero{font-size:clamp(14px,4.15vw,16px);padding:14px 12px 14px 20px;gap:10px;white-space:nowrap}
-  .cta-hero svg{width:26px;height:26px;padding:5px} }
-@media (max-width:899px) and (max-height:700px){ .cta.cta-hero{margin-top:14px} .hero-sob{margin-top:10px} }
-@media (min-width:900px){ .cta.cta-hero{margin:8px 0 0} .hero-sob{text-align:left;padding-left:26px} }
+.hero .oferta{margin-top:22px}
+@media (min-width:900px){ .hero .oferta{margin-top:8px} }
 .fundo-rosa{background:var(--rose2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
 .mec .fone{margin:22px auto 0;width:min(250px,64vw);animation:none}
 @media (min-width:900px){ .mec-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center} .mec .fone{margin:0 auto} }
@@ -332,7 +307,7 @@ footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-item
   section{padding:76px 0}
   .hero{padding:34px 0 66px}
   .hero .grade{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
-    .hero h1{max-width:none;font-size:min(41px,3.55vw)}
+  .hero h1{max-width:none;font-size:min(41px,3.55vw)}
   .sub{font-size:19.5px}
   .oferta{max-width:430px}
   .passos{grid-template-columns:1fr 1fr}
@@ -364,24 +339,15 @@ alt=""/></noscript>
 </head>
 <body>
 
-<div class="topfaixa">⚡ Oferta especial disponible solo hoy <span class="hoje"></span></div>
-<script>
-(function () {
-  var el = document.querySelector(".topfaixa .hoje");
-  function atualiza() { try { el.textContent = new Intl.DateTimeFormat("es-MX", { timeZone: "America/Mexico_City", day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date()); } catch (e) {} }
-  atualiza(); setInterval(atualiza, 30000);
-})();
-</script>
-
 <header class="hero">
   <div class="w">
     <img src="img/logo-appganancia-branca.png" alt="AppGanancia" width="480" height="116" class="marca">
     <div class="grade">
       <div class="hero-txt">
-        <h1>Hay vendedoras <mark>pagando</mark>
-          <span class="l2"><mark>por trabajar</mark> sin saberlo.</span></h1>
+        <h1>Hay vendedoras pagando
+          <span class="serif">por trabajar sin saberlo.</span></h1>
         <p class="sub">Una vendedora profesional no saca las cuentas en el cuaderno:
-          <mark>usa una app en el celular que le muestra la ganancia de cada venta al momento.</mark></p>
+          <b>usa una app en el celular que le muestra la ganancia de cada venta al momento.</b></p>
 
         <div class="palco palco-mob">
           <div class="vsl" id="vsl">
@@ -403,8 +369,13 @@ alt=""/></noscript>
           </div>
         </div>
 
-        <a class="cta cta-hero" href="https://pay.hotmart.com/D108140431V?checkoutMode=10" data-checkout><span>Quiero organizar mi negocio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-        <div class="hero-sob">Pago único · acceso inmediato · 7 días de garantía</div>
+        <div class="oferta">
+          <div class="ancora">Las apps de mensualidad cobran de <b>$199 a $399</b> cada mes.</div>
+          <div class="val"><sup>$</sup>299</div>
+          <div class="uma">pago único, sin mensualidad</div>
+          <a class="cta" href="https://pay.hotmart.com/D108140431V?checkoutMode=10" data-checkout>Quiero organizar mi negocio</a>
+          <div class="sob">Acceso inmediato · 7 días de garantía</div>
+        </div>
       </div>
 
       <div class="palco palco-desk">      </div>
@@ -576,7 +547,7 @@ alt=""/></noscript>
 </footer>
 
 <div class="barra" id="barra">
-  <div class="p"><span class="de">antes <s>$599</s></span><b>$299</b><small>pago único</small></div>
+  <div class="p">$299<small>pago único</small></div>
   <a class="cta" href="#" data-checkout>Quiero ver mi ganancia</a>
 </div>
 
