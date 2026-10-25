@@ -336,7 +336,17 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1148101020880740&ev=PageView&noscript=1"
 alt=""/></noscript>
 <script async src="https://painel.labofertas.com/api/lp/script?k=6062b6ab7f3c717167390e5e30ebcf89"></script>
-<script>(function(){try{var z=Intl.DateTimeFormat().resolvedOptions().timeZone||"";if(/^America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Mazatlan|Bahia_Banderas|Hermosillo|Tijuana|Ensenada)$|^Mexico\//.test(z))document.documentElement.className+=" mx"}catch(e){}})();</script>
+<script>
+/* pais pelo fuso horario do aparelho (sem chamada externa, decide antes de pintar). AGN_PAIS escolhe o checkout e a
+   moeda do preco; vazio = pais nao reconhecido (vai para o checkout sem bump, que aceita os meios de qualquer pais). */
+(function(){try{var z=Intl.DateTimeFormat().resolvedOptions().timeZone||"",p="";
+var F={"America/Bogota":"CO","America/Santiago":"CL","America/Punta_Arenas":"CL","Pacific/Easter":"CL","America/Lima":"PE","America/Guayaquil":"EC","Pacific/Galapagos":"EC","America/Tegucigalpa":"HN","America/Santo_Domingo":"DO","America/Panama":"PA","America/El_Salvador":"SV","America/Guatemala":"GT","America/Costa_Rica":"CR","America/Managua":"NI","America/Asuncion":"PY","America/Montevideo":"UY","America/La_Paz":"BO","America/Caracas":"VE","America/Puerto_Rico":"PR","America/Havana":"CU","Europe/Madrid":"ES","Atlantic/Canary":"ES"};
+if(/^America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Mazatlan|Bahia_Banderas|Hermosillo|Tijuana|Ensenada)$|^Mexico\//.test(z))p="MX";
+else if(F[z])p=F[z];
+else if(/^America\/Argentina\//.test(z))p="AR";
+else if(/^America\/(Sao_Paulo|Fortaleza|Recife|Bahia|Belem|Manaus|Cuiaba|Campo_Grande|Porto_Velho|Boa_Vista|Rio_Branco|Maceio|Araguaina|Santarem|Noronha)$/.test(z))p="BR";
+else if(/^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Indiana\/|Kentucky\/)|^Pacific\/Honolulu$/.test(z))p="US";
+window.AGN_PAIS=p;if(p==="MX")document.documentElement.className+=" mx"}catch(e){}})();</script>
 <style>html:not(.mx) .so-mx{display:none!important}html.mx .fora-mx{display:none!important}.oferta .val.fora-mx{font-size:36px;letter-spacing:-.5px}</style>
 </head>
 <body>
@@ -373,8 +383,8 @@ alt=""/></noscript>
 
         <div class="oferta">
           <div class="ancora so-mx">Las apps de mensualidad cobran de <b>$199 a $399</b> cada mes.</div><div class="ancora fora-mx">Las apps de mensualidad te cobran cada mes, todo el año.</div>
-          <div class="val so-mx"><sup>$</sup>299</div><div class="val fora-mx">Pagas una vez</div>
-          <div class="uma"><span class="so-mx">pago único, sin mensualidad</span><span class="fora-mx">sin mensualidad · el precio aparece en tu moneda al pagar</span></div>
+          <div class="val so-mx"><sup>$</sup>299</div><div class="val fora-mx" data-preco-local>Pagas una vez</div>
+          <div class="uma"><span class="so-mx">pago único, sin mensualidad</span><span class="fora-mx" data-preco-nota>sin mensualidad · el precio aparece en tu moneda al pagar</span></div>
           <a class="cta" href="https://pay.hotmart.com/D108140431V?checkoutMode=10" data-checkout>Quiero organizar mi negocio</a>
           <div class="sob">Acceso inmediato · 7 días de garantía</div>
         </div>
@@ -489,8 +499,8 @@ alt=""/></noscript>
         <li>7 días de garantía</li>
       </ul>
       <div class="de-por so-mx">antes <s>$599</s> ahora</div>
-      <div class="val so-mx"><sup>$</sup>299</div><div class="val fora-mx">Pagas una vez</div>
-      <div class="uma"><span class="so-mx">pago único, sin mensualidad</span><span class="fora-mx">sin mensualidad · el precio aparece en tu moneda al pagar</span></div>
+      <div class="val so-mx"><sup>$</sup>299</div><div class="val fora-mx" data-preco-local>Pagas una vez</div>
+      <div class="uma"><span class="so-mx">pago único, sin mensualidad</span><span class="fora-mx" data-preco-nota>sin mensualidad · el precio aparece en tu moneda al pagar</span></div>
       <p class="mensal so-mx">Las apps de mensualidad cobran de $199 a $399 cada mes.</p><p class="mensal fora-mx">Las apps de mensualidad te cobran cada mes, todo el año.</p>
       <a class="cta" href="#" data-checkout>Quiero organizar mi negocio</a>
       <div class="sob">7 días de garantía. Si no es para ti, te regresamos tu dinero.</div>
@@ -549,12 +559,18 @@ alt=""/></noscript>
 </footer>
 
 <div class="barra" id="barra">
-  <div class="p"><span class="so-mx">$299</span><span class="fora-mx">Pago único</span><small><span class="so-mx">pago único</span><span class="fora-mx">sin mensualidad</span></small></div>
+  <div class="p"><span class="so-mx">$299</span><span class="fora-mx" data-preco-local>Pago único</span><small><span class="so-mx">pago único</span><span class="fora-mx">sin mensualidad</span></small></div>
   <a class="cta" href="#" data-checkout>Quiero ver mi ganancia</a>
 </div>
 
 <script>
-var CHECKOUT = 'https://pay.hotmart.com/D108140431V?checkoutMode=10';   /* front MX$299 (IVA incluido), produto 8782634; checkoutMode=10 = checkout com o bump */
+/* front MX$299 (IVA incluido), produto 8782634. checkoutMode=10 = a pagina do checkout COM o bump (Mensajes listos).
+   O bump esconde os meios de pagamento que nao aceitam bump (medido 25/10/2026: na Colombia, com bump so cartao e
+   PayPal; sem bump, Efecty, Nequi e PSE). No Mexico os meios locais aguentam o bump (OXXO, Mercado Pago, SPEI).
+   Entao: Mexico vai para o checkout com bump; qualquer outro pais, ou pais nao reconhecido, para o sem bump. */
+var CHECKOUT_MX = 'https://pay.hotmart.com/D108140431V?checkoutMode=10';
+var CHECKOUT_FORA = 'https://pay.hotmart.com/D108140431V';
+var CHECKOUT = window.AGN_PAIS === 'MX' ? CHECKOUT_MX : CHECKOUT_FORA;
 (function(){
   /* repasse de UTM + fbclid da landing para o checkout (fase 2.4 da funil-montar).
      localStorage com validade de 7 dias (casa com a janela de clique do Meta), pra
@@ -604,6 +620,39 @@ var CHECKOUT = 'https://pay.hotmart.com/D108140431V?checkoutMode=10';   /* front
 })();
 </script>
 
+<script>
+/* preco na moeda de quem abre (25/10/2026): fora do Mexico, os MX$299 convertidos pelo cambio do dia, como valor
+   aproximado (o checkout da Hotmart converte com a taxa dela e mostra o valor exato). Cambio de open.er-api.com, guardado
+   12 h no aparelho; sem pais reconhecido, sem moeda no mapa ou sem resposta em 3 s, fica o texto sem numero. */
+(function(){
+  var MXN = 299;
+  var MOEDA = { CO:'COP', CL:'CLP', PE:'PEN', AR:'ARS', EC:'USD', SV:'USD', PA:'USD', PR:'USD', US:'USD', VE:'USD',
+    DO:'DOP', HN:'HNL', GT:'GTQ', CR:'CRC', NI:'NIO', PY:'PYG', UY:'UYU', BO:'BOB', BR:'BRL', ES:'EUR' };
+  var cur = MOEDA[window.AGN_PAIS]; if (!cur) return;
+  function pinta(taxa){
+    var v = MXN * taxa, dec = ['USD','EUR','PEN','BRL','BOB','GTQ'].indexOf(cur) >= 0;
+    if (!dec) { var passo = v >= 10000 ? 100 : v >= 1000 ? 10 : 1; v = Math.round(v / passo) * passo; }
+    var txt;
+    try { txt = new Intl.NumberFormat('es', { style:'currency', currency:cur, currencyDisplay:'code',
+      minimumFractionDigits: dec ? 2 : 0, maximumFractionDigits: dec ? 2 : 0 }).format(v); } catch(e){ return; }
+    document.querySelectorAll('[data-preco-local]').forEach(function(el){ el.textContent = '≈ ' + txt; });
+    document.querySelectorAll('[data-preco-nota]').forEach(function(el){ el.textContent = 'pago único, sin mensualidad · valor aproximado, el exacto aparece al pagar'; });
+  }
+  try {
+    var c = JSON.parse(localStorage.getItem('agn_fx') || 'null');
+    if (c && c.r && c.r[cur] && Date.now() - c.em < 12 * 3600 * 1000) { pinta(c.r[cur]); return; }
+  } catch(e){}
+  var ctl = window.AbortController ? new AbortController() : null;
+  var t = setTimeout(function(){ if (ctl) ctl.abort(); }, 3000);
+  fetch('https://open.er-api.com/v6/latest/MXN', ctl ? { signal: ctl.signal } : {})
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      clearTimeout(t); if (!j || !j.rates || !j.rates[cur]) return;
+      try { localStorage.setItem('agn_fx', JSON.stringify({ r: j.rates, em: Date.now() })); } catch(e){}
+      pinta(j.rates[cur]);
+    }).catch(function(){});
+})();
+</script>
 <script>
 /* demo de uso (o player antigo da VSL saiu em 21/10/2026, entrou o padrao de VSL de pagina abaixo) */
 (function(){
