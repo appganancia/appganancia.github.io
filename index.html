@@ -343,7 +343,7 @@ alt=""/></noscript>
 var F={"America/Bogota":"CO","America/Santiago":"CL","America/Punta_Arenas":"CL","Pacific/Easter":"CL","America/Lima":"PE","America/Guayaquil":"EC","Pacific/Galapagos":"EC","America/Tegucigalpa":"HN","America/Santo_Domingo":"DO","America/Panama":"PA","America/El_Salvador":"SV","America/Guatemala":"GT","America/Costa_Rica":"CR","America/Managua":"NI","America/Asuncion":"PY","America/Montevideo":"UY","America/La_Paz":"BO","America/Caracas":"VE","America/Puerto_Rico":"PR","America/Havana":"CU","Europe/Madrid":"ES","Atlantic/Canary":"ES"};
 if(/^America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Mazatlan|Bahia_Banderas|Hermosillo|Tijuana|Ensenada)$|^Mexico\//.test(z))p="MX";
 else if(F[z])p=F[z];
-else if(/^America\/Argentina\//.test(z))p="AR";
+else if(/^America\/(Argentina\/|Buenos_Aires$|Cordoba$|Catamarca$|Jujuy$|Mendoza$|Rosario$)/.test(z))p="AR";
 else if(/^America\/(Sao_Paulo|Fortaleza|Recife|Bahia|Belem|Manaus|Cuiaba|Campo_Grande|Porto_Velho|Boa_Vista|Rio_Branco|Maceio|Araguaina|Santarem|Noronha)$/.test(z))p="BR";
 else if(/^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Indiana\/|Kentucky\/)|^Pacific\/Honolulu$/.test(z))p="US";
 window.AGN_PAIS=p;if(p==="MX")document.documentElement.className+=" mx"}catch(e){}})();</script>
@@ -621,22 +621,34 @@ var CHECKOUT = window.AGN_PAIS === 'MX' ? CHECKOUT_MX : CHECKOUT_FORA;
 </script>
 
 <script>
-/* preco na moeda de quem abre (25/10/2026): fora do Mexico, os MX$299 convertidos pelo cambio do dia, como valor
-   aproximado (o checkout da Hotmart converte com a taxa dela e mostra o valor exato). Cambio de open.er-api.com, guardado
-   12 h no aparelho; sem pais reconhecido, sem moeda no mapa ou sem resposta em 3 s, fica o texto sem numero. */
+/* preco na moeda de quem abre (25/10/2026): fora do Mexico, o valor que o checkout da Hotmart cobra em cada pais
+   (a conversao e da Hotmart, com a taxa dela: o cambio do dia chegava a errar 10%, e no Chile a pagina mostrava menos que
+   o checkout). Medido no checkout em 25/10/2026 para MX$299; refazer a medicao se o preco ou o cambio mudarem muito.
+   Pais fora da tabela usa o cambio do dia (open.er-api.com, guardado 12 h) como aproximado; sem pais reconhecido, sem
+   moeda ou sem resposta em 3 s, fica o texto sem numero. */
 (function(){
   var MXN = 299;
-  var MOEDA = { CO:'COP', CL:'CLP', PE:'PEN', AR:'ARS', EC:'USD', SV:'USD', PA:'USD', PR:'USD', US:'USD', VE:'USD',
-    DO:'DOP', HN:'HNL', GT:'GTQ', CR:'CRC', NI:'NIO', PY:'PYG', UY:'UYU', BO:'BOB', BR:'BRL', ES:'EUR' };
-  var cur = MOEDA[window.AGN_PAIS]; if (!cur) return;
+  var HOTMART = { CO:['COP',46199], CL:['CLP',17100], PE:['PEN',50], AR:['ARS',24992], BO:['BOB',172], EC:['USD',15],
+    SV:['USD',15], PR:['USD',15], PA:['PAB',15], HN:['HNL',392], DO:['DOP',894], GT:['GTQ',112], CR:['CRC',6644],
+    UY:['UYU',584], BR:['BRL',75.42] };
+  var MOEDA = { US:'USD', VE:'USD', NI:'NIO', PY:'PYG', ES:'EUR' };
+  var pais = window.AGN_PAIS, fixo = HOTMART[pais], cur = fixo ? fixo[0] : MOEDA[pais]; if (!cur) return;
+  function formata(v, dec){
+    return new Intl.NumberFormat('es', { style:'currency', currency:cur, currencyDisplay:'code',
+      minimumFractionDigits: dec ? 2 : 0, maximumFractionDigits: dec ? 2 : 0 }).format(v);
+  }
+  function escreve(preco, nota){
+    document.querySelectorAll('[data-preco-local]').forEach(function(el){ el.textContent = preco; });
+    document.querySelectorAll('[data-preco-nota]').forEach(function(el){ el.textContent = nota; });
+  }
+  if (fixo) {
+    try { escreve(formata(fixo[1], ['COP','CLP'].indexOf(cur) < 0), 'pago único, sin mensualidad · en tu moneda'); } catch(e){}
+    return;
+  }
   function pinta(taxa){
-    var v = MXN * taxa, dec = ['USD','EUR','PEN','BRL','BOB','GTQ'].indexOf(cur) >= 0;
+    var v = MXN * taxa, dec = ['USD','EUR'].indexOf(cur) >= 0;
     if (!dec) { var passo = v >= 10000 ? 100 : v >= 1000 ? 10 : 1; v = Math.round(v / passo) * passo; }
-    var txt;
-    try { txt = new Intl.NumberFormat('es', { style:'currency', currency:cur, currencyDisplay:'code',
-      minimumFractionDigits: dec ? 2 : 0, maximumFractionDigits: dec ? 2 : 0 }).format(v); } catch(e){ return; }
-    document.querySelectorAll('[data-preco-local]').forEach(function(el){ el.textContent = '≈ ' + txt; });
-    document.querySelectorAll('[data-preco-nota]').forEach(function(el){ el.textContent = 'pago único, sin mensualidad · valor aproximado, el exacto aparece al pagar'; });
+    try { escreve('≈ ' + formata(v, dec), 'pago único, sin mensualidad · valor aproximado, el exacto aparece al pagar'); } catch(e){}
   }
   try {
     var c = JSON.parse(localStorage.getItem('agn_fx') || 'null');
