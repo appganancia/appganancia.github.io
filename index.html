@@ -256,7 +256,7 @@ h3{font-size:var(--s2)}
 .comp tr.nosso td:last-child{color:var(--vinho)}
 .comp small{display:block;font-size:11px;font-weight:800;letter-spacing:.5px;
   text-transform:uppercase;color:var(--cinza);margin-top:3px}
-.comp tr.nosso small{color:var(--vinho);opacity:.75}
+.comp tr.nosso small{color:var(--vinho);opacity:.88}
 .inclui{font-size:14.5px;line-height:1.6;color:var(--cinza);margin-top:14px}
 .inclui b{color:var(--tinta)}
 
@@ -327,7 +327,7 @@ footer .f-logo{height:34px;width:auto;margin:0 auto 16px;opacity:.9}
 footer .f-links{display:flex;gap:10px;justify-content:center;align-items:center;
   font-size:13.5px;font-weight:600}
 footer .f-links span{opacity:.4}
-footer .f-id{margin-top:14px;font-size:11.5px;opacity:.55;line-height:1.7}
+footer .f-id{margin-top:14px;font-size:11.5px;opacity:.78;line-height:1.7}
 footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;
   min-height:44px;padding:0 6px;border-bottom:1px solid rgba(255,255,255,.3)}
 
@@ -462,6 +462,7 @@ setTimeout(function(){document.documentElement.classList.add("precio-ok")},2500)
     </div>
   </div>
 </header>
+<main>
 
 <!-- ============ FAIXA DE PROVA ============ -->
 <section class="faixa-prova">
@@ -471,7 +472,7 @@ setTimeout(function(){document.documentElement.classList.add("precio-ok")},2500)
         <img class="print" src="img/dep-alexandra.jpg" width="1170" height="1125" loading="lazy" decoding="async"
           alt="Captura de conversación de WhatsApp: “La verdad sí me sirvió. Antes anotaba todo en mi cuaderno. Ya había visto algunas apps, pero no quería pagar una mensualidad. Así está mucho mejor: la app hace las cuentas y me deja todas las ventas calculadas y registradas.”">
       </div>
-      <figcaption><span class="ini" aria-hidden="true">A</span><span class="nome">Alexandra, 40</span><span class="fp-estrelas" aria-label="5 de 5"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span></figcaption>
+      <figcaption><span class="ini" aria-hidden="true">A</span><span class="nome">Alexandra, 40</span><span class="fp-estrelas" role="img" aria-label="5 de 5"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span></figcaption>
     </figure>
     <a class="fp-link" href="#depoimentos">ver las capturas de las conversaciones</a>
   </div>
@@ -772,6 +773,8 @@ setTimeout(function(){document.documentElement.classList.add("precio-ok")},2500)
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="w">
     <img src="img/logo-appganancia-branca.png" alt="AppGanancia" width="150" height="36" class="f-logo">
@@ -785,7 +788,7 @@ setTimeout(function(){document.documentElement.classList.add("precio-ok")},2500)
 </footer>
 
 <!-- barra fixa (aparece depois do hero) -->
-<div class="barra" id="barra">
+<div class="barra" id="barra" role="complementary" aria-label="Comprar">
   <div class="p"><span data-precio="front" data-forma="curto">$175</span><small><span data-precio-moeda>MXN</span> · pago único</small></div>
   <a class="cta" href="#" data-checkout>Quiero la app</a>
 </div>
