@@ -124,6 +124,19 @@ main{padding:16px 0 36px}
 @keyframes respira{0%,100%{box-shadow:0 18px 34px -14px rgba(92,24,56,.9)}50%{box-shadow:0 18px 44px -10px rgba(255,61,139,.75)}}
 .pix{font-size:12.5px;line-height:1.4;color:var(--cinza);text-align:center;margin-top:11px;text-wrap:balance}
 .pix b{color:var(--tinta)}
+/* botoes de 1 clique da Cakto: o botao mora em shadow DOM e so aceita estilo por ::part(button);
+   o host e inline por padrao e precisa de display:block nos dois niveis para esticar */
+cakto-upsell-buttons,cakto-upsell-accept,cakto-upsell-reject{display:block;width:100%}
+cakto-upsell-accept::part(button){
+  display:block;width:100%;background:linear-gradient(165deg,#b2306c,#5c1838);
+  color:#fff;font-family:var(--sans);font-size:19px;font-weight:800;letter-spacing:-.3px;
+  border:0;border-radius:var(--r);padding:21px 16px;cursor:pointer;line-height:1.2;text-wrap:balance;
+  box-shadow:0 18px 34px -14px rgba(92,24,56,.9);animation:respira 2.8s ease-in-out infinite}
+cakto-upsell-accept::part(button):active{transform:translateY(2px);animation:none}
+cakto-upsell-reject::part(button){
+  display:block;width:100%;background:transparent;color:var(--cinza);
+  font-family:var(--sans);font-size:13.5px;font-weight:600;border:0;
+  padding:14px 8px 4px;cursor:pointer;text-decoration:underline;line-height:1.4}
 
 .ga{font-size:12.5px;color:var(--cinza);margin:14px auto 0;text-align:center;line-height:1.4;max-width:34ch;text-wrap:balance}
 
@@ -141,7 +154,7 @@ footer a{color:var(--cinza)}
 .barra .cta-link{padding:14px 10px;font-size:15.5px;animation:none}
 
 @media (prefers-reduced-motion:reduce){
-  .selo,.selo .pisca,.vsl .som b,.cta-link{animation:none}
+  .selo,.selo .pisca,.vsl .som b,.cta-link,cakto-upsell-accept::part(button){animation:none}
   .alerta::after{display:none}}
 
 @media (max-height:640px){
@@ -176,7 +189,7 @@ alt=""/></noscript>
 <div class="ok">
   <div class="w">
     <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
-    <span>¡Pago aprobado! Hotmart ya te mandó el acceso a tu <span style="white-space:nowrap">correo</span>.<br><span style="font-weight:500">Revisa también spam, promociones o la papelera. Llega de Hotmart, al <span style="white-space:nowrap">correo</span> que pusiste al pagar.</span></span>
+    <span>¡Pago aprobado! Ya te mandamos el acceso a tu <span style="white-space:nowrap">correo</span>.<br><span style="font-weight:500">Revisa también spam, promociones o la papelera. Llega de Cakto, al <span style="white-space:nowrap">correo</span> que pusiste al pagar.</span></span>
   </div>
 </div>
 
@@ -213,33 +226,38 @@ alt=""/></noscript>
 
 <main class="w">
   <div class="oferta">
-    <div class="val so-mx"><sup>$</sup>399<small>MXN</small></div><div class="val fora-mx">Tuyo para siempre</div>
+    <div class="val so-mx"><sup>$</sup>251<small>MXN</small></div><div class="val fora-mx">Tuyo para siempre</div>
     <div class="uma"><span class="so-mx">pago único, IVA incluido · sin mensualidad · es tuyo para siempre</span><span class="fora-mx">pago único · sin mensualidad · ves el precio en tu moneda</span></div>
     <div class="relogio" id="relogio"><small>esta oferta termina en</small><b>--</b></div>
 
     <div class="acao" id="acao">
-      <div id="hotmart-sales-funnel"></div>
-      <div id="plano-b" hidden><a class="cta-link" href="https://pay.hotmart.com/Y108141969P" data-checkout>¡Sí! Quiero mi catálogo listo</a></div>
-      <p class="pix">Si pagaste con tarjeta, es un solo toque. <b></b></p>
+      <cakto-upsell-buttons>
+        <cakto-upsell-accept
+          bg-color="#8e2757ff"
+          text-color="#ffffff"
+          upsell-accept-url="members_area"
+          offer-id="izf22iu"
+          app-base-url="https://app.cakto.com.br"
+          offer-type="upsell"
+          upsell-reject-url="members_area"
+        >¡Sí! Quiero mi catálogo listo</cakto-upsell-accept>
+        <p class="pix">Si pagaste con tarjeta, es un solo toque, con la misma tarjeta.</p>
+        <cakto-upsell-reject
+          upsell-reject-url="members_area"
+        >No, sigo mandando fotos sueltas</cakto-upsell-reject>
+      </cakto-upsell-buttons>
     </div>
   </div>
 
-  <p class="ga">7 días para pedir tu reembolso desde Hotmart. Si dices que no, tu compra queda igual.</p>
+  <p class="ga">7 días para pedir tu reembolso en reembolso.cakto.com.br. Si dices que no, tu compra queda igual.</p>
 </main>
 
 <footer><a href="termos.html">Términos de uso</a> · <a href="privacidad.html">Aviso de privacidad</a></footer>
 
-<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
-<script>
-(function(){var b=document.getElementById("plano-b"),w=document.getElementById("hotmart-sales-funnel"),ok=false;
-function reserva(esconde){if(esconde)w.style.display="none";b.hidden=false}
-if(!location.search){reserva(true);return}
-try{checkoutElements.init("salesFunnel",{onLoad:function(){ok=true},onLoadDataError:function(){reserva(true)}}).mount("#hotmart-sales-funnel")}catch(e){reserva(true)}
-setTimeout(function(){if(!ok)reserva(false)},10000)})();
-</script>
+<script src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
 
 <div class="barra" id="barraFixa">
-  <div class="p"><span class="so-mx">$399<small>MXN · pago único</small></span><span class="fora-mx">Pago único<small>tuyo para siempre</small></span></div>
+  <div class="p"><span class="so-mx">$251<small>MXN · pago único</small></span><span class="fora-mx">Pago único<small>tuyo para siempre</small></span></div>
   <div class="cta"><a class="cta-link" href="#acao">Quiero mi catálogo</a></div>
 </div>
 
