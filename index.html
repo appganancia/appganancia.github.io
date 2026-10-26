@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="es-MX">
+<html lang="es">
+<head>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -47,6 +48,7 @@ h3{font-size:var(--s2)}
   color:var(--vinho);margin-bottom:9px}
 .centro{text-align:center}
 
+/* ---------------- HERO ---------------- */
 .hero{position:relative;background:
    radial-gradient(120% 90% at 12% 0%, #a12f66 0%, transparent 55%),
    linear-gradient(168deg,var(--vinho) 0%,var(--vinho-esc) 52%,var(--vinho-prof) 100%);
@@ -64,6 +66,7 @@ h3{font-size:var(--s2)}
 .sub b{color:#fff;font-weight:700}
 
 .palco{position:relative;display:flex;justify-content:center;padding:8px 0 4px}
+/* dobra: no celular a VSL aparece inteira sem rolar */
 @media (max-width:899px){
   .hero{padding-top:16px}
   .hero .marca{height:30px;margin-bottom:12px}
@@ -72,14 +75,16 @@ h3{font-size:var(--s2)}
   .sub{font-size:15.5px;line-height:1.42;margin-bottom:14px;max-width:32ch}
   .palco{padding:0 0 4px}
   .fone{width:min(268px,64vw)}
+  .palco .vsl{width:min(340px,86vw)}   /* VSL grande: no celular a legenda e a tela do app precisam ser lidas */
 }
 @media (max-width:899px) and (max-height:700px){
   .hero{padding-top:10px}
   .hero .marca{height:24px;margin-bottom:8px}
   .chapeu{font-size:10px;margin-bottom:6px}
   .hero h1{font-size:clamp(22px,5.8vw,27px);margin-bottom:7px}
-  .sub{font-size:14px;line-height:1.36;margin-bottom:10px;max-width:none}
+  .sub{font-size:14px;line-height:1.36;margin-bottom:10px}
   .fone{width:min(228px,58vw)}
+  .palco .vsl{width:min(312px,80vw)}
 }
 @media (max-width:899px){
   .hero-txt{display:flex;flex-direction:column}
@@ -87,30 +92,31 @@ h3{font-size:var(--s2)}
   .hero-txt h1{order:2}
   .hero-txt .sub{order:3}
   .hero-txt .palco-mob{order:5}
-  .hero-txt .oferta{order:6}
+  .hero-txt .tags{order:6}
+  .hero-txt .selos{order:7}
+  .hero-txt .oferta{order:8}
   .palco-desk{display:none}
 }
 @media (min-width:900px){ .palco-mob{display:none} }
-.fone{position:relative;width:min(300px,72vw);border-radius:44px;padding:8px;
-  background:linear-gradient(150deg,#55555c 0%,#1c1c1f 18%,#0b0b0c 55%,#2b2b30 100%);
-  box-shadow:0 30px 60px -24px rgba(20,4,12,.85), inset 0 0 0 1.5px rgba(255,255,255,.16), inset 0 0 0 5px #050506;
+.fone{position:relative;width:min(300px,72vw);border-radius:34px;padding:9px;
+  background:linear-gradient(160deg,#3b2530,#1d1218);
+  box-shadow:0 30px 60px -28px rgba(20,4,12,.85), 0 0 0 1px rgba(255,255,255,.09) inset;
   animation:flutua 7s ease-in-out infinite}
-.fone::before,.fone::after{content:"";position:absolute;width:4px;border-radius:3px;background:#2e2e33}
-.fone::before{left:-3px;top:17%;height:9%;box-shadow:0 calc(100% + 14px) 0 #2e2e33}
-.fone::after{right:-3px;top:23%;height:13%}
-.fone .tela{position:relative;border-radius:36px;overflow:hidden;background:#fff}
-.fone .sb{height:26px;background:#8d2456;color:#fff;display:flex;align-items:center;justify-content:space-between;
-  padding:3px 20px 0 26px;font:700 11.5px/1 var(--sans)}
-.fone .sb span{display:flex;gap:4px;align-items:center}
-.fone .ilha{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:30%;height:19px;border-radius:12px;background:#000}
-.fone .tela img,.fone .tela video{width:100%;height:auto;aspect-ratio:720/1280;object-fit:cover;display:block}
-.vsl{--vsl-fundo:#1d1218;--vsl-tinta:#3d0f24;--vsl-vidro:rgba(29,18,24,.66);--vsl-acento:#ff3d8b;--vsl-fonte:var(--sans);
-  position:relative;width:calc(100% - 36px);max-width:484px;aspect-ratio:4/5;margin:4px auto 16px;border-radius:22px;overflow:hidden;background:var(--vsl-fundo);box-shadow:0 14px 30px rgba(61,51,85,.22);cursor:pointer}
-.vsl video{display:block;width:100%;height:100%;object-fit:cover}
-.vsl .som{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.35);border-radius:20px;padding:16px 22px 15px;background:var(--vsl-vidro);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;cursor:pointer;box-shadow:0 10px 26px rgba(30,22,48,.28)}
+.fone .tela{border-radius:26px;overflow:hidden;background:var(--rose2);aspect-ratio:720/1280}
+.fone .tela img,.fone .tela video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.fone{animation:none}}
+
+/* ---------- VSL do hero: cartao de video vertical (406x722, 9:16), sem moldura de celular ---------- */
+.vsl{--vsl-fundo:#140a10;--vsl-tinta:#3d0f24;--vsl-vidro:rgba(29,18,24,.66);--vsl-acento:#ff3d8b;--vsl-fonte:var(--sans);
+  position:relative;width:min(300px,72vw);aspect-ratio:406/722;margin:0 auto;border-radius:24px;overflow:hidden;
+  background:var(--vsl-fundo);box-shadow:0 26px 56px -24px rgba(20,4,12,.8),0 0 0 1px rgba(255,255,255,.14);
+  cursor:pointer;-webkit-tap-highlight-color:transparent}
+.vsl video{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.vsl .som{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.35);border-radius:20px;padding:15px 16px 14px;background:var(--vsl-vidro);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;cursor:pointer;box-shadow:0 10px 26px rgba(30,22,48,.28)}
 .vsl .som-ic{width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;animation:vsl-anel 1.8s ease-out infinite}
-.vsl .som-t{font:800 13.5px/1.2 var(--vsl-fonte);opacity:.85;white-space:nowrap}
-.vsl .som-b{font:900 16.5px/1.2 var(--vsl-fonte);white-space:nowrap}
+.vsl .som-t{font:800 13px/1.2 var(--vsl-fonte);opacity:.85;white-space:nowrap}
+.vsl .som-b{font:900 16px/1.2 var(--vsl-fonte);white-space:nowrap}
 @keyframes vsl-anel{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 14px rgba(255,255,255,0)}}
 @media (prefers-reduced-motion: reduce){.vsl .som-ic{animation:none}}
 .vsl.com-som .som{display:none}
@@ -118,29 +124,41 @@ h3{font-size:var(--s2)}
 .vsl .pausa i{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center}
 .vsl .pausa i:after{content:"";margin-left:6px;border-left:22px solid var(--vsl-tinta);border-top:14px solid transparent;border-bottom:14px solid transparent}
 .vsl.parado .pausa{display:flex}
-.vsl .ctl{position:absolute;left:0;right:0;bottom:5px;height:46px;display:flex;align-items:center;gap:8px;padding:0 10px;background:linear-gradient(rgba(20,16,32,0),rgba(20,16,32,.62));opacity:0;pointer-events:none;transition:opacity .25s}
+.vsl .ctl{position:absolute;left:0;right:0;bottom:5px;height:46px;display:flex;align-items:center;gap:6px;padding:0 8px;background:linear-gradient(rgba(20,16,32,0),rgba(20,16,32,.62));opacity:0;pointer-events:none;transition:opacity .25s}
 .vsl.com-som.ctl-on .ctl,.vsl.com-som.parado .ctl{opacity:1;pointer-events:auto}
-.vsl .cb{flex:0 0 34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
-.vsl .tempo{color:#fff;font:800 12.5px/1 var(--vsl-fonte);text-shadow:0 1px 2px rgba(0,0,0,.5);font-variant-numeric:tabular-nums}
+.vsl .cb{flex:0 0 32px;height:32px;border:0;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.vsl .tempo{color:#fff;font:800 11.5px/1 var(--vsl-fonte);text-shadow:0 1px 2px rgba(0,0,0,.5);font-variant-numeric:tabular-nums;white-space:nowrap}
 .vsl .esp{flex:1}
-.vsl .vol{width:76px;accent-color:var(--vsl-acento);margin:0}
+.vsl .vol{width:48px;min-width:0;accent-color:var(--vsl-acento);margin:0}
 .vsl.sem-volume .vol{display:none}
 .vsl .prog{position:absolute;left:0;right:0;bottom:0;height:18px;cursor:pointer;touch-action:none}
 .vsl .prog:before{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:rgba(255,255,255,.5)}
 .vsl .prog i{position:absolute;left:0;bottom:0;height:5px;width:0;background:var(--vsl-acento)}
-.palco .vsl{width:100%;max-width:400px;margin:0 auto;box-shadow:0 26px 50px -24px rgba(20,4,12,.85)}
-@media (max-width:899px) and (max-height:700px){ .palco .vsl{max-width:min(300px,78vw)} }
-@media (min-width:900px){ .palco .vsl{max-width:440px} .palco-desk{align-self:start;padding-top:6px} }
 
-@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@media (prefers-reduced-motion:reduce){.fone{animation:none}}
+/* etiquetas de recurso */
+.tags{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:22px 0 4px}
+.tg{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.96);
+  border-radius:11px;padding:9px 10px;color:var(--tinta);
+  box-shadow:0 10px 22px -14px rgba(20,4,12,.6)}
+.tg svg{width:16px;height:16px;flex-shrink:0;fill:none;stroke:var(--vinho);stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round}
+.tg span{font-size:12.5px;font-weight:700;line-height:1.25}
+.tg small{display:block;font-size:9px;font-weight:800;letter-spacing:.06em;
+  color:var(--cinza);text-transform:uppercase}
+.tg.verde svg{stroke:var(--verde)}
 
+.selos{display:flex;flex-wrap:wrap;gap:7px;margin:22px 0 20px}
+.selos span{font-size:12px;font-weight:600;color:#f2d4e1;
+  border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:6px 12px}
+.selos span.destaque{color:#fff;font-weight:800;background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.55)}
+
+/* cartao de preco */
 .oferta{background:#fff;color:var(--tinta);border-radius:var(--r-lg);
   padding:22px 20px;text-align:center;box-shadow:0 24px 50px -26px rgba(20,4,12,.6)}
 .oferta .de{font-size:13px;font-weight:700;color:var(--cinza);margin-bottom:2px}
 .oferta .ancora{font-size:13px;line-height:1.45;color:var(--cinza);
   border-bottom:1px solid var(--linha);padding-bottom:11px;margin-bottom:13px}
-.oferta .ancora s{opacity:.85}
 .oferta .ancora b{color:var(--tinta);font-weight:700}
 .oferta .val{font-weight:800;font-size:clamp(46px,38px + 3vw,60px);line-height:1;
   color:var(--vinho);letter-spacing:-2px}
@@ -156,8 +174,29 @@ h3{font-size:var(--s2)}
 .cta.claro{background:#fff;color:var(--vinho)}
 .oferta .sob{font-size:12.5px;color:var(--cinza);margin-top:12px;line-height:1.5}
 
+/* ---------------- FAIXA DE PROVA ---------------- */
+/* um print so, cortado logo abaixo do horario da mensagem dela (o recorte e por CSS) */
+.faixa-prova{background:var(--rose2);border-bottom:1px solid var(--linha);padding:22px 0 24px}
+.faixa-prova .w{display:flex;flex-direction:column;align-items:center}
+.fp{background:#fff;border:1px solid var(--linha);border-radius:var(--r);
+  overflow:hidden;padding:0;margin:0;width:100%;max-width:340px;
+  box-shadow:0 10px 26px -20px rgba(61,15,36,.35)}
+.fp .recorte{aspect-ratio:1170/580;overflow:hidden;background:#0b141a}
+.fp .print{display:block;width:100%;height:auto;background:#0b141a}
+.fp figcaption{display:flex;align-items:center;gap:9px;padding:12px 16px;
+  border-top:1px solid var(--linha);
+  font-size:13.5px;font-weight:700;color:var(--cinza)}
+.fp figcaption .nome{line-height:1.3}
+.fp figcaption .onde{display:block;font-weight:400;font-size:12.5px}
+.fp-estrelas{display:flex;gap:2px;margin-left:auto;flex-shrink:0}
+.fp-estrelas svg{width:14px;height:14px;fill:#e8a02b}
 .ini{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--vinho);
   color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.fp-link{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;
+  font-size:14px;font-weight:700;color:var(--vinho);text-decoration:none;
+  border-bottom:1px solid rgba(142,39,87,.3)}
+
+/* ---------------- LISTAS E CARTOES ---------------- */
 .card{background:#fff;border:1px solid var(--linha);border-radius:var(--r);
   padding:6px 18px;box-shadow:0 12px 30px -26px rgba(61,15,36,.4)}
 .para{list-style:none}
@@ -178,6 +217,7 @@ h3{font-size:var(--s2)}
 .remate{font-size:clamp(16px,15px + .5vw,18.5px);line-height:1.55;margin-top:4px}
 .remate b{color:var(--vinho)}
 
+/* passos */
 .passos{list-style:none;counter-reset:p;display:grid;gap:11px;margin-top:20px}
 .passos li{display:flex;gap:13px;background:#fff;border:1px solid var(--linha);
   border-radius:var(--r);padding:15px 16px}
@@ -187,12 +227,28 @@ h3{font-size:var(--s2)}
 .passos .t{display:block;font-weight:800;font-size:16px;margin-bottom:2px}
 .passos .d{display:block;font-size:14.5px;color:var(--cinza);line-height:1.5}
 
-.tela-app{margin:22px auto 0;width:min(300px,72vw)}
-.tela-app>div{border-radius:0}
-.tela-app img{width:100%;height:auto;display:block}
 .legenda{font-size:13.5px;color:var(--cinza);text-align:center;margin-top:11px;
   max-width:40ch;margin-left:auto;margin-right:auto}
 
+/* familia de apps */
+.apps{display:grid;gap:11px;margin-top:20px}
+.app{background:#fff;border:1px solid var(--linha);border-radius:var(--r);padding:17px}
+.app.principal{border:2px solid var(--vinho);box-shadow:0 16px 34px -26px rgba(92,24,56,.6)}
+.app .tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--cinza);border:1px solid var(--linha);
+  border-radius:999px;padding:3px 9px;margin-bottom:9px}
+.app.principal .tag{color:#fff;background:var(--vinho);border-color:var(--vinho)}
+.app.principal{position:relative}
+.app .selo{position:absolute;top:-10px;right:14px;background:var(--dourado);color:#3a2c05;
+  font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:999px;padding:4px 11px;box-shadow:0 6px 14px -8px rgba(90,70,10,.8)}
+.apps-nota{font-size:13.5px;color:var(--cinza);margin-top:13px;line-height:1.55}
+.apps-nota b{color:var(--tinta)}
+.app .pr{float:right;font-weight:800;color:var(--vinho);font-size:17px}
+.app h3{font-size:18px;margin-bottom:5px}
+.app p{font-size:14.5px;color:var(--cinza);line-height:1.5}
+
+/* tabela comparativa */
 .comp{width:100%;border-collapse:collapse;font-size:16px;margin:6px 0}
 .comp td{padding:13px 2px;border-bottom:1px solid var(--linha)}
 .comp td:last-child{text-align:right;font-weight:700;white-space:nowrap;color:var(--cinza)}
@@ -204,6 +260,22 @@ h3{font-size:var(--s2)}
 .inclui{font-size:14.5px;line-height:1.6;color:var(--cinza);margin-top:14px}
 .inclui b{color:var(--tinta)}
 
+/* dois caminhos */
+.caminhos{display:grid;gap:12px;margin-top:20px}
+.cam{border-radius:var(--r);padding:18px}
+.cam h3{font-size:17px;margin-bottom:12px}
+.cam ul{list-style:none;display:grid;gap:8px}
+.cam li{font-size:14.5px;padding-left:22px;position:relative}
+.cam.ruim{background:var(--verm-bg);border:1px solid #f5d5d2}
+.cam.ruim h3{color:var(--verm)}
+.cam.ruim li:before{content:'';position:absolute;left:0;top:7px;width:12px;height:12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3261e' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M5 5l14 14M19 5L5 19'/%3E%3C/svg%3E") center/12px no-repeat}
+.cam.bom{background:var(--verde-bg);border:1px solid #cfe8da}
+.cam.bom h3{color:var(--verde)}
+.cam.bom li:before{content:'';position:absolute;left:0;top:6px;width:13px;height:13px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e7d4f' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/13px no-repeat}
+
+/* garantia */
 .garantia{background:linear-gradient(165deg,#fff,var(--verde-bg));border:1px solid #cfe8da;
   border-radius:var(--r-lg);padding:24px 20px;text-align:center}
 .garantia svg{width:38px;height:38px;margin:0 auto 12px;fill:none;stroke:var(--verde);
@@ -212,6 +284,7 @@ h3{font-size:var(--s2)}
 .garantia h3{font-size:21px;margin-bottom:10px}
 .garantia p{font-size:15px;color:var(--cinza);line-height:1.6;max-width:46ch;margin:0 auto}
 
+/* depoimentos: o print manda no layout, o rodape e so a legenda */
 .depos{display:grid;gap:14px;align-items:start}
 @media (min-width:760px){.depos{grid-template-columns:1fr 1fr}}
 .prova{background:#fff;border:1px solid var(--linha);border-radius:var(--r);
@@ -221,12 +294,12 @@ h3{font-size:var(--s2)}
 .prova .quem{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;
   color:var(--cinza);padding:12px 16px;border-top:1px solid var(--linha)}
 .prova .quem .nome{line-height:1.3}
-.prova .quem .onde{display:block;font-weight:400;font-size:12.5px}
 .prova .quem .est{display:flex;gap:2px;margin-left:auto;flex-shrink:0}
 .prova .quem .est svg{width:13px;height:13px;fill:#e8a02b}
 .depos-nota{font-size:13px;color:var(--cinza);text-align:center;margin-top:18px;
   line-height:1.55}
 
+/* FAQ */
 .faq{margin-top:18px;border-top:1px solid var(--linha)}
 details{border-bottom:1px solid var(--linha)}
 summary{list-style:none;cursor:pointer;padding:15px 34px 15px 0;position:relative;
@@ -239,6 +312,15 @@ details[open] summary:after{transform:rotate(-135deg)}
 details .r{padding:0 0 16px;font-size:15px;color:var(--cinza);line-height:1.62}
 details .r b{color:var(--tinta)}
 
+/* fechamento */
+.fim{background:linear-gradient(168deg,var(--vinho),var(--vinho-prof));color:#fff;
+  text-align:center;padding:52px 0}
+.fim h2{margin-bottom:12px}
+.fim h2 .serif{display:block;color:#ffd7e8}
+.fim p{color:#f7e4ec;margin-bottom:22px;font-size:16px}
+.fim .cta{max-width:420px;margin:0 auto}
+.fim .obs{font-size:12.5px;color:#e7bfd0;margin-top:12px}
+
 footer{background:var(--tinta);color:#c9bec6;font-size:13px;padding:30px 0 38px;
   line-height:1.65;text-align:center}
 footer .f-logo{height:34px;width:auto;margin:0 auto 16px;opacity:.9}
@@ -246,10 +328,10 @@ footer .f-links{display:flex;gap:10px;justify-content:center;align-items:center;
   font-size:13.5px;font-weight:600}
 footer .f-links span{opacity:.4}
 footer .f-id{margin-top:14px;font-size:11.5px;opacity:.55;line-height:1.7}
-footer .f-id a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.18)}
 footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;
   min-height:44px;padding:0 6px;border-bottom:1px solid rgba(255,255,255,.3)}
 
+/* barra fixa mobile */
 .barra{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,250,246,.94);
   backdrop-filter:blur(10px);border-top:1px solid var(--linha);padding:10px 16px;
   padding-bottom:calc(10px + env(safe-area-inset-bottom));display:none;gap:12px;align-items:center}
@@ -259,61 +341,23 @@ footer .f-links a{color:#fff;text-decoration:none;display:inline-flex;align-item
 .barra .cta{flex:1;padding:14px 12px;font-size:16px;text-align:center}
 @media (min-width:900px){ .barra,.barra.on{display:none} }
 
-
-.hero .oferta{margin-top:22px}
-@media (min-width:900px){ .hero .oferta{margin-top:8px} }
-.fundo-rosa{background:var(--rose2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
-.mec .fone{margin:22px auto 0;width:min(250px,64vw);animation:none}
-@media (min-width:900px){ .mec-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center} .mec .fone{margin:0 auto} }
-.carrossel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  padding:6px 20px 16px;margin:18px -20px 0;scrollbar-width:none;scroll-padding:0 20px}
-.carrossel::-webkit-scrollbar{display:none}
-.carrossel>*{flex:0 0 72%;max-width:270px;scroll-snap-align:center;margin:0}
-.slide img{width:100%;height:auto;border-radius:18px;border:1px solid var(--linha);background:#fff;
-  box-shadow:0 16px 30px -22px rgba(61,15,36,.55)}
-.slide figcaption{padding:12px 4px 0;font-size:14.5px;line-height:1.45;color:var(--cinza)}
-.slide figcaption b{display:block;color:var(--tinta);font-size:16.5px;font-weight:800;margin-bottom:2px}
-.carrossel.provas>*{flex-basis:84%;max-width:340px}
-@media (max-width:899px){ .carrossel>*{transition:transform .45s ease,opacity .45s ease;transform:scale(.93);opacity:.6}
-  .carrossel>.foco{transform:none;opacity:1} }
-@media (prefers-reduced-motion:reduce){ .carrossel>*{transition:none} }
-.car-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:4px}
-.car-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--linha);background:#fff;color:var(--vinho);
-  font-size:20px;font-weight:800;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.car-nav .pontos{display:flex;gap:6px}
-.car-nav .pontos i{width:7px;height:7px;border-radius:50%;background:var(--linha);transition:background .2s,width .2s}
-.car-nav .pontos i.on{background:var(--vinho);width:18px;border-radius:4px}
-@media (min-width:900px){ .carrossel{margin:22px 0 0;padding:6px 2px 16px} .carrossel>*{flex-basis:250px} .carrossel.provas>*{flex-basis:330px} }
-.bonus{list-style:none;display:grid;gap:10px;margin-top:20px}
-.bonus li{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid var(--linha);border-radius:var(--r);padding:15px 16px}
-.bonus .ic{flex-shrink:0;width:38px;height:38px;border-radius:11px;background:var(--rose);display:flex;align-items:center;justify-content:center}
-.bonus .ic svg{width:20px;height:20px;fill:none;stroke:var(--vinho);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.bonus .t{display:block;font-weight:800;font-size:16px;line-height:1.3}
-.bonus .d{display:block;font-size:14.5px;color:var(--cinza);line-height:1.5;margin-top:2px}
-.bonus .inc{margin-left:auto;flex-shrink:0;align-self:center;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--verde);background:var(--verde-bg);border-radius:999px;padding:4px 9px}
-@media (min-width:900px){ .bonus{grid-template-columns:1fr 1fr} }
-.oferta-final{max-width:430px;margin:22px auto 0;border:2px solid var(--vinho);box-shadow:0 18px 40px -22px rgba(61,15,36,.4)}
-.leva{list-style:none;text-align:left;margin:0 0 18px;border-bottom:1px solid var(--linha);padding-bottom:12px}
-.leva li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14.5px;line-height:1.45}
-.leva li:before{content:'';flex-shrink:0;width:18px;height:18px;margin-top:1px;border-radius:50%;
-  background:var(--verde-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e7d4f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/11px no-repeat}
-.leva li b{font-weight:800}
-.oferta .de-por{font-size:15px;font-weight:700;color:var(--cinza);margin-bottom:4px}
-.oferta .de-por s{color:var(--verm);text-decoration-thickness:2px}
-.oferta .mensal{font-size:13px;color:var(--cinza);margin:-4px 0 16px;line-height:1.45}
-.faq-cta{max-width:420px;margin:28px auto 0;text-align:center}
-
+/* ---------------- DESKTOP ---------------- */
 @media (min-width:900px){
   section{padding:76px 0}
   .hero{padding:34px 0 66px}
   .hero .grade{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
-  .hero h1{max-width:none;font-size:min(41px,3.55vw)}
+  .hero h1{max-width:none;font-size:min(44px,3.6vw)}
+  .hero h1 .serif{text-wrap:balance}
   .sub{font-size:19.5px}
+  .tags{grid-template-columns:1fr 1fr;gap:9px;max-width:440px}
   .oferta{max-width:430px}
+  .fp{max-width:380px}
+  .apps{grid-template-columns:repeat(3,1fr);align-items:start}
+  .caminhos{grid-template-columns:1fr 1fr;gap:16px}
+  .depos{grid-template-columns:1fr 1fr;gap:16px}
+  .prova{padding:22px}
   .passos{grid-template-columns:1fr 1fr}
   .comofunciona{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
-  .tela-app{margin-top:0;width:min(330px,100%)}
   .card{padding:8px 24px}
   h2{max-width:22ch}
   .centro h2,h2.centro{max-width:none}
@@ -347,24 +391,28 @@ else if(F[z])p=F[z];
 else if(/^America\/(Argentina\/|Buenos_Aires$|Cordoba$|Catamarca$|Jujuy$|Mendoza$|Rosario$)/.test(z))p="AR";
 else if(/^America\/(Sao_Paulo|Fortaleza|Recife|Bahia|Belem|Manaus|Cuiaba|Campo_Grande|Porto_Velho|Boa_Vista|Rio_Branco|Maceio|Araguaina|Santarem|Noronha)$/.test(z))p="BR";
 else if(/^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Indiana\/|Kentucky\/)|^Pacific\/Honolulu$/.test(z))p="US";
-window.AGN_PAIS=p;if(p==="MX")document.documentElement.className+=" mx"}catch(e){}})();</script>
-<style>html:not(.mx) .so-mx{display:none!important}html.mx .fora-mx{display:none!important}.oferta .val.fora-mx{font-size:36px;letter-spacing:-.5px}</style>
+window.AGN_PAIS=p;if(p==="MX")document.documentElement.className+=" mx"}catch(e){}
+/* trava: se o script de preco falhar, o numero aparece mesmo assim */
+setTimeout(function(){document.documentElement.classList.add("precio-ok")},2500)})();</script>
+<style>html:not(.precio-ok) [data-precio],html:not(.precio-ok) [data-precio-nota]{visibility:hidden}html:not(.mx) .so-mx{display:none!important}html.mx .fora-mx{display:none!important}.oferta .val.fora-mx{font-size:36px;letter-spacing:-.5px}</style>
 </head>
 <body>
 
+<!-- ============ HERO ============ -->
 <header class="hero">
   <div class="w">
     <img src="img/logo-appganancia-branca.png" alt="AppGanancia" width="480" height="116" class="marca">
     <div class="grade">
       <div class="hero-txt">
-        <h1>Hay vendedoras pagando
-          <span class="serif">por trabajar sin saberlo.</span></h1>
-        <p class="sub">Una vendedora profesional no saca las cuentas en el cuaderno:
-          <b>usa una app en el celular que le muestra la ganancia de cada venta al momento.</b></p>
+        <div class="chapeu">Para quien vende ropa, perfume o maquillaje</div>
+        <h1>Vendes todos los días.
+          <span class="serif">¿Pero sabes cuánto te quedó?</span></h1>
+        <p class="sub">Vendes bien, repones mercancía, pagas envíos y, a fin de mes,
+          <b>el dinero desaparece sin explicación</b>.</p>
 
         <div class="palco palco-mob">
           <div class="vsl" id="vsl">
-            <video id="vVsl" src="img/vsl.mp4" poster="img/vsl-capa.jpg" muted playsinline preload="none" width="720" height="900"
+            <video id="vVsl" src="img/vsl.mp4" poster="img/vsl-capa.jpg" muted playsinline preload="none" width="406" height="722"
                    aria-label="Cómo funciona la app, desde que agregas el producto hasta la ganancia de la venta"></video>
             <button class="som" id="bSom" type="button">
               <span class="som-ic"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" style="color:var(--vsl-tinta)" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
@@ -382,168 +430,346 @@ window.AGN_PAIS=p;if(p==="MX")document.documentElement.className+=" mx"}catch(e)
           </div>
         </div>
 
+        <div class="tags">
+          <div class="tg"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Anotar ventas<small>en pocos toques</small></span></div>
+          <div class="tg verde"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span>Ganancia en pantalla<small>al instante</small></span></div>
+          <div class="tg"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3.3 8.3L12 13l8.7-4.7"/></svg><span>Control de inventario<small>se descuenta solo</small></span></div>
+          <div class="tg"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Resumen del mes<small>cuánto te quedó</small></span></div>
+          <div class="tg"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9.3 8.4 8.6 8.6 0 01-3.9-1L3 20l1.2-4.6a8.4 8.4 0 1116.8-3.9z"/></svg><span>Recibo por WhatsApp<small>para tu clienta</small></span></div>
+          <div class="tg"><svg viewBox="0 0 24 24"><path d="M16 3h-2a2 2 0 00-2 2v0a2 2 0 01-2 2H8"/><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M9 13h6M9 17h4"/></svg><span>Quién te debe<small>con nombre</small></span></div>
+        </div>
+
+        <div class="selos">
+          <span class="destaque">pago único, sin mensualidad</span>
+          <span>la usan vendedoras de verdad</span>
+          <span>con tarjeta, acceso inmediato</span>
+        </div>
+
         <div class="oferta">
-          <div class="ancora so-mx">Las apps de mensualidad cobran de <b>$199 a $399</b> cada mes.</div><div class="ancora fora-mx">Las apps de mensualidad te cobran cada mes, todo el año.</div>
-          <div class="val so-mx"><sup>$</sup>175<small>MXN</small></div><div class="val fora-mx" data-preco-local>Pagas una vez</div>
-          <div class="uma"><span class="so-mx">pago único, IVA incluido · sin mensualidad</span><span class="fora-mx" data-preco-nota>sin mensualidad · el precio aparece en tu moneda al pagar</span></div>
+          <div class="ancora so-mx">Las apps de mensualidad cobran de <b>$199 a $399</b> cada mes.
+            Aquí pagas <b>una sola vez</b>.</div>
+          <div class="ancora fora-mx">Las apps de mensualidad te cobran cada mes, todo el año.
+            Aquí pagas <b>una sola vez</b>.</div>
+          <div class="de">paga una vez, úsala para siempre</div>
+          <div class="val" data-precio="front" data-forma="grande"><sup>$</sup>175<small>MXN</small></div>
+          <div class="uma" data-precio-nota>pago único, IVA y tarifa incluidos · sin mensualidad</div>
           <a class="cta" href="https://pay.cakto.com.br/fecwm9c" data-checkout>Quiero organizar mi negocio</a>
-          <div class="sob">Con tarjeta, acceso al momento · 7 días de garantía</div>
+          <div class="sob">Con tarjeta, acceso inmediato · 7 días de garantía</div>
         </div>
       </div>
-
-      <div class="palco palco-desk">      </div>
 
       <div class="palco palco-desk"></div>
     </div>
   </div>
 </header>
 
-<section class="mec fundo-rosa">
+<!-- ============ FAIXA DE PROVA ============ -->
+<section class="faixa-prova">
   <div class="w">
-    <div class="mec-grade">
-      <div>
-        <div class="olho">Por qué no te queda nada</div>
-        <h2>Vender ya sabes. <span class="serif">Te falta ver lo que te dejó la venta.</span></h2>
-        <p>La semana estuvo buena. Entró dinero, metiste tu pedido, le echaste gasolina, compraste bolsitas. Y a fin de mes <b>no te quedó lo que pensabas</b>.</p>
-        <ul class="dores">
-          <li>Vendes sin saber si ese producto te dejó ganancia <i>de verdad</i></li>
-          <li>Le prometes el producto a la clienta y resulta que ya se te acabó</li>
-          <li>Se te olvida quién te quedó a deber, y a la que le da pena cobrar es a ti</li>
-          <li>Cierras el mes sin saber a dónde se fue el dinero</li>
-        </ul>
-        <p class="remate"><b>No es que te falten ventas. Es que el cuaderno anota, pero no saca las cuentas.</b>
-          En Mis Ventas, la venta que anotas ya te muestra la ganancia, descuenta el producto del inventario y apunta quién quedó de pagarte.</p>
-      </div>
-      <div class="fone">
-        <div class="tela">
-          <div class="sb" aria-hidden="true">4:41<span><svg width="15" height="10" viewBox="0 0 30 20" fill="#fff"><rect x="0" y="13" width="5" height="7" rx="1.5"/><rect x="8" y="9" width="5" height="11" rx="1.5"/><rect x="16" y="5" width="5" height="15" rx="1.5"/><rect x="24" y="1" width="5" height="19" rx="1.5"/></svg><svg width="14" height="10" viewBox="0 0 27 20" fill="#fff"><path d="M13.5 19l4-4.6a5.6 5.6 0 0 0-8 0zM5.3 10.1l2.8 3.2a7.7 7.7 0 0 1 10.8 0l2.8-3.2a12 12 0 0 0-16.4 0zM1 5.2l2.8 3.2a14 14 0 0 1 19.4 0L26 5.2a18.3 18.3 0 0 0-25 0z"/></svg><svg width="22" height="11" viewBox="0 0 22 11"><rect x="1" y="1" width="18" height="9" rx="2.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="1.4"/><rect x="3" y="3" width="13" height="5" rx="1" fill="#fff"/></svg></span></div>
-          <div class="ilha" aria-hidden="true"></div>
-          <video data-src="img/demo-uso.mp4" data-poster="img/demo-uso-capa.jpg" data-sob-demanda width="720" height="1280"
-                 muted loop playsinline preload="none"
-                 aria-label="La app en uso: anotando una venta, descontándola del inventario y mostrando la ganancia"></video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="w">
-    <div class="olho">Lo que vas a recibir</div>
-    <h2>Todo lo que el cuaderno <span class="serif">nunca te mostró</span></h2>
-    <div class="carrossel" id="carTelas" tabindex="0" aria-label="Pantallas de la app">
-      <figure class="slide"><img src="img/tela-01-vender.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de inicio de la app: cuánto te quedó hoy, la ganancia del mes y lo que te deben"><figcaption><b>Cuánto te quedó hoy</b>Anotaste la venta, aparece la ganancia. Sin hacer cuentas de cabeza al final del día.</figcaption></figure>
-      <figure class="slide"><img src="img/tela-02-pago.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de pago de la venta: transferencia, efectivo, tarjeta o a plazos"><figcaption><b>Transferencia, efectivo, tarjeta o a plazos</b>Lo que vendes a plazos ya queda anotado con el nombre de quien se lo llevó. No tienes que acordarte de nada.</figcaption></figure>
-      <figure class="slide"><img src="img/tela-03-inventario.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de inventario: productos, costo, precio de venta y ganancia de cada uno"><figcaption><b>El inventario se actualiza solo</b>Vendiste, el producto sale del inventario, y ya no prometes lo que se acabó.</figcaption></figure>
-      <figure class="slide"><img src="img/tela-04-me-deben.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Pantalla de ventas con lo que te deben y el botón cobrar"><figcaption><b>Quién te debe, con un solo toque</b>Lo que te deben queda aparte. ¿Ya te pagó? Un toque y sale de la lista.</figcaption></figure>
-      <figure class="slide"><img src="img/tela-05-resumen.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Resumen del mes: lo que entró, la ganancia, los gastos y lo que te quedó de verdad"><figcaption><b>Cuánto te quedó de verdad</b>Entró, gastaste, te quedó. El mes cierra sin cuentas a ojo y sin cuaderno.</figcaption></figure>
-      <figure class="slide"><img src="img/tela-06-mas-ganancia.jpg" width="540" height="1080" loading="lazy" decoding="async" alt="Los que más ganancia dejaron en el mes: los productos que más te hicieron ganar"><figcaption><b>Lo que más ganancia te deja</b>Sabes qué producto conviene volver a pedir primero: el que más ganancia te dejó.</figcaption></figure>
-    </div>
-    <div class="car-nav" data-car="carTelas"><button type="button" class="ant" aria-label="Anterior">‹</button><span class="pontos"></span><button type="button" class="prox" aria-label="Siguiente">›</button></div>
-  </div>
-</section>
-
-<section class="fundo-rosa">
-  <div class="w">
-    <div class="olho">Bonos, sin pagar de más</div>
-    <h2>Y además viene lo que <span class="serif">les faltaba a las otras apps</span></h2>
-    <ul class="bonus">
-      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9.3 8.4 8.6 8.6 0 01-3.9-1L3 20l1.2-4.6a8.4 8.4 0 1116.8-3.9z"/></svg></span><span><span class="t">Recibo con el nombre de tu negocio</span><span class="d">Se manda por WhatsApp con un solo toque. La clienta ve el total, nunca tu ganancia.</span></span><span class="inc">incluido</span></li>
-      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg></span><span><span class="t">Respaldo con un solo toque</span><span class="d">Guarda todo en tu WhatsApp o en Drive. Cambias de celular y todo regresa.</span></span><span class="inc">incluido</span></li>
-      <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><span><span class="t">Mejoras sin volver a pagar</span><span class="d">Cuando la app trae algo nuevo, te llega a tu celular. Sin mensualidad.</span></span><span class="inc">incluido</span></li>
-      <li><span class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><span><span class="t">Abre hasta sin internet</span><span class="d">Queda con su ícono en la pantalla del celular. Sin crear cuenta y sin contraseña que se te olvide.</span></span><span class="inc">incluido</span></li>
-      <li><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="10" r="1.3"/><circle cx="12" cy="7.5" r="1.3"/><circle cx="15.5" cy="10" r="1.3"/></svg></span><span><span class="t">Con tu propio estilo</span><span class="d">Escoge entre 5 colores y deja la app como más te guste.</span></span><span class="inc">incluido</span></li>
-    </ul>
-  </div>
-</section>
-
-<style>#depoimentos .prova{background:#0b0b0c;border-color:#0b0b0c;display:flex;align-items:center}</style>
-<section id="depoimentos">
-  <div class="w">
-    <div class="olho">Quienes ya la usan</div>
-    <h2>Lo que ellas <span class="serif">nos contaron</span></h2>
-    <div class="carrossel provas" id="carProvas" tabindex="0" aria-label="Mensajes de clientas">
-      <figure class="prova">
-        <img class="print" src="img/dep-denise.jpg" width="1170" height="1017" loading="lazy" decoding="async"
-             alt="Captura de conversación de WhatsApp, traducida al español: “Me gustó mucho, la verdad. Es muy fácil de usar, yo pensaba que iba a ser más complicado, pero lo aprendí solo y me está ayudando a organizarme mucho mejor, sobre todo con las entregas que siempre andaba cambiando. Y otra cosa, pagar solo una vez también fue lo que más me gustó.”">
-      </figure>
-      <figure class="prova">
-        <img class="print" src="img/dep-aline.jpg" width="1170" height="1249" loading="lazy" decoding="async"
-             alt="Captura de conversación de WhatsApp, traducida al español: “¡No manches! La parte del control de inventario fue un alivio para mí. Antes tenía que estar anotando en una libreta cuántas piezas me quedaban y era horrible. Con eso ya me ayudó muchísimo. La parte de las ventas también está buenísima para registrar todo y tener los precios bien calculados. ¡Me encantó!”">
-      </figure>
-      <figure class="prova">
-        <img class="print" src="img/dep-bruna.jpg" width="1170" height="1071" loading="lazy" decoding="async"
-             alt="Captura de conversación de WhatsApp, traducida al español: “Sí, claro que lo recomiendo. Es muy fácil de usar y no tiene un montón de cosas que ni necesitas. Lo que más me gustó es que no hay mensualidad, porque antes ya había pagado por otra app que sí cobraba cada mes y ni siquiera estaba tan buena.”">
-      </figure>
-      <figure class="prova">
+    <figure class="fp">
+      <div class="recorte">
         <img class="print" src="img/dep-alexandra.jpg" width="1170" height="1125" loading="lazy" decoding="async"
-             alt="Captura de conversación de WhatsApp, traducida al español: “La verdad sí me sirvió. Antes anotaba todo en mi cuaderno. Ya había visto algunas apps, pero no quería pagar una mensualidad. Así está mucho mejor: la app hace las cuentas y me deja todas las ventas calculadas y registradas.”">
-      </figure>
-    </div>
-    <div class="car-nav" data-car="carProvas"><button type="button" class="ant" aria-label="Anterior">&#8249;</button><span class="pontos"></span><button type="button" class="prox" aria-label="Siguiente">&#8250;</button></div>
-    <p class="depos-nota">Mensajes de clientas por WhatsApp, traducidos al español.</p>
+          alt="Captura de conversación de WhatsApp, traducida al español: “La verdad sí me sirvió. Antes anotaba todo en mi cuaderno. Ya había visto algunas apps, pero no quería pagar una mensualidad. Así está mucho mejor: la app hace las cuentas y me deja todas las ventas calculadas y registradas.”">
+      </div>
+      <figcaption><span class="ini" aria-hidden="true">A</span><span class="nome">Alexandra, 40<span class="onde">mensaje traducido al español</span></span><span class="fp-estrelas" aria-label="5 de 5"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span></figcaption>
+    </figure>
+    <a class="fp-link" href="#depoimentos">ver las capturas de las conversaciones</a>
   </div>
 </section>
 
-<section id="comprar" class="fundo-rosa">
+<!-- ============ ES PARA TI ============ -->
+<section style="padding-top:58px">
   <div class="w">
-    <div class="olho centro">Tu acceso</div>
-    <h2 class="centro">Pagas una vez, <span class="serif">y la app es tuya</span></h2>
-    <div class="oferta oferta-final">
-      <ul class="leva">
-        <li><span><b>Mis Ventas</b> en tu celular: ventas, ganancia al momento, inventario, quién te debe y resumen del mes</span></li>
-        <li>Recibo con el nombre de tu negocio</li>
-        <li>Respaldo con un solo toque</li>
-        <li>Mejoras sin volver a pagar</li>
-        <li>Funciona hasta sin internet</li>
-        <li>5 colores para escoger</li>
-        <li>7 días de garantía</li>
+    <div class="olho">Hecha para ti</div>
+    <h2>Es para ti <span class="serif">si…</span></h2>
+    <div class="card">
+      <ul class="para">
+        <li>Vendes ropa, perfume, maquillaje o bisutería por catálogo, WhatsApp o Instagram</li>
+        <li>Anotas las ventas en un cuaderno, en las notas del celular o las llevas de memoria</li>
+        <li>Ya probaste con Excel y te pareció demasiado complicado</li>
+        <li>Quieres saber, sin hacer ninguna cuenta, cuánto te quedó de verdad en el mes</li>
+        <li>Estás empezando y quieres arrancar con todo en orden</li>
       </ul>
-      <div class="val so-mx"><sup>$</sup>175<small>MXN</small></div><div class="val fora-mx" data-preco-local>Pagas una vez</div>
-      <div class="uma"><span class="so-mx">pago único, IVA incluido · sin mensualidad</span><span class="fora-mx" data-preco-nota>sin mensualidad · el precio aparece en tu moneda al pagar</span></div>
-      <p class="mensal so-mx">Las apps de mensualidad cobran de $199 a $399 cada mes.</p><p class="mensal fora-mx">Las apps de mensualidad te cobran cada mes, todo el año.</p>
-      <a class="cta" href="#" data-checkout>Quiero organizar mi negocio</a>
-      <div class="sob">7 días de garantía. Si no es para ti, te regresamos tu dinero.</div>
+      <div class="nao">
+        <div class="rot">No es para ti si…</div>
+        <ul class="para neg">
+          <li>Tienes una tienda física con empleados y necesitas caja registradora o lector de códigos de barras</li>
+          <li>Necesitas emitir facturas desde la app</li>
+          <li>Quieres que otra persona vea los mismos datos desde otro celular al mismo tiempo</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ============ LA CUENTA QUE NO CUADRA ============ -->
+<section style="background:var(--rose2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)">
+  <div class="w">
+    <div class="olho">Las cuentas que nunca cuadran</div>
+    <h2>¿Sabes cuidar el dinero <span class="serif">de tu negocio?</span></h2>
+    <p>Esta semana vendiste bien. Entró dinero, repusiste mercancía, pagaste envíos,
+      compraste bolsas y empaques… y a fin de mes <b>no te quedó lo que pensabas</b>.</p>
+    <ul class="dores">
+      <li>Vendes y no sabes si ese producto te dejó ganancia <i>de verdad</i></li>
+      <li>Vuelves a pedir un producto que ya tenías, porque no recuerdas tu inventario</li>
+      <li>Se te olvida quién te quedó debiendo, y te da vergüenza cobrar</li>
+      <li>Mezclas el dinero del negocio con el dinero de la casa</li>
+      <li>Cierras el mes sin saber a dónde se fue el dinero</li>
+    </ul>
+    <p class="remate"><b>Muchos negocios pequeños no cierran por falta de ventas. Cierran por falta
+      de control.</b> Vender ya sabes. Te falta ver lo que te deja cada venta.</p>
+  </div>
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
 <section>
+  <div class="w">
+    <div class="olho">Cómo funciona</div>
+    <h2>Ahora son <span class="serif">unos pocos toques, y listo</span></h2>
+    <div class="comofunciona">
+      <div>
+        <p style="margin-bottom:6px">Mis Ventas es una <b>app</b> que funciona en tu celular y
+          <b>queda con su ícono en tu pantalla de inicio</b>, junto a tus otras apps.
+          La abres y la usas: sin crear cuenta, sin contraseña que olvidar y sin ocupar espacio
+          en el celular.</p>
+        <div class="palco" style="padding:0">
+          <div class="fone">
+            <div class="tela">
+              <video data-src="img/demo-uso.mp4" data-poster="img/demo-uso-capa.jpg" data-sob-demanda width="720" height="1280"
+                     muted loop playsinline preload="none"
+                     aria-label="La app en uso: anotando una venta, descontándola del inventario y mostrando la ganancia"></video>
+            </div>
+          </div>
+        </div>
+        <p class="legenda">El resumen que nunca tuviste: lo vendido, la ganancia, los gastos y lo
+          que de verdad te quedó en el mes.</p>
+      </div>
+      <ol class="passos">
+        <li><span class="num">1</span><span><span class="t">Venta en pocos toques</span><span class="d">producto, cantidad y forma de pago. La ganancia de esa venta aparece al instante.</span></span></li>
+        <li><span class="num">2</span><span><span class="t">Inventario que se descuenta solo</span><span class="d">vendiste, sale del inventario. Y te avisa cuando un producto se está acabando.</span></span></li>
+        <li><span class="num">3</span><span><span class="t">Lo que te deben, con nombre, y un botón para cobrar</span><span class="d">quién se lo llevó, cuánto falta y la lista de lo que tienes por cobrar.</span></span></li>
+        <li><span class="num">4</span><span><span class="t">Los que más ganancia te dejan en el mes</span><span class="d">descubre qué productos de verdad te dan dinero. Casi nunca son los que imaginas.</span></span></li>
+        <li><span class="num">5</span><span><span class="t">Recibo para tu clienta por WhatsApp</span><span class="d">con el nombre de tu negocio, y sin mostrar cuánto ganaste.</span></span></li>
+        <li><span class="num">6</span><span><span class="t">Respaldo con un solo toque</span><span class="d">una hoja de cálculo que te mandas a tu WhatsApp o a tu Drive. ¿Cambiaste de celular? La restauras y sigues donde te quedaste.</span></span></li>
+        <li><span class="num">7</span><span><span class="t">Ya instalada, funciona hasta sin señal</span><span class="d">después de poner el ícono en tu pantalla de inicio, anotas ventas aunque el internet esté lento: tus datos se guardan en tu celular.</span></span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA FAMILIA ============ -->
+<section style="background:var(--rose2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)">
+  <div class="w">
+    <div class="olho">La familia AppGanancia</div>
+    <h2>Y hay dos más, <span class="serif">si las quieres</span></h2>
+    <p>La principal resuelve el control. Las otras dos son opcionales:
+      <b>puedes llevarte solo la principal</b>, sin ningún problema.</p>
+    <div class="apps">
+      <div class="app principal">
+        <div class="selo">La más elegida</div>
+        <div class="tag">La principal</div>
+        <span class="pr" data-precio="front" data-forma="curto">$175</span>
+        <h3>Mis Ventas</h3>
+        <p>Ventas, inventario, lo que te deben, gastos y el resumen del mes con tu ganancia.</p>
+      </div>
+      <div class="app">
+        <div class="tag">Opcional al pagar</div>
+        <span class="pr" data-precio="bump" data-forma="mais">+$100</span>
+        <h3>Mensajes listos</h3>
+        <p>El mensaje para cobrar ya viene escrito, de una forma que no te hace quedar mal:
+          recordar, confirmar cuando te paga y volver a cobrar. Y trae los mensajes de novedades
+          y promociones para venderle al resto, con la imagen lista para tu estado de WhatsApp.</p>
+      </div>
+      <div class="app">
+        <div class="tag">Opcional después de pagar</div>
+        <span class="pr" data-precio="upsell" data-forma="mais">+$251</span>
+        <h3>Mi Catálogo</h3>
+        <p>En vez de mandar foto por foto y contestar “¿cuánto cuesta?”, los productos que ya
+          tienes en tu inventario se convierten en un catálogo listo, con tu logo y el precio de
+          cada uno, para mandar por WhatsApp.</p>
+      </div>
+    </div>
+    <p class="apps-nota"><b>Tú decides en el momento</b>, sin instalar nada más que el ícono.
+      Mensajes listos aparece al pagar, y Mi Catálogo, justo después de la compra. Si dices que
+      no, tu compra queda igual.</p>
+  </div>
+</section>
+
+<!-- ============ POR QUE NO UN EXCEL ============ -->
+<section>
+  <div class="w">
+    <div class="olho">Comparando de verdad</div>
+    <h2>¿Por qué no <span class="serif">un Excel?</span></h2>
+    <table class="comp">
+      <tr><td>Excel en el celular</td><td>celdas diminutas</td></tr>
+      <tr><td>App con mensualidad</td><td><span class="so-mx">$199 a $399 <b>al mes</b></span><span class="fora-mx">cobra <b>cada mes</b></span></td></tr>
+      <tr><td>App gratis de la tienda</td><td>anuncios y se traba</td></tr>
+      <tr class="nosso"><td>Mis Ventas</td><td><span data-precio="front">$175 MXN</span> una vez</td></tr>
+    </table>
+    <p class="inclui">Hecha para el pulgar, no para el mouse. Y se paga una sola vez:
+      <b>nunca te vuelve a cobrar.</b></p>
+  </div>
+</section>
+
+<!-- ============ DOS CAMINOS ============ -->
+<section style="background:var(--rose2);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)">
+  <div class="w">
+    <div class="olho">La elección</div>
+    <h2>Ahora tienes <span class="serif">dos caminos</span></h2>
+    <div class="caminhos">
+      <div class="cam ruim">
+        <h3>Seguir como estás</h3>
+        <ul>
+          <li>anotando en el cuaderno</li>
+          <li>sin saber tu ganancia real</li>
+          <li>comprando productos repetidos</li>
+          <li>deudas que se olvidan</li>
+          <li>cierra el mes y el dinero desapareció</li>
+        </ul>
+      </div>
+      <div class="cam bom">
+        <h3>Tener el control en tu mano</h3>
+        <ul>
+          <li>venta en pocos toques</li>
+          <li>ganancia en pantalla, al instante</li>
+          <li>inventario siempre al día</li>
+          <li>la lista de quién te debe</li>
+          <li>cierra el mes y sabes cuánto te quedó</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA OFERTA ============ -->
+<section id="comprar">
+  <div class="w">
+    <div class="olho centro">La oferta</div>
+    <h2 class="centro">Empieza hoy por el precio <span class="serif">de una comida</span></h2>
+    <table class="comp">
+      <tr class="so-mx"><td>App con mensualidad<small>Los planes de pago van de $199 a $399 al mes</small></td><td>$2,388 a $4,788<small>el primer año</small></td></tr>
+      <tr class="fora-mx"><td>App con mensualidad<small>Te cobra todos los meses</small></td><td>12 cobros<small>el primer año</small></td></tr>
+      <tr><td>Y en el segundo año</td><td>cobra todo de nuevo</td></tr>
+      <tr class="nosso"><td>Mis Ventas<small>pagas una vez</small></td><td><span data-precio="front">$175 MXN</span><small>y nunca más</small></td></tr>
+    </table>
+    <p class="inclui">Sin recortes: ventas, inventario, lo que te deben, gastos y el resumen del
+      mes, todo viene incluido. El respaldo, el recibo por WhatsApp, elegir el color de tu app y
+      las actualizaciones también. <b>Pagas una vez, y es tuya.</b></p>
+
+    <div class="oferta" style="margin:22px auto 0;box-shadow:0 18px 40px -22px rgba(61,15,36,.4);border:2px solid var(--vinho)">
+      <div class="val" data-precio="front" data-forma="grande"><sup>$</sup>175<small>MXN</small></div>
+      <div class="uma" data-precio-nota>pago único, IVA y tarifa incluidos · sin mensualidad</div>
+      <a class="cta" href="#" data-checkout>Quiero organizar mi negocio</a>
+      <div class="sob"><span class="so-mx">Tarjeta, OXXO o SPEI · pago seguro</span><span class="fora-mx">Tarjeta y otros medios según tu país · pago seguro</span><br>7 días de garantía incondicional</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GARANTIA ============ -->
+<section style="padding-top:0">
   <div class="w">
     <div class="garantia">
       <svg viewBox="0 0 24 24"><path d="M12 2.6l7.5 3v6.2c0 4.4-3 8.2-7.5 9.6-4.5-1.4-7.5-5.2-7.5-9.6V5.6l7.5-3z"/><path d="M8.6 12.2l2.4 2.4 4.4-4.8"/></svg>
       <div class="olho">Garantía de 7 días</div>
       <h3>¿No te gustó? Te devolvemos tu dinero.</h3>
-      <p>Úsala como quieras durante 7 días. Si sientes que no es para ti, pides tu reembolso en reembolso.cakto.com.br, con el correo de tu compra, y te regresamos todo lo que pagaste, sin tener que dar explicaciones. Es nuestra garantía y la cumplimos con gusto.</p>
+      <p>Úsala como quieras durante 7 días. Si sientes que no es para ti, pide el reembolso en
+        reembolso.cakto.com.br con el correo de tu compra y te devolvemos todo lo que pagaste,
+        sin tener que dar explicaciones. Es nuestra garantía y la cumplimos con gusto.</p>
     </div>
   </div>
 </section>
 
+<!-- ============ DEPOIMENTOS ============ -->
+<section id="depoimentos" style="background:var(--rose2);border-top:1px solid var(--linha)">
+  <div class="w">
+    <div class="olho">Quienes ya la usan</div>
+    <h2>Lo que ellas <span class="serif">contaron</span></h2>
+    <div class="depos">
+      <figure class="prova">
+        <img class="print" src="img/dep-denise.jpg" width="1170" height="1017" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “Me gustó mucho, la verdad. Es muy fácil de usar, yo pensaba que iba a ser más complicado, pero lo aprendí solo y me está ayudando a organizarme mucho mejor, sobre todo con las entregas que siempre andaba cambiando. Y otra cosa, pagar solo una vez también fue lo que más me gustó.”">
+        <figcaption class="quem"><span class="ini" aria-hidden="true">D</span><span class="nome">Denise, 32</span><span class="est"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span></figcaption>
+      </figure>
+      <figure class="prova">
+        <img class="print" src="img/dep-aline.jpg" width="1170" height="1249" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “¡No manches! La parte del control de inventario fue un alivio para mí. Antes tenía que estar anotando en una libreta cuántas piezas me quedaban y era horrible. Con eso ya me ayudó muchísimo. La parte de las ventas también está buenísima para registrar todo y tener los precios bien calculados. ¡Me encantó!”">
+        <figcaption class="quem"><span class="ini" aria-hidden="true">A</span><span class="nome">Aline, 28</span><span class="est"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span></figcaption>
+      </figure>
+      <figure class="prova">
+        <img class="print" src="img/dep-bruna.jpg" width="1170" height="1071" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “Sí, claro que lo recomiendo. Es muy fácil de usar y no tiene un montón de cosas que ni necesitas. Lo que más me gustó es que no hay mensualidad, porque antes ya había pagado por otra app que sí cobraba cada mes y ni siquiera estaba tan buena.”">
+        <figcaption class="quem"><span class="ini" aria-hidden="true">B</span><span class="nome">Bruna, 30</span><span class="est"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span></figcaption>
+      </figure>
+      <figure class="prova">
+        <img class="print" src="img/dep-alexandra.jpg" width="1170" height="1125" loading="lazy" decoding="async"
+             alt="Captura de conversación de WhatsApp, traducida al español: “La verdad sí me sirvió. Antes anotaba todo en mi cuaderno. Ya había visto algunas apps, pero no quería pagar una mensualidad. Así está mucho mejor: la app hace las cuentas y me deja todas las ventas calculadas y registradas.”">
+        <figcaption class="quem"><span class="ini" aria-hidden="true">A</span><span class="nome">Alexandra, 40</span><span class="est"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.2-5.9 3.2 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span></figcaption>
+      </figure>
+    </div>
+    <p class="depos-nota">Mensajes de clientas por WhatsApp, traducidos al español.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
 <section>
   <div class="w">
     <div class="olho">Dudas</div>
     <h2>Preguntas de quien <span class="serif">llegó hasta aquí</span></h2>
     <div class="faq">
       <details><summary>¿Cómo la instalo en mi celular?</summary>
-        <div class="r">Tocas <b>Instalar</b> dentro de la app y el ícono de AppGanancia queda en tu pantalla de inicio, junto al WhatsApp y al Instagram. No pasa por la Play Store ni por la App Store, así que se instala al instante y <b>no ocupa espacio</b> en el celular. De ahí en adelante la abres desde el ícono, <b>en pantalla completa, sin la barra del navegador</b>, y funciona hasta sin señal.</div></details>
+        <div class="r">Tocas <b>Instalar</b> dentro de la app y el ícono de AppGanancia queda en tu
+        pantalla de inicio, junto a WhatsApp e Instagram. No pasa por la Play Store ni por la App
+        Store, así que se instala al instante y <b>no ocupa espacio</b> en el celular. Desde ahí la
+        abres con el ícono, <b>en pantalla completa, sin la barra del navegador</b>, y funciona
+        hasta sin señal.</div></details>
       <details><summary>¿Cómo funciona la app en mi celular?</summary>
-        <div class="r">Te llega un link, lo abres en el celular y, en 2 toques, pones el ícono en tu pantalla de inicio (la misma app te enseña cómo, con los pasos para tu celular). De ahí en adelante abre igual que cualquier otra app, en pantalla completa, <b>sin la barra del navegador</b>. No tienes que bajarla de ninguna tienda y no ocupa espacio en el celular.</div></details>
+        <div class="r">Recibes un enlace, lo abres en el celular y, en 2 toques, pones el ícono en
+        tu pantalla de inicio (la misma app te enseña cómo, con los pasos para tu celular). Desde
+        ahí se abre igual que cualquier otra app, en pantalla completa, <b>sin la barra del
+        navegador</b>. No tienes que descargarla de ninguna tienda y no ocupa espacio en el
+        celular.</div></details>
       <details><summary>¿Tiene mensualidad?</summary>
-        <div class="r">No. Pagas <b>una sola vez</b> y la app es tuya, con las actualizaciones incluidas. No hay suscripción, ni renovación, ni cobros automáticos.</div></details>
+        <div class="r">No. Pagas <b>una sola vez</b> y la app es tuya, con las actualizaciones
+        incluidas. No hay suscripción, ni renovación, ni cobros automáticos.</div></details>
       <details><summary>¿Necesito internet para usarla?</summary>
-        <div class="r">Para abrir la app la primera vez y ponerla en tu pantalla de inicio, sí. Ya instalada, sigue funcionando <b>aunque el internet esté lento o no tengas señal</b>, porque todo se guarda en tu propio celular: anotas la venta en el tianguis, en el camión o en casa de la clienta y no pierdes nada.</div></details>
+        <div class="r">Para abrir la app la primera vez y ponerla en tu pantalla de inicio, sí. Ya
+        instalada, sigue funcionando <b>aunque el internet esté lento o no tengas señal</b>, porque
+        todo se guarda en tu propio celular: anotas la venta en la calle, en el transporte o en
+        casa de la clienta y no pierdes nada.</div></details>
       <details><summary>¿Y si cambio de celular? ¿Pierdo todo?</summary>
-        <div class="r">No, si usas el respaldo. Con un solo toque, la app arma un archivo con todo (productos, ventas, gastos) y te lo mandas a tu propio WhatsApp. En el celular nuevo, abres la app, eliges restaurar y sigues donde te quedaste. Como los datos se guardan en el celular, <b>hacer el respaldo de vez en cuando es lo que te protege</b>, y la app te lo recuerda.</div></details>
-      <details><summary>No sé nada de Excel. ¿Sí voy a poder usarla?</summary>
-        <div class="r">Justo para eso existe. No hay fórmulas, ni celdas, ni pestañas. Tocas el producto, la cantidad, la forma de pago, y la venta queda anotada. <b>Quien nunca ha abierto un Excel en su vida la usa sin batallar.</b></div></details>
-      <details><summary>¿Me sirve si vendo comida, pongo uñas o hago manualidades?</summary>
-        <div class="r">Sí. Está pensada para quien vende ropa, maquillaje y accesorios por catálogo, pero lo que hace (anotar ventas, llevar el inventario, apuntar quién te debe y mostrarte la ganancia) sirve para cualquier negocio pequeño en el que compras o haces tu producto y lo vendes.</div></details>
+        <div class="r">No, si usas el respaldo. Con un solo toque, la app genera una hoja de cálculo
+        con todo (productos, ventas, gastos) y te la mandas a tu propio WhatsApp. En el celular
+        nuevo, abres la app, eliges restaurar y sigues donde te quedaste. Como los datos se guardan
+        en el celular, <b>hacer el respaldo de vez en cuando es lo que te protege</b>, y la app te
+        lo recuerda.</div></details>
+      <details><summary>No sé nada de Excel. ¿Voy a poder usarla?</summary>
+        <div class="r">Justo para eso existe. No hay fórmulas, ni celdas, ni pestañas. Tocas el
+        producto, la cantidad, la forma de pago, y la venta queda anotada. <b>Quien nunca ha abierto
+        un Excel en su vida la usa sin problema.</b></div></details>
+      <details><summary>¿Me sirve si vendo postres, uñas o artesanías?</summary>
+        <div class="r">Sí. Está pensada para quien revende ropa, perfume y maquillaje, pero lo que
+        hace (anotar ventas, llevar el inventario, apuntar quién te debe y mostrarte la ganancia)
+        sirve para cualquier negocio pequeño en el que compras o haces tu producto y lo
+        vendes.</div></details>
       <details><summary>¿Emite factura?</summary>
-        <div class="r">No. Es una app para llevar tus cuentas: te muestra tus ventas, tu inventario y tu ganancia. Las facturas se hacen por el SAT, y eso lo ve tu contador.</div></details>
+        <div class="r">No. Es una app para llevar tus cuentas: te muestra tus ventas, tu inventario
+        y tu ganancia. La facturación es un tema para tu contador.</div></details>
       <details><summary>¿Cómo la recibo después de pagar?</summary>
-        <div class="r">En cuanto se confirma tu pago <span class="so-mx">(con tarjeta, al momento; en OXXO, en cuanto se refleja)</span><span class="fora-mx">(con tarjeta o PayPal, al momento; con otros medios, en cuanto se acredita)</span>, te llega el link de acceso a tu correo. Lo abres y ya la estás usando, sin esperar a que alguien te la active.</div></details>
+        <div class="r">En cuanto se confirma tu pago <span class="so-mx">(con tarjeta, al instante; en OXXO, en cuanto se refleja)</span><span class="fora-mx">(con tarjeta o PayPal, al instante; con otros medios, en cuanto se acredita)</span>,
+        te llega el enlace de acceso a tu correo. Lo abres y ya la estás usando, sin esperar a que
+        alguien te la active.</div></details>
     </div>
-    <div class="faq-cta"><a class="cta" href="#" data-checkout>Quiero organizar mi negocio</a></div>
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section class="fim">
+  <div class="w">
+    <h2>Mañana puedes saber
+      <span class="serif">exactamente cuánto ganaste hoy</span></h2>
+    <p><span data-precio="front">$175 MXN</span>, una sola vez. Con 7 días de garantía.</p>
+    <a class="cta claro" href="#" data-checkout>Quiero organizar mi negocio</a>
+    <div class="obs">Con tarjeta, el acceso llega al instante a tu correo</div>
   </div>
 </section>
 
@@ -555,12 +781,14 @@ window.AGN_PAIS=p;if(p==="MX")document.documentElement.className+=" mx"}catch(e)
       <span>·</span>
       <a href="privacidad.html">Aviso de privacidad</a>
     </div>
+    <div class="f-id">Soporte: el correo de contacto viene en el mensaje de tu compra.</div>
   </div>
 </footer>
 
+<!-- barra fixa (aparece depois do hero) -->
 <div class="barra" id="barra">
-  <div class="p"><span class="so-mx">$175</span><span class="fora-mx" data-preco-local>Pago único</span><small><span class="so-mx">MXN · pago único</span><span class="fora-mx">sin mensualidad</span></small></div>
-  <a class="cta" href="#" data-checkout>Quiero ver mi ganancia</a>
+  <div class="p"><span data-precio="front" data-forma="curto">$175</span><small><span data-precio-moeda>MXN</span> · pago único</small></div>
+  <a class="cta" href="#" data-checkout>Quiero la app</a>
 </div>
 
 <script>
@@ -618,49 +846,64 @@ var CHECKOUT = 'https://pay.cakto.com.br/fecwm9c';
 </script>
 
 <script>
-/* preco na moeda de quem abre (26/10/2026): fora do Mexico, o TOTAL que o checkout da Cakto cobra em cada pais
-   (produto de US$ 6,60 + tarifa de servico de US$ 0,99, convertidos pela Cakto, que cobra uns 6% acima do cambio do dia).
-   Medido no checkout em 26/10/2026; refazer a medicao se o preco ou o cambio mudarem muito. O Mexico e fixo no HTML
-   (MX$175, com IVA e tarifa). Pais fora da tabela usa o cambio do dia (open.er-api.com, guardado 12 h) como aproximado;
-   sem pais reconhecido, sem moeda ou sem resposta em 3 s, fica o texto sem numero.
-   [moeda, total, casas decimais] */
+/* preco do pais de quem abre (26/10/2026, Vini: o valor tem que ficar claro, no pais de quem acessa, e bem confiavel).
+   Pais: pelo IP (api.country.is), o mesmo criterio do checkout da Cakto; sem resposta em 1,5 s, o fuso (AGN_PAIS).
+   Valor: o TOTAL que o checkout cobra naquele pais (produto + tarifa de servico + imposto), em precos.json, que a
+   automacao .github/workflows/precos.yml refaz a partir do proprio checkout a cada 6 horas. Enquanto nao chega,
+   pinta com a RESERVA abaixo (copia do precos.json do dia da publicacao), pelo fuso.
+   Acima de 100 em moeda com centavos, arredonda pro inteiro (MX$174,90 vira $175): a diferenca pro checkout e de
+   centavos e o numero redondo nao parece outro preco. [moeda, front, bump, upsell, imposto] */
 (function(){
-  var USD = 7.59;
-  var CAKTO = { CO:['COP',25415,0], CL:['CLP',8056,0], PE:['PEN',27.88,2], AR:['ARS',12832,0], BO:['BOB',92.58,2],
-    EC:['USD',7.59,2], SV:['USD',7.59,2], PR:['USD',7.59,2], PA:['USD',7.59,2], US:['USD',7.59,2], HN:['HNL',210.39,2],
-    DO:['DOP',480.25,2], GT:['GTQ',59.92,2], CR:['CRC',3572,0], UY:['UYU',323.98,2], PY:['PYG',46586,0], ES:['EUR',7,2] };
-  var MOEDA = { VE:'USD', NI:'NIO' };
-  var pais = window.AGN_PAIS, fixo = CAKTO[pais], cur = fixo ? fixo[0] : MOEDA[pais]; if (!cur) return;
-  function formata(v, dec){
-    return new Intl.NumberFormat('es', { style:'currency', currency:cur, currencyDisplay:'code',
-      minimumFractionDigits: dec ? 2 : 0, maximumFractionDigits: dec ? 2 : 0 }).format(v);
+  var RESERVA = {"AR":["ARS",12784,7360,18352],"BO":["BOB",92.58,53.02,132.85],"CL":["CLP",8056,4614,11560],"CO":["COP",25414,14555,36468],"CR":["CRC",3571,2045,5125],"DO":["DOP",480.22,275.04,689.11],"EC":["USD",7.59,4.35,10.89],"ES":["EUR",7.0,4.01,10.04],"GT":["GTQ",59.91,34.31,85.97],"HN":["HNL",210.38,120.49,301.89],"MX":["MXN",174.9,100.22,251.07,"IVA"],"PA":["USD",7.59,4.35,10.89],"PE":["PEN",27.88,15.96,40.0],"PR":["USD",7.59,4.35,10.89],"PY":["PYG",46584,26680,66846],"SV":["USD",7.59,4.35,10.89],"US":["USD",7.59,4.35,10.89],"UY":["UYU",323.97,185.54,464.88]};
+  var SEM_CENT = ['COP','CLP','PYG','CRC','ARS'];
+  var html = document.documentElement, fuso = window.AGN_PAIS || '';
+  function linha(r){ return r ? {moeda:r[0], front:r[1], bump:r[2], upsell:r[3], imposto:r[4] || null} : null; }
+  function tabelaReserva(){ var o = {}; Object.keys(RESERVA).forEach(function(k){ o[k] = linha(RESERVA[k]); }); return o; }
+  function nomePais(cc){ try { return new Intl.DisplayNames(['es'], {type:'region'}).of(cc); } catch(e){ return ''; } }
+  function partes(v, moeda, cc){
+    var dec = SEM_CENT.indexOf(moeda) < 0 && v < 100, loc = 'es-' + (cc || 'US'), n, s = '$';
+    try { n = new Intl.NumberFormat(loc, {minimumFractionDigits: dec ? 2 : 0, maximumFractionDigits: dec ? 2 : 0}).format(dec ? v : Math.round(v)); }
+    catch(e){ n = dec ? v.toFixed(2) : String(Math.round(v)); }
+    try { s = new Intl.NumberFormat(loc, {style:'currency', currency:moeda, currencyDisplay:'narrowSymbol'})
+            .formatToParts(1).filter(function(p){ return p.type === 'currency'; })[0].value; } catch(e){}
+    return {s:s, n:n, m:moeda};
   }
-  function escreve(preco, nota){
-    document.querySelectorAll('[data-preco-local]').forEach(function(el){ el.textContent = preco; });
-    document.querySelectorAll('[data-preco-nota]').forEach(function(el){ el.textContent = nota; });
+  function pinta(cc, p, emDolar){
+    if (!p) return;
+    html.classList.toggle('mx', cc === 'MX');
+    document.querySelectorAll('[data-precio]').forEach(function(el){
+      var v = p[el.getAttribute('data-precio')];
+      if (v == null) { el.style.visibility = 'hidden'; return; }
+      var x = partes(v, p.moeda, cc), f = el.getAttribute('data-forma');
+      if (f === 'grande') el.innerHTML = '<sup>' + x.s + '</sup>' + x.n + '<small>' + x.m + '</small>';
+      else if (f === 'mais') el.textContent = '+' + x.s + x.n + ' ' + x.m;
+      else if (f === 'curto') el.textContent = x.s + x.n;
+      else el.textContent = x.s + x.n + ' ' + x.m;
+      el.style.visibility = '';
+    });
+    document.querySelectorAll('[data-precio-moeda]').forEach(function(el){ el.textContent = p.moeda; });
+    var nome = nomePais(cc), extra = p.imposto ? p.imposto + ' y tarifa de servicio incluidos' : 'tarifa de servicio incluida';
+    var nota = emDolar || !nome ? 'Precio en dólares · pago único, sin mensualidad'
+                                : 'Total final para ' + nome + ', ' + extra + ' · pago único';
+    document.querySelectorAll('[data-precio-nota]').forEach(function(el){ el.textContent = nota; });
+    html.classList.add('precio-ok');
   }
-  if (fixo) {
-    try { escreve(formata(fixo[1], fixo[2] > 0), 'pago único, sin mensualidad · en tu moneda'); } catch(e){}
-    return;
+  /* pais onde o checkout nao vende (o Brasil) ou fora da lista: mostra em dolar */
+  function escolhe(cc, tab){ return tab[cc] ? [cc, tab[cc], false] : ['US', tab.US, true]; }
+  var r0 = escolhe(fuso, tabelaReserva()); pinta(r0[0], r0[1], r0[2]);
+  function comTempo(url, ms){
+    var c = window.AbortController ? new AbortController() : null, t = setTimeout(function(){ if (c) c.abort(); }, ms);
+    return fetch(url, c ? {signal:c.signal, cache:'no-cache'} : {cache:'no-cache'})
+      .then(function(r){ clearTimeout(t); if (!r.ok) throw new Error(r.status); return r.json(); });
   }
-  function pinta(taxa){
-    var v = USD * taxa * 1.06, dec = ['USD','EUR'].indexOf(cur) >= 0;
-    if (!dec) { var passo = v >= 10000 ? 100 : v >= 1000 ? 10 : 1; v = Math.round(v / passo) * passo; }
-    try { escreve('≈ ' + formata(v, dec), 'pago único, sin mensualidad · valor aproximado, el exacto aparece al pagar'); } catch(e){}
-  }
-  try {
-    var c = JSON.parse(localStorage.getItem('agn_fx_usd') || 'null');
-    if (c && c.r && c.r[cur] && Date.now() - c.em < 12 * 3600 * 1000) { pinta(c.r[cur]); return; }
-  } catch(e){}
-  var ctl = window.AbortController ? new AbortController() : null;
-  var t = setTimeout(function(){ if (ctl) ctl.abort(); }, 3000);
-  fetch('https://open.er-api.com/v6/latest/USD', ctl ? { signal: ctl.signal } : {})
-    .then(function(r){ return r.json(); })
-    .then(function(j){
-      clearTimeout(t); if (!j || !j.rates || !j.rates[cur]) return;
-      try { localStorage.setItem('agn_fx_usd', JSON.stringify({ r: j.rates, em: Date.now() })); } catch(e){}
-      pinta(j.rates[cur]);
-    }).catch(function(){});
+  var salvo = ''; try { salvo = sessionStorage.getItem('agn_pais_ip') || ''; } catch(e){}
+  var pPais = salvo ? Promise.resolve(salvo) : comTempo('https://api.country.is/', 1500).then(function(j){
+    var c = String(j && j.country || '').toUpperCase(); try { if (c) sessionStorage.setItem('agn_pais_ip', c); } catch(e){}
+    return c || fuso; }).catch(function(){ return fuso; });
+  var pTab = comTempo('precos.json', 4000).then(function(j){ return j && j.paises; }).catch(function(){ return null; });
+  Promise.all([pPais, pTab]).then(function(r){
+    var e = escolhe(r[0], r[1] || tabelaReserva()); pinta(e[0], e[1], e[2]);
+  });
 })();
 </script>
 <script>
@@ -742,69 +985,6 @@ window.VSL_ROT = { pausa: "Pausar", play: "Reproducir", som: "Silenciar", mudo: 
     [25, 50, 75].forEach(function (k) { if (!marcos[k] && v.currentTime / v.duration * 100 >= k) { marcos[k] = 1; ev("vsl_" + k); } });
   });
   v.addEventListener("ended", function () { if (!v.muted) { ev("vsl_fim"); box.classList.add("parado"); } else { v.currentTime = 0; tocar(); } });
-})();
-</script>
-<script>
-/* carrosseis em ESTEIRA (22/10/2026): os cartoes
-   andam devagar e sem parar, em loop (cada cartao ganha um clone no fim, e a volta e invisivel). O dedo desliza nativo;
-   no computador arrasta com o mouse (antes so as setas mexiam: mouse nao rola caixa com overflow e o print era arrastado
-   como imagem). Tocar, arrastar, rolar ou usar as setas para a esteira; ela volta 2,5 s depois. Quem pede menos movimento
-   no sistema nao ve a esteira. */
-(function(){
-  var menos = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var VEL = 38; /* px por segundo */
-  document.querySelectorAll('.car-nav').forEach(function(nav){
-    var car = document.getElementById(nav.dataset.car); if (!car) return;
-    var orig = [].slice.call(car.children), n = orig.length;
-    orig.forEach(function(it){ var c = it.cloneNode(true); c.setAttribute('aria-hidden', 'true');
-      c.querySelectorAll('img').forEach(function(i){ i.alt = ''; }); car.appendChild(c); });
-    car.querySelectorAll('img').forEach(function(i){ i.draggable = false; });
-    car.style.scrollSnapType = 'none'; car.style.cursor = 'grab';
-    var itens = [].slice.call(car.children), pontos = nav.querySelector('.pontos');
-    orig.forEach(function(){ pontos.appendChild(document.createElement('i')); });
-    var bolas = [].slice.call(pontos.children);
-    var pos = car.scrollLeft, meu = false, parouEm = 0, naTela = false, anim = false, arr = null, ult = 0, rodando = false;
-    function volta(){ return itens[n].offsetLeft - itens[0].offsetLeft; }
-    function passoCartao(){ return itens[1].offsetLeft - itens[0].offsetLeft; }
-    function poe(x){ var L = volta(); if (L > 0) { while (x >= L) x -= L; while (x < 0) x += L; } pos = x; meu = true; car.scrollLeft = x; }
-    function atual(){ var c = car.scrollLeft + car.clientWidth / 2, k = 0, m = 1e9;
-      itens.forEach(function(it, i){ var d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - c); if (d < m) { m = d; k = i; } }); return k; }
-    function pinta(){ var k = atual();
-      bolas.forEach(function(b, i){ b.classList.toggle('on', i === k % n); });
-      itens.forEach(function(it, i){ it.classList.toggle('foco', i === k); }); }
-    function mexeu(){ parouEm = Date.now(); }
-    car.addEventListener('scroll', function(){ if (meu) meu = false; else { pos = car.scrollLeft; mexeu(); } requestAnimationFrame(pinta); }, { passive: true });
-    ['touchstart', 'wheel', 'keydown'].forEach(function(ev){ car.addEventListener(ev, mexeu, { passive: true }); });
-    /* arrastar com o mouse */
-    car.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') return;
-      arr = { x: e.clientX, s: car.scrollLeft, longe: false }; car.style.cursor = 'grabbing'; mexeu();
-      try { car.setPointerCapture(e.pointerId); } catch (x) {} });
-    car.addEventListener('pointermove', function(e){ if (!arr) return; var dx = e.clientX - arr.x;
-      if (Math.abs(dx) > 4) arr.longe = true; poe(arr.s - dx); mexeu(); });
-    function solta(){ if (!arr) return; arr = null; car.style.cursor = 'grab'; mexeu(); }
-    car.addEventListener('pointerup', solta); car.addEventListener('pointercancel', solta);
-    /* setas: um cartao por toque, com aceleracao e freio */
-    function vai(dir){ mexeu(); var de = pos, d = passoCartao() * dir, dur = 600, t0 = null; anim = true;
-      if (menos) { poe(de + d); anim = false; return; }
-      function q(t){ if (t0 === null) t0 = t; var x = Math.min(1, (t - t0) / dur), e = x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-        poe(de + d * e); if (x < 1) requestAnimationFrame(q); else { anim = false; mexeu(); } }
-      requestAnimationFrame(q); }
-    nav.querySelector('.ant').onclick = function(){ vai(-1); };
-    nav.querySelector('.prox').onclick = function(){ vai(1); };
-    pinta();
-    if (menos) return;
-    /* a esteira: so anda com o carrossel na tela e a aba visivel */
-    function passo(t){
-      if (!naTela) { rodando = false; ult = 0; return; }
-      var dt = ult ? Math.min(0.05, (t - ult) / 1000) : 0; ult = t;
-      if (!arr && !anim && !document.hidden && Date.now() - parouEm > 2500) poe(pos + VEL * dt);
-      requestAnimationFrame(passo);
-    }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function(e){ naTela = e[0].isIntersecting;
-        if (naTela && !rodando) { rodando = true; requestAnimationFrame(passo); } }, { threshold: .2 }).observe(car);
-    }
-  });
 })();
 </script>
 </body>

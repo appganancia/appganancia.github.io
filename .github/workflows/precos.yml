@@ -1,0 +1,27 @@
+# Atualiza precos.json com o total que o checkout da Cakto cobra em cada pais (cambio muda todo dia).
+# A landing le esse arquivo para mostrar o mesmo valor do checkout, na moeda de quem abre.
+name: precos
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+jobs:
+  precos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/precos.py
+      - name: grava se mudou
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- precos.json; then echo "sem mudanca"; exit 0; fi
+          git config user.name "AppGanancia"
+          git config user.email "contato@appganancia.com"
+          git add precos.json
+          git commit -m "Precios del checkout por pais"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
