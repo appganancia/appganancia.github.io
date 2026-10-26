@@ -106,6 +106,7 @@ main{padding:16px 0 36px}
 .oferta .de s{text-decoration-thickness:2px;text-decoration-color:var(--pink);color:var(--tinta)}
 .oferta .val{font-weight:800;font-size:58px;line-height:1;color:var(--vinho);letter-spacing:-2px;margin-top:2px}
 .oferta .val sup{font-size:.36em;vertical-align:super;letter-spacing:0;margin-right:3px}
+.oferta .val small{font-size:.3em;letter-spacing:0;margin-left:5px}
 .oferta .tl{font-size:14px;color:var(--pink);font-weight:800;margin-top:8px;line-height:1.3;text-wrap:balance}
 .oferta .uma{font-size:13px;color:var(--cinza);font-weight:700;margin-top:2px}
 .relogio{display:none;margin:12px auto 0;max-width:300px;background:var(--vinho-prof);color:#fff;border-radius:12px;padding:9px 12px}
@@ -212,24 +213,21 @@ alt=""/></noscript>
 
 <main class="w">
   <div class="oferta">
-    <div class="lim"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg>precio de lanzamiento</div>
-    <div class="de so-mx">antes <s>$599</s> ahora</div>
-    <div class="val so-mx"><sup>$</sup>399</div><div class="val fora-mx">Tuyo para siempre</div>
-    <div class="tl so-mx">por tiempo limitado: después regresa a $599</div>
+    <div class="val so-mx"><sup>$</sup>399<small>MXN</small></div><div class="val fora-mx">Tuyo para siempre</div>
     <div class="uma"><span class="so-mx">pago único, IVA incluido · sin mensualidad · es tuyo para siempre</span><span class="fora-mx">pago único · sin mensualidad · ves el precio en tu moneda</span></div>
-    <div class="relogio" id="relogio"><small>el precio de lanzamiento termina en</small><b>--</b></div>
+    <div class="relogio" id="relogio"><small>esta oferta termina en</small><b>--</b></div>
 
     <div class="acao" id="acao">
       <div id="hotmart-sales-funnel"></div>
-      <div id="plano-b" hidden><a class="cta-link" href="https://pay.hotmart.com/Y108141969P" data-checkout>¡SÍ! Quiero mi catálogo listo</a></div>
-      <p class="pix">Con tarjeta, sale en 1 toque. <b></b></p>
+      <div id="plano-b" hidden><a class="cta-link" href="https://pay.hotmart.com/Y108141969P" data-checkout>¡Sí! Quiero mi catálogo listo</a></div>
+      <p class="pix">Si pagaste con tarjeta, es un solo toque. <b></b></p>
     </div>
   </div>
 
-  <p class="ga">7 días para pedir tu reembolso, desde la misma plataforma. Si dices que no, tu compra queda igual.</p>
+  <p class="ga">7 días para pedir tu reembolso desde Hotmart. Si dices que no, tu compra queda igual.</p>
 </main>
 
-<footer><a href="termos.html">Términos de uso</a> · <a href="privacidad.html">Privacidad</a></footer>
+<footer><a href="termos.html">Términos de uso</a> · <a href="privacidad.html">Aviso de privacidad</a></footer>
 
 <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
 <script>
@@ -241,7 +239,7 @@ setTimeout(function(){if(!ok)reserva(false)},10000)})();
 </script>
 
 <div class="barra" id="barraFixa">
-  <div class="p"><span class="so-mx"><s>$599</s>$399<small>lanzamiento</small></span><span class="fora-mx">Pago único<small>tuyo para siempre</small></span></div>
+  <div class="p"><span class="so-mx">$399<small>MXN · pago único</small></span><span class="fora-mx">Pago único<small>tuyo para siempre</small></span></div>
   <div class="cta"><a class="cta-link" href="#acao">Quiero mi catálogo</a></div>
 </div>
 
@@ -278,7 +276,7 @@ setTimeout(function(){if(!ok)reserva(false)},10000)})();
 
     function marcarMudo(sem){
       box.classList.toggle('sem-som', sem);
-      mudo.setAttribute('aria-label', sem ? 'Ligar o som' : 'Silenciar');
+      mudo.setAttribute('aria-label', sem ? 'Activar el sonido' : 'Silenciar');
     }
 
     function ligarSom(){
@@ -339,6 +337,7 @@ setTimeout(function(){if(!ok)reserva(false)},10000)})();
   });
 })();
 
+/* contador: so com prazo real e anunciado (LFPC do Mexico, arts. 32 e 48); vazio = o contador nao aparece */
 var FIM_DO_PRECO = '';
 (function(){
   var fim = FIM_DO_PRECO;
